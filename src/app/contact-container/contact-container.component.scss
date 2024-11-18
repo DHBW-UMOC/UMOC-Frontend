@@ -1,0 +1,25 @@
+.contact-container-details {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: green;
+    }
+
+    .contact-container-image {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #aaa;
+      margin-left: 10px;
+    }
+
+    .contact-name {
+      font-weight: bold;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }

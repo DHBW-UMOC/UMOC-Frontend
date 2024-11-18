@@ -1,0 +1,15 @@
+.contact-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    margin-left: 15vw;
+    border-right: 1px solid #ccc;
+    height: 90vh;
+  
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+    }
+  }
