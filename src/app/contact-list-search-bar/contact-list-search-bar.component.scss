@@ -2,7 +2,7 @@
 
 .contact-list-search-bar {
     padding: 10px;
-    border-bottom: 1px solid $contact-list-border;
+    border-bottom: 1px solid $contact-list-search-bar-border;
     input {
       width: 90%;
       padding-left: 5%;
@@ -10,6 +10,6 @@
       padding-bottom: 2%;
       padding-top: 2%;
       border-radius: 4px;
-      border: 1px solid $contact-list-back;
+      border: 1px solid $contact-list-search-bar-background;
     }
   }
