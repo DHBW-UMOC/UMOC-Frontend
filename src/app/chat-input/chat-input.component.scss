@@ -1,21 +1,21 @@
 .chat-input-container {
     display: flex;
     padding: 10px;
-    border-top: 1px solid #ccc;
+    border-top: 2px solid #ff9999;
     background-color: #f1f1f1;
   
     input {
       flex: 1;
       padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #ddd;
+      border-radius: 10px;
+      border: 2px solid #ff9999;
       margin-right: 5px;
       outline: none;
     }
   
     button {
       padding: 8px 15px;
-      background-color: #4CAF50;
+      background-color: #ff9999;
       color: white;
       border: none;
       border-radius: 4px;
@@ -23,7 +23,7 @@
       outline: none;
   
       &:hover {
-        background-color: #45a049;
+        background-color: #ff3030;
       }
     }
   }

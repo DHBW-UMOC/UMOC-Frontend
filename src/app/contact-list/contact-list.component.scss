@@ -1,15 +1,16 @@
 .contact-list-container {
     display: flex;
     flex-direction: column;
-    width: 20vw;
-    margin-left: 15vw;
-    border-right: 1px solid #ccc;
-    height: 90vh;
+    width: 25vw;
+    height: 80vh;
+    border-right: 2px solid #ff9999;
+    background-color: #fafafa;
   
     .contact-list {
       list-style: none;
       padding: 0;
       margin: 0;
       overflow-y: auto;
+      border-bottom: 2px solid #ff9999;
     }
   }

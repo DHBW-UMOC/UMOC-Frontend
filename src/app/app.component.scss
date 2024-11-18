@@ -1,4 +1,22 @@
-.app-container {
-    display: flex;
-    height: 100vh;
+// Irgendwas aus Stackoverflow um Margin in Angular zu removen.
+::ng-deep * { 
+    margin: 0;
+    padding: 0;
+  }
+
+.app-background {
+    background: linear-gradient(#424242 15%, #a6a6a6 15%);
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    .app-container {
+        display: flex;
+        // height: 80vh;
+        // width:80vw;
+        // margin-left: 10vw;
+        // margin-right: 10vw;
+        // margin-top: 5vh;
+        // margin-bottom: 5vh;
+    }
 }
