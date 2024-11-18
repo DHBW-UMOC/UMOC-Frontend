@@ -1,3 +1,5 @@
+@import "../../styles.scss";
+
 .chat-window-container {
     flex: 1;
     display: flex;
@@ -7,7 +9,7 @@
   
     .chat-header {
       padding: 15px;
-      background-color: #f1f1f1;
+      background-color: $chat-window-alternative;
       cursor: pointer;
       font-weight: bold;
     }
@@ -16,6 +18,6 @@
       flex: 1;
       overflow-y: auto;
       padding: 20px;
-      background-color: #e9e9e9;
+      background-color: $chat-window-back;
     }
   }

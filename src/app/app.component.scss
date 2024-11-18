@@ -1,3 +1,5 @@
+@import "../styles.scss";
+
 // Irgendwas aus Stackoverflow um Margin in Angular zu removen.
 ::ng-deep * { 
     margin: 0;
@@ -5,7 +7,7 @@
   }
 
 .app-background {
-    background: linear-gradient(#424242 15%, #a6a6a6 15%);
+    background: linear-gradient($global-background-top 15%, $global-background-bottom 15%);
     padding-top: 10vh;
     padding-bottom: 10vh;
     padding-left: 15vw;

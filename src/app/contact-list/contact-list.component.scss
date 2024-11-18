@@ -1,16 +1,17 @@
+@import "../../styles.scss";
+
 .contact-list-container {
     display: flex;
     flex-direction: column;
     width: 25vw;
     height: 80vh;
-    border-right: 2px solid #ff9999;
-    background-color: #fafafa;
+    background-color: $contact-list-back;
   
     .contact-list {
       list-style: none;
       padding: 0;
       margin: 0;
       overflow-y: auto;
-      border-bottom: 2px solid #ff9999;
+      border-bottom: 1px solid $contact-list-border;
     }
   }
