@@ -1,0 +1,30 @@
+@import "../../styles.scss";
+
+.chat-input-container {
+    display: flex;
+    padding: 10px;
+    background-color: $chat-input-background;
+  
+    input {
+      flex: 1;
+      padding: 8px;
+      border-radius: 10px;
+      margin-right: 5px;
+      border: 1px solid $chat-input-border;
+      outline: none;
+    }
+  
+    button {
+      padding: 8px 15px;
+      background-color: $chat-input-send-button-normal;
+      color: $white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      outline: none;
+  
+      &:hover {
+        background-color: $chat-input-send-button-hover;
+      }
+    }
+  }

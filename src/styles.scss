@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Was ich da mach is warscheinlich bad practice und so, aber juckt...
+
+// APP.component
+$global-background-top: #424242;
+$global-background-bottom: #a6a6a6;
+
+// CHAT-INPUT.component
+$chat-input-background: #f1f1f1;
+$chat-input-border: #f1f1f1;
+$chat-input-send-button-normal: #ff9999;
+$chat-input-send-button-hover: #ff3030;
+
+// CHAT-WINDOW.component
+$chat-window-background: #dddddd;
+$chat-window-header: #f1f1f1;
+
+// CONTACT-LIST.component
+$contact-list-background: #fafafa;
+$contact-list-border: #ccc;
+
+// CONTACT-CONTAINER
+$contact-list-hover: #eeeeee;
+$contact-container-default-image: #aaa;
+
+// CONTACT-LIST-SEARCH-BAR.component
+$contact-list-search-bar-background: #fafafa;
+$contact-list-search-bar-border: #ccc;
+
+// MESSAGE.component
+$message-background: #e1e1ff;
+$message-box-shadow: rgba(0, 0, 0, 0.1);
+
+$white: #f0f0f0;

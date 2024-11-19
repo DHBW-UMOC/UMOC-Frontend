@@ -1,0 +1,27 @@
+@import "../../styles.scss";  
+
+.contact-container-details {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $contact-list-hover;
+    }
+
+    .contact-container-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: $contact-container-default-image;
+      margin-right: 10px;
+    }
+
+    .contact-name {
+      font-weight: bold;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
