@@ -1,0 +1,13 @@
+.chat-input-extras {
+    button {
+        border: none;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        padding: 0;
+        font-size: 30px;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
