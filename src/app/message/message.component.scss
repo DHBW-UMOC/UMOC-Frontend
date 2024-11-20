@@ -10,9 +10,11 @@
 
     &.message-sent {
       background-color: $message-sent-background;
+      margin-left: auto;
     }
 
     &.message-received {
       background-color: $message-received-background;
+      margin-right: auto;
     }
 }
