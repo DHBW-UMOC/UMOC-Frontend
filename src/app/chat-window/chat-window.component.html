@@ -3,7 +3,7 @@
       PLACEHOLDER
     </div>
     <div class="chat-messages">
-      <app-message/>
+      <app-message *ngFor="let message of messages" [message]="message"/>
     </div>
     <app-chat-input/>
   </div>
