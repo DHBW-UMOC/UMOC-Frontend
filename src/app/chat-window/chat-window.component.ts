@@ -17,7 +17,6 @@ import {Contact} from "../model/contact.model";
   styleUrl: './chat-window.component.scss'
 })
 export class ChatWindowComponent implements OnInit {
-  counter: number = 0;
   protected messages: Array<Message> = [];
   protected selectedContact!: Contact | null;
 
@@ -26,12 +25,8 @@ export class ChatWindowComponent implements OnInit {
 
   ngOnInit(): void {
     this.contactService.currentContact$.subscribe(contact => {
-      this.counter++;
-      console.log("-----------" + this.counter.toString() + contact);
       this.selectedContact = contact;
-      this.selectedContact!.userName = "Test" + this.counter.toString();
-      if (this.selectedContact !== null) {
-        console.log("-----------" + this.counter.toString() + contact);
+      if (this.selectedContact) {
         this.chatService.fetchChatHistory(this.loginService.sessionID, contact!.userID)
           .subscribe(messages => {
             this.messages = messages;

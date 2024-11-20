@@ -9,7 +9,7 @@ import {BehaviorSubject} from "rxjs";
 export class ContactListService {
   private contacts!: Array<Contact>
 
-  private contactSource = new BehaviorSubject<Contact>(new Contact("",""));
+  private contactSource = new BehaviorSubject<Contact | null>(null);
   currentContact$ = this.contactSource.asObservable();
 
   selectContact(contact: Contact) {

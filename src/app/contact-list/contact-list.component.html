@@ -2,6 +2,10 @@
   <app-contact-list-header/>
   <app-contact-list-search-bar/>
   <div class="contact-list">
-    <contact-container *ngFor="let contact of contacts" (click)="openChat(contact)" [contact]="contact" ></contact-container>
+    <contact-container
+      *ngFor="let contact of contacts"
+      [contact]="contact"
+      (contactClick)="openChat($event)"
+    ></contact-container>
   </div>
 </div>

@@ -1,6 +1,10 @@
 <div class="chat-input-container">
     <app-chat-input-emojis/>
     <app-chat-input-extras/>
-    <input type="text" placeholder="Type a message">
-    <button>&#10146;</button>
+    <input
+      type="text"
+      placeholder="Type a message"
+      #messageInput
+    >
+    <button (click)="saveMessage(messageInput.value)">&#10146;</button>
   </div>

@@ -5,7 +5,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
   providedIn: 'root'
 })
 export class LoginService {
-  private _sessionID: string = "38e616ea-9852-4ae7-a7eb-b534a526f026";
+  private _sessionID: string = "00000000-0000-0000-1111-000000000001";
+
 
   constructor(private http: HttpClient) {
   }

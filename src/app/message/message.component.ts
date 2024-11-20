@@ -13,5 +13,5 @@ import {CommonModule, NgClass} from '@angular/common';
 })
 export class MessageComponent {
   @Input() message!: Message;
-  @Input() isSent: boolean = false;
+  @Input() isSent: string | undefined = "";
 }

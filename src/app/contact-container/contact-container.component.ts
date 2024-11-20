@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Contact} from "../model/contact.model";
 import {NgOptimizedImage} from "@angular/common";
 
@@ -13,4 +13,9 @@ import {NgOptimizedImage} from "@angular/common";
 })
 export class ContactContainerComponent {
   @Input() contact!: Contact;
+  @Output() contactClick = new EventEmitter<Contact>();
+
+  onContactClick() {
+    this.contactClick.emit(this.contact);
+  }
 }
