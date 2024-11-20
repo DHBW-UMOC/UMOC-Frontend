@@ -2,8 +2,18 @@
     <div class="chat-header">
       PLACEHOLDER
     </div>
+<!--     
+    <div *ngFor="let msg of messages">
+      <app-message [message]="msg.text" [isSent]="msg.isSent"/>
+    </div>
+    Das da hat Kollege4 vorgeschlagen, idk. Is nich meine Aufgabe. -->
+
     <div class="chat-messages">
-      <app-message/>
+      <app-message message="Hello, this is a sent message!!" [isSent]=true/>
+      <app-message message="This is a received message!!" [isSent]=false/>
+      <app-message message="Yeah, how wonderful this is, right??????" [isSent]=true/>
+      <app-message message="Wow, it's sooooo incredible, yeahhhhhh, this is a multiline text, because I feel like it. WOOOOOOOOOO!!!! Yeah, what a long text, it is really sooooo incredible, like i don't know what I'm writing here, but I just have to write to fill out multiple lines to test ittttt......" [isSent]=false/>
+      <app-message message="SNTEOUTHN ATHOUNOTEA TOUSEA  OUEHTN UHNTEUHTENSOTUAHNOE SA EOUSTHNUOE TNHUOEA SHTNUOEA NHTUOEA NHT AUOEHTN EOUANTHN OTHEUANHT OAUENHT OEAUNHT OEAUHTNAOEUNHT AOUENHT AOEUNTHA EUOTH AOENUHT HTEUOATHU ESOTAHUNSAOTHU SNTOAHEU SNTAOH NSTUH SNAOTH USNTOH UNSTAHO ESTNUHA SNTOHES NUTHAOESNT HUASNO THE" [isSent]=true/>
     </div>
     <app-chat-input/>
   </div>
