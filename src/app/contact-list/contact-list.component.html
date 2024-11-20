@@ -1,11 +1,12 @@
 <div class="contact-list-container">
   <app-contact-list-header/>
   <app-contact-list-search-bar/>
-    <ul class="contact-list">
-      <li>
-          <app-contact-container/>
-      </li>
-    </ul>
+<!--  <ul class="contact-list">-->
+<!--    <li>-->
+<!--        <app-contact-container/>-->
+<!--    </li>-->
+<!--  </ul>-->
+  <div class="contact-list">
+    <contact-container *ngFor="let contact of contacts" [contact]="contact"></contact-container>
   </div>
-  
-  
+</div>

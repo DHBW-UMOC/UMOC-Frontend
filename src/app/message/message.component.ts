@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+
+import {Component, Input} from '@angular/core';
+import {Message} from "../model/message.model";
+import {CommonModule, NgClass} from '@angular/common';
+
 
 @Component({
   selector: 'app-message',
@@ -9,6 +12,6 @@ import { CommonModule, NgClass } from '@angular/common';
   styleUrl: './message.component.scss'
 })
 export class MessageComponent {
-  @Input() message: string = '';
+  @Input() message!: Message;
   @Input() isSent: boolean = false;
 }
