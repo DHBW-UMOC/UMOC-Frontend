@@ -3,9 +3,18 @@
 .message-container {
     margin-bottom: 10px;
     padding: 10px;
-    background-color: $message-background;
     border-radius: 5px;
     box-shadow: 0 1px 2px $message-box-shadow;
     max-width: 80%;
     word-wrap: break-word;
-  }
+
+    &.message-sent {
+      background-color: $message-sent-background;
+      margin-left: auto;
+    }
+
+    &.message-received {
+      background-color: $message-received-background;
+      margin-right: auto;
+    }
+}
