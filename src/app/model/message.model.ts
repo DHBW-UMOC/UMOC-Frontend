@@ -3,9 +3,9 @@ import {Contact} from "./contact.model";
 export class Message {
   message: string;
   timeStamp?: Date;
-  owner?: Contact;
+  owner?: string;
 
-  constructor(message: string, timeStamp?: Date, owner?: Contact) {
+  constructor(message: string, timeStamp?: Date, owner?: string) {
     this.message = message;
     this.timeStamp = timeStamp;
     this.owner = owner;

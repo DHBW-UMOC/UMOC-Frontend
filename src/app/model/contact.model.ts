@@ -1,9 +1,11 @@
 export class Contact {
-  userName: string;
-  profilePicture?: string; //URL muss abgefragt werden
+    userID: string;
+    userName: string;
+    profilePicture?: string;
 
-  constructor(userName: string, profilePicture?: string) {
-    this.userName = userName;
-    this.profilePicture = profilePicture;
-  }
+    constructor(contact_id: string, name: string, url?: string) {
+        this.userID = contact_id;
+        this.userName = name;
+        this.profilePicture = url;
+    }
 }

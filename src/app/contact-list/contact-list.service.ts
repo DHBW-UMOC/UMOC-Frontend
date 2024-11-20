@@ -1,16 +1,37 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Contact} from "../model/contact.model";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactListService {
-  constructor() {
+  private contacts!: Array<Contact>
+
+  private contactSource = new BehaviorSubject<Contact>(new Contact("",""));
+  currentContact$ = this.contactSource.asObservable();
+
+  selectContact(contact: Contact) {
+    this.contactSource.next(contact);
   }
 
-  public fetchContacts(sessionID: string):Array<Contact> {
-    //TODO: Actually get some Data
-    return [{userName:"DummyUser0"},{userName:"DummyUser1"},{userName:"DummyUser2"},{userName:"DummyUser3"},{userName:"DummyUser4"},{userName:"DummyUser5"}];
+  constructor(private http: HttpClient) {
+  }
+
+  public fetchContacts(sessionID: string): Array<Contact> {
+    this.http.get<any[]>(
+        "http://localhost:5000/getContacts",
+        { params: new HttpParams().append('sessionID', sessionID)}
+    ).subscribe(contacts => {
+      this.contacts = contacts.map(contact =>
+          new Contact(
+              contact.contact_id,
+              contact.name,
+              contact.url
+          )
+      );
+    });
+    return this.contacts;
   }
 }
