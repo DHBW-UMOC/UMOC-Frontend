@@ -1,4 +1,3 @@
-<!-- If isSent=true: -->
-<div class="message-container" [ngClass]="{'sent-message': isSent, 'receivedMessage': !isSent}"> 
+<div class="message-container" [ngClass]="{'message-sent': isSent, 'message-received': !isSent}"> 
     {{ message }}
 </div>
