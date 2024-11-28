@@ -1,0 +1,9 @@
+@import '../../styles.scss';
+
+.container {
+    flex: 1; // This ensures it takes half the parent container when combined with the sibling
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+    border: 2px solid green;
+}

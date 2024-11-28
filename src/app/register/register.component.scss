@@ -1,0 +1,11 @@
+@import '../../styles.scss';
+
+// Das is der globale background, idk, einfach jede page in nem div mit class=app-background reinhauhen
+.app-background {
+    background: linear-gradient($global-background-top 15%, $global-background-bottom 15%);
+    height: 90vh;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-left: 10vw;
+    padding-right: 10vw;
+}
