@@ -1,19 +1,19 @@
 <div class="chat-window-container" *ngIf="selectedContact">
   <div class="chat-header">
-    {{ this.selectedContact?.userName }}
+    {{ selectedContact.userName }}
   </div>
-  <!--
-      <div *ngFor="let msg of messages">
-        <app-message [message]="msg.text" [isSent]="msg.isSent"/>
-      </div>
-      So evtl implementieren?? Idk, is nich meine Aufgabe-->
 
   <div class="chat-messages">
-    <app-message
-      *ngFor="let message of messages"
-      [message]="message"
-      [isSent]="message.owner"
-    />
+    <ng-container *ngIf="messages && messages.length > 0; else noMessages">
+      <app-message
+        *ngFor="let message of messages"
+        [message]="message"
+        [isSent]="message.owner"
+      ></app-message>
+    </ng-container>
+    <ng-template #noMessages>
+      <div class="no-messages">No messages yet. Start a conversation!</div>
+    </ng-template>
   </div>
-  <app-chat-input/>
+  <app-chat-input></app-chat-input>
 </div>

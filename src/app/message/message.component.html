@@ -1,3 +1,6 @@
-<div class="message-container" [ngClass]="{'message-sent': isSent == '00000000-0000-0000-0000-000000000001', 'message-received': isSent != '00000000-0000-0000-0000-000000000001'}"><!--TODO: INSANE TECHNICAL DEBT   FIX IMMEDIATELY-->
+<div class="message-container" *ngIf="isValidMessage()" [ngClass]="{'message-sent': isSent == '00000000-0000-0000-0000-000000000001', 'message-received': isSent != '00000000-0000-0000-0000-000000000001'}">
   {{ message.message }}
+  <div class="message-timestamp" *ngIf="message.timeStamp">
+    {{ message.timeStamp | date:'short' }}
+  </div>
 </div>

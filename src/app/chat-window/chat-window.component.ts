@@ -1,13 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {MessageComponent} from "../message/message.component";
-import {ChatInputComponent} from "../chat-input/chat-input.component";
-import {CommonModule} from "@angular/common";
-import {Message} from "../model/message.model";
-import {ChatService} from "./chat.service";
-import {LoginService} from "../login/login.service";
-import {ContactListService} from "../contact-list/contact-list.service";
-import {Contact} from "../model/contact.model";
-
+import { Component, OnInit } from '@angular/core';
+import { MessageComponent } from "../message/message.component";
+import { ChatInputComponent } from "../chat-input/chat-input.component";
+import { CommonModule } from "@angular/common";
+import { Message } from "../model/message.model";
+import { ChatService } from "./chat.service";
+import { LoginService } from "../login/login.service";
+import { ContactListService } from "../contact-list/contact-list.service";
+import { Contact } from "../model/contact.model";
 
 @Component({
   selector: 'app-chat-window',
@@ -24,15 +23,24 @@ export class ChatWindowComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contactService.currentContact$.subscribe(contact => {
+    this.contactService.currentContact$.subscribe((contact: Contact | null) => {
       this.selectedContact = contact;
       if (this.selectedContact) {
+        console.log('Fetching messages for contact:', this.selectedContact);
         this.chatService.fetchChatHistory(this.loginService.sessionID, contact!.userID)
-          .subscribe(messages => {
-            this.messages = messages;
+          .subscribe({
+            next: (messages: Message[]) => {
+              console.log('Received messages:', messages);
+              this.messages = messages;
+            },
+            error: (error) => {
+              console.error('Error loading messages:', error);
+              this.messages = [];
+            }
           });
+      } else {
+        this.messages = [];
       }
     });
   }
-
 }

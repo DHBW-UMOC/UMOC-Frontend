@@ -1,9 +1,9 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ChatInputEmojisComponent} from "../chat-input-emojis/chat-input-emojis.component";
-import {ChatInputExtrasComponent} from "../chat-input-extras/chat-input-extras.component";
-import {ContactListService} from "../contact-list/contact-list.service";
-import {Contact} from "../model/contact.model";
-import {ChatInputService} from "./chat-input.service";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChatInputEmojisComponent } from "../chat-input-emojis/chat-input-emojis.component";
+import { ChatInputExtrasComponent } from "../chat-input-extras/chat-input-extras.component";
+import { ContactListService } from "../contact-list/contact-list.service";
+import { Contact } from "../model/contact.model";
+import { ChatInputService } from "./chat-input.service";
 
 @Component({
   selector: 'app-chat-input',
@@ -20,9 +20,9 @@ export class ChatInputComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.contactService.currentContact$.subscribe(contact => {
+    this.contactService.currentContact$.subscribe((contact: Contact | null) => {
       this.selectedContact = contact;
-    })
+    });
   }
 
   saveMessage(messageContent: string) {
@@ -34,10 +34,10 @@ export class ChatInputComponent implements OnInit {
         this.selectedContact!.userID,
         messageContent
       ).subscribe({
-        next: (response) => {
+        next: (response: any) => {
           this.messageInput.nativeElement.value = '';
         },
-        error: (error) => {
+        error: (error: any) => {
           console.error('Message send failed', error);
           this.messageInput.nativeElement.value = '';
         }
