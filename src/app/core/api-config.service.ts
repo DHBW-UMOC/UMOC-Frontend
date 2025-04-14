@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 })
 export class ApiConfigService {
   // Base API URL - should come from environment in a real app
-  private apiUrl = 'http://localhost:5000';
+  private apiUrl = 'http://0.0.0.0:5000';
 
   // Authentication endpoints
   getLoginUrl(): string {

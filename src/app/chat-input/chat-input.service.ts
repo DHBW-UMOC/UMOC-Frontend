@@ -16,7 +16,7 @@ export class ChatInputService {
     };
     console.log('Request Body:', body);
     return this.http.post(
-      'http://localhost:5000/saveMessage',
+      'http://0.0.0.0:5000/saveMessage',
       body,
       {
         headers: new HttpHeaders({

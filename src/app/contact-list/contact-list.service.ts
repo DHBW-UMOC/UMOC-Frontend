@@ -20,7 +20,7 @@ export class ContactListService {
 
   public fetchContacts(sessionID: string): Array<Contact> {
     this.http.get<any>(
-      "http://localhost:5000/getContacts",
+      "http://0.0.0.0:5000/getContacts",
       { params: new HttpParams().append('sessionID', sessionID) }
     ).subscribe(response => {
       // API returns either array directly or inside 'contacts' property

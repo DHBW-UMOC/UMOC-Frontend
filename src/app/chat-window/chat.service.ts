@@ -12,7 +12,7 @@ export class ChatService {
   public fetchChatHistory(sessionID: string, contactID: string): Observable<Message[]> {
     console.log(`Fetching messages for session ${sessionID} and contact ${contactID}`);
     return this.http.get<any>(
-      "http://localhost:5000/getContactMessages",
+      "http://0.0.0.0:5000/getContactMessages",
       {
         params: new HttpParams()
           .append('sessionID', sessionID)
