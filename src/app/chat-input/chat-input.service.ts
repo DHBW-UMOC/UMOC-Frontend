@@ -16,7 +16,7 @@ export class ChatInputService {
     };
     console.log('Request Body:', body);
     return this.http.post(
-      'http://0.0.0.0:5000/saveMessage',
+      'https://api.umoc.chat/saveMessage',
       body,
       {
         headers: new HttpHeaders({

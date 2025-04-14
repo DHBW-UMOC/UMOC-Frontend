@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 })
 export class ApiConfigService {
   // Base API URL - should come from environment in a real app
-  private apiUrl = 'http://0.0.0.0:5000';
+  private apiUrl = 'https://api.umoc.chat';
 
   // Authentication endpoints
   getLoginUrl(): string {

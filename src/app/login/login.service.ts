@@ -7,7 +7,7 @@ import { Observable, tap, catchError, of } from "rxjs";
 })
 export class LoginService {
   private _sessionID: string = "00000000-0000-0000-1111-000000000001"; // Default value for development
-  private readonly baseUrl = "http://0.0.0.0:5000"; // API base URL
+  private readonly baseUrl = "https://api.umoc.chat"; // API base URL
 
   constructor(private http: HttpClient) {}
 

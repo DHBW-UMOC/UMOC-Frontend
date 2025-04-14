@@ -20,7 +20,7 @@ export class ContactListService {
 
   public fetchContacts(sessionID: string): Array<Contact> {
     this.http.get<any>(
-      "http://0.0.0.0:5000/getContacts",
+      "https://api.umoc.chat/getContacts",
       { params: new HttpParams().append('sessionID', sessionID) }
     ).subscribe(response => {
       // API returns either array directly or inside 'contacts' property
