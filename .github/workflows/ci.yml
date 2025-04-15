@@ -11,7 +11,7 @@ on:
       - development
 
 jobs:
-  build & Publish:
+  publish:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
