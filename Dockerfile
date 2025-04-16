@@ -1,8 +1,9 @@
-FROM node:20-alpine
-
+FROM node:20 AS build
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
 COPY . .
-EXPOSE 4200
-CMD ["npm", "start"]
+RUN npm install && npm run build --prod
+
+FROM nginx:alpine
+COPY --from=build /app/dist/umoc-frontend/browser/ /usr/share/nginx/html/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
