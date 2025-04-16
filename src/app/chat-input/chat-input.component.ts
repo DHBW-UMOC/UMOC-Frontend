@@ -6,11 +6,10 @@ import { Contact } from "../model/contact.model";
 import { ChatInputService } from "./chat-input.service";
 
 @Component({
-  selector: 'app-chat-input',
-  standalone: true,
-  imports: [ChatInputEmojisComponent, ChatInputExtrasComponent],
-  templateUrl: './chat-input.component.html',
-  styleUrl: './chat-input.component.scss'
+    selector: 'app-chat-input',
+    imports: [ChatInputEmojisComponent, ChatInputExtrasComponent],
+    templateUrl: './chat-input.component.html',
+    styleUrl: './chat-input.component.scss'
 })
 export class ChatInputComponent implements OnInit {
   protected selectedContact!: Contact | null;

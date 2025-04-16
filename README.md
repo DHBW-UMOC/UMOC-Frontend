@@ -1,6 +1,6 @@
 # UmocFrontend
 
-This project uses [Angular CLI](https://github.com/angular/angular-cli) version 18.2.18 and Node version 22.14.0.
+This project uses Angular CLI version 19.2.8, Angular version 19.9.2 and Node version 22.14.0.
 
 ## Development server
 

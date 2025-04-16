@@ -8,17 +8,16 @@ import { CommonModule } from "@angular/common";
 import { LoginService } from "../login/login.service";
 
 @Component({
-  selector: 'app-contact-list',
-  standalone: true,
-  imports: [
-    ContactContainerComponent,
-    ContactListSearchBarComponent,
-    ContactListHeaderComponent,
-    CommonModule
-  ],
-  providers: [LoginService],
-  templateUrl: './contact-list.component.html',
-  styleUrl: './contact-list.component.scss'
+    selector: 'app-contact-list',
+    imports: [
+        ContactContainerComponent,
+        ContactListSearchBarComponent,
+        ContactListHeaderComponent,
+        CommonModule
+    ],
+    providers: [LoginService],
+    templateUrl: './contact-list.component.html',
+    styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent implements OnInit {
   protected contacts: Array<Contact> = [];

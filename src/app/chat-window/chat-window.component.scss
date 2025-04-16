@@ -1,4 +1,4 @@
-@import "../../styles.scss";
+@use "../../styles.scss" as global;
 
 .chat-window-container {
     flex: 1;
@@ -9,7 +9,7 @@
   
     .chat-header {
       padding: 15px;
-      background-color: $chat-window-header;
+      background-color: global.$chat-window-header;
       cursor: pointer;
       font-weight: bold;
     }
@@ -19,7 +19,7 @@
       flex: 1;
       overflow-y: auto;
       padding: 20px;
-      background-color: $chat-window-background;
+      background-color: global.$chat-window-background;
       flex-direction: column-reverse;
     }
   }

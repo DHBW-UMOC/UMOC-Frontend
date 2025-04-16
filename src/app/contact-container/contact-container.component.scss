@@ -1,4 +1,4 @@
-@import "../../styles.scss";  
+@use "../../styles.scss" as global;
 
 .contact-container-details {
     display: flex;
@@ -7,14 +7,14 @@
     cursor: pointer;
 
     &:hover {
-      background-color: $contact-list-hover;
+      background-color: global.$contact-list-hover;
     }
 
     .contact-container-image {
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background-color: $contact-container-default-image;
+      background-color: global.$contact-container-default-image;
       margin-right: 10px;
     }
 

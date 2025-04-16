@@ -1,8 +1,8 @@
-@import "../../styles.scss";
+@use "../../styles.scss" as global;
 
 .contact-list-header {
     padding-left: 20px;
     padding-top: 20px;
     padding-bottom: 10px;
-    color: $contact-list-header-font;
+    color: global.$contact-list-header-font;
 }
