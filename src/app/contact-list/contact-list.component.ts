@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
 import { ContactContainerComponent } from "../contact-container/contact-container.component";
 import { ContactListSearchBarComponent } from "../contact-list-search-bar/contact-list-search-bar.component";
 import { ContactListHeaderComponent } from "../contact-list-header/contact-list-header.component";
@@ -15,8 +14,7 @@ import { LoginService } from "../login/login.service";
     ContactContainerComponent,
     ContactListSearchBarComponent,
     ContactListHeaderComponent,
-    CommonModule,
-    HttpClientModule
+    CommonModule
   ],
   providers: [LoginService],
   templateUrl: './contact-list.component.html',
