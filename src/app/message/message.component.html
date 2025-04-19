@@ -1,6 +1,3 @@
-<div class="message-container" *ngIf="isValidMessage()" [ngClass]="{'message-sent': isSent == '00000000-0000-0000-0000-000000000001', 'message-received': isSent != '00000000-0000-0000-0000-000000000001'}">
+<div class="message-container" *ngIf="isValidMessage()" [ngClass]="(sender == currentUser) ? 'message-sent' : 'message-received'">
   {{ message.message }}
-  <div class="message-timestamp" *ngIf="message.timeStamp">
-    {{ message.timeStamp | date:'short' }}
-  </div>
 </div>

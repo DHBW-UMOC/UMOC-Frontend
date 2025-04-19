@@ -8,7 +8,7 @@
       <app-message
         *ngFor="let message of messages"
         [message]="message"
-        [isSent]="message.owner"
+        [sender]="message.owner"
       ></app-message>
     </ng-container>
     <ng-template #noMessages>

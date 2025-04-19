@@ -1,66 +1,56 @@
-import { Injectable } from "@angular/core";
+import {EventEmitter, Injectable, Output} from "@angular/core";
 import { HttpClient, HttpParams } from "@angular/common/http";
-import { Observable, tap, catchError, of } from "rxjs";
+import { CookieService } from 'ngx-cookie-service';
+import { PRODUCTION } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private _sessionID: string = "00000000-0000-0000-1111-000000000001"; // Default value for development
-  private readonly baseUrl = "https://api.umoc.chat"; // API base URL
+  constructor(
+      private http: HttpClient,
+      private cookie: CookieService
+  ) {}
 
-  constructor(private http: HttpClient) {}
+  @Output() userLoggedIn = new EventEmitter<boolean>();
 
-  /**
-   * Authenticate user and receive session ID
-   * @param username User's username
-   * @param password User's password
-   * @returns Observable containing login result
-   */
-  public login(username: string, password: string): Observable<any> {
-    return this.http.get<any>(
-      `${this.baseUrl}/login`,
-      { 
-        params: new HttpParams()
-          .append('username', username)
-          .append('password', password)
+  public login(username: String, password: String): void {
+    const params = new HttpParams()
+        .set('username', username.toString())
+        .set('password', password.toString());
+    this.http.get(`${PRODUCTION}/login`, { params }).subscribe({
+      next: (response: any) => {
+        const { access_token, expires_in , user_id} = response;
+        this.cookie.set('auth_token', access_token);
+        this.cookie.set('expires_in', expires_in.toString());
+        this.cookie.set('userID', user_id.toString());
+        this.userLoggedIn.emit(true);
+      },
+      error: (error) => {
+        console.error('Login error:', error);
       }
-    ).pipe(
-      tap(response => {
-        if (response && response.sessionID) {
-          this._sessionID = response.sessionID;
-        }
-      }),
-      catchError(error => {
-        console.error("Login attempt failed:", error);
-        return of({ error: error.message || "Authentication failed" });
-      })
-    );
+    });
   }
 
-  /**
-   * End user's session
-   * @returns Observable containing logout result
-   */
-  public logout(): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}/logout`,
-      { sessionID: this._sessionID }
-    ).pipe(
-      tap(() => {
-        this._sessionID = "";
-      }),
-      catchError(error => {
-        console.error("Logout failed:", error);
-        return of({ error: error.message || "Logout failed" });
-      })
-    );
+  public logout(): void {
+    this.cookie.delete('auth_token');
+    this.cookie.delete('expires_in');
+    this.userLoggedIn.emit(false);
   }
 
-  /**
-   * Get current session ID
-   */
-  get sessionID(): string {
-    return this._sessionID;
+  public isLoggedIn(): boolean {
+    return this.cookie.check('auth_token');
+  }
+
+  public getAuthToken(): string {
+    return this.cookie.get('auth_token');
+  }
+
+  public getTimeLeft(): string {
+    return this.cookie.get('expires_in');
+  }
+
+  public getUserID(): string {
+    return this.cookie.get('userID');
   }
 }

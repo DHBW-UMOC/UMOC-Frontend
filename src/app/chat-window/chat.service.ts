@@ -1,22 +1,25 @@
 import { Injectable } from "@angular/core";
 import { Message } from "../model/message.model";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import { catchError, map, Observable, of } from "rxjs";
+import {LoginService} from "../login/login.service";
+import {PRODUCTION} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  constructor(private http: HttpClient) {}
+  constructor(
+      private http: HttpClient,
+      private loginService: LoginService
+  ) {}
 
-  public fetchChatHistory(sessionID: string, contactID: string): Observable<Message[]> {
-    console.log(`Fetching messages for session ${sessionID} and contact ${contactID}`);
+  public fetchChatHistory(contactID: string): Observable<Message[]> {
     return this.http.get<any>(
-      "https://api.umoc.chat/getContactMessages",
+        `${PRODUCTION}/getContactMessages`,
       {
-        params: new HttpParams()
-          .append('sessionID', sessionID)
-          .append('contactID', contactID)
+          headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`}),
+          params: new HttpParams().append('contactID', contactID)
       }
     ).pipe(
       map(response => {

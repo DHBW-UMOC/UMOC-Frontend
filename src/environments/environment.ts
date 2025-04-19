@@ -1,4 +1,1 @@
-export const environment = {
-  production: false,
-  apiUrl: 'https://api.umoc.chat'
-};
+export const PRODUCTION = 'https://api.umoc.chat';

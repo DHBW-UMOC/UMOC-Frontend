@@ -1,29 +1,33 @@
-import { Injectable } from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { Contact } from "../model/contact.model";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Contact } from '../model/contact.model';
+import { BehaviorSubject } from 'rxjs';
+import { PRODUCTION } from '../../environments/environment';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactListService {
   private contacts: Array<Contact> = [];
-
   private contactSource = new BehaviorSubject<Contact | null>(null);
   currentContact$ = this.contactSource.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private loginService: LoginService
+  ) {
+  }
 
   selectContact(contact: Contact): void {
     this.contactSource.next(contact);
   }
 
-  public fetchContacts(sessionID: string): Array<Contact> {
+  public fetchContacts(): Array<Contact> {
     this.http.get<any>(
-      "https://api.umoc.chat/getContacts",
-      { params: new HttpParams().append('sessionID', sessionID) }
+      `${PRODUCTION}/getContacts`,
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe(response => {
-      // API returns either array directly or inside 'contacts' property
       const contactsData = Array.isArray(response) ? response : response.contacts || [];
       this.contacts = contactsData.map((contact: any) =>
         new Contact(

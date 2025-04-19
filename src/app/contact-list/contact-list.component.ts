@@ -23,12 +23,11 @@ export class ContactListComponent implements OnInit {
   protected contacts: Array<Contact> = [];
 
   constructor(
-    private contactService: ContactListService,
-    private loginService: LoginService,
-  ) { }
+    private contactService: ContactListService
+  ) {}
 
   ngOnInit(): void {
-    this.contacts = this.contactService.fetchContacts(this.loginService.sessionID);
+    this.contacts = this.contactService.fetchContacts();
   }
 
   openChat(contact: Contact) {

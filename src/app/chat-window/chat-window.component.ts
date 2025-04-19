@@ -26,7 +26,7 @@ export class ChatWindowComponent implements OnInit {
       this.selectedContact = contact;
       if (this.selectedContact) {
         console.log('Fetching messages for contact:', this.selectedContact);
-        this.chatService.fetchChatHistory(this.loginService.sessionID, contact!.userID)
+        this.chatService.fetchChatHistory(contact!.contactID)
           .subscribe({
             next: (messages: Message[]) => {
               console.log('Received messages:', messages);
