@@ -31,12 +31,12 @@ export class ContactService {
     ).pipe(
       map((response: any) => {
         const contactsData = Array.isArray(response) ? response : (response.contacts ? response.contacts : []);
-        return  contactsData.map((contact: any) => {
+        return contactsData.map((contact: any) => {
           return new Contact(
             contact.contact_id,
             contact.name,
             contact.url
-          )
+          );
         });
       })
     );
