@@ -4,7 +4,7 @@ import { ContactListSearchBarComponent } from '../contact-list-search-bar/contac
 import { ContactListHeaderComponent } from '../contact-list-header/contact-list-header.component';
 import { ContactService } from '../services/contact.service';
 import { Contact } from '../model/contact.model';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login.service';
 
 @Component({
@@ -13,7 +13,8 @@ import { LoginService } from '../services/login.service';
     ContactContainerComponent,
     ContactListSearchBarComponent,
     ContactListHeaderComponent,
-    CommonModule
+    CommonModule,
+    NgOptimizedImage
   ],
   providers: [LoginService],
   templateUrl: './contact-list.component.html',

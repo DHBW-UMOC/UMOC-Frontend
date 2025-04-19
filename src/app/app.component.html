@@ -1,10 +1,17 @@
 <div class="app-background">
-  <button style="position: absolute; top: 10px; right: 10px;" *ngIf="isLoggedIn" (click)="logout()">Abmelden</button>
-  <div class="app-container" *ngIf="isLoggedIn">
+  @defer (when isLoggedIn) {
+    <button style="position: absolute; top: 10px; right: 10px;" (click)="logout()">Abmelden</button>
+    <div class="app-container">
       <app-contact-list/>
       <app-chat-window/>
-  </div>
-  <div *ngIf="!isLoggedIn">
+    </div>
+  } @placeholder {
+    <div *ngIf="!isLoggedIn">
       <login-field/>
-  </div>
+    </div>
+  } @loading (minimum 500ms) {
+    <div class="loading-container">
+      <img ngSrc="assets/duckduckgoes.gif" width="383" height="480" alt="Loading..."/>
+    </div>
+  }
 </div>

@@ -9,22 +9,22 @@
     word-wrap: break-word;
     position: relative;
 
-    &.message-sent {
-      background-color: global.$message-sent-background;
-      margin-left: auto;
-    }
+  &.message-sent {
+    background-color: global.$message-sent-background;
+    margin-left: auto;
+  }
 
-    &.message-received {
-      background-color: global.$message-received-background;
-      margin-right: auto;
-    }
+  &.message-received {
+    background-color: global.$message-received-background;
+    margin-right: auto;
+  }
 
-    .message-timestamp {
-      font-size: 0.7em;
-      color: #888;
-      text-align: right;
-      margin-top: 5px;
-    }
+  .message-timestamp {
+    font-size: 0.7em;
+    color: #888;
+    text-align: right;
+    margin-top: 5px;
+  }
 }
 
 .no-messages {

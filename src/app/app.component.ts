@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
-import { NgIf } from '@angular/common';
+import { NgIf, NgOptimizedImage } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './services/login.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  imports: [ContactListComponent, ChatWindowComponent, NgIf, LoginComponent],
+  imports: [ContactListComponent, ChatWindowComponent, NgIf, LoginComponent, NgOptimizedImage],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -40,6 +40,7 @@ export class LoginService {
     this.cookie.delete('auth_token');
     this.cookie.delete('expires_in');
     this.userLoggedIn.emit(false);
+    window.location.reload();
   }
 
   public isLoggedIn(): boolean {

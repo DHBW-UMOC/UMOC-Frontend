@@ -27,7 +27,7 @@ export class ChatService {
     ).pipe(
       map(response => {
         const messagesData = Array.isArray(response) ? response : (response.messages ? response.messages : []);
-        return messagesData.map((message: any) => {
+        return  messagesData.map((message: any) => {
           return new Message(
             message.content,
             new Date(message.timestamp),
