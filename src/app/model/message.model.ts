@@ -1,13 +1,11 @@
-import {Contact} from "./contact.model";
-
 export class Message {
   message: string;
-  timeStamp?: Date;
-  owner?: string;
+  timeStamp: Date;
+  sender_user_id: string;
 
-  constructor(message: string, timeStamp?: Date, owner?: string) {
+  constructor(message: string, timeStamp: Date, sender_user_id: string) {
     this.message = message;
     this.timeStamp = timeStamp;
-    this.owner = owner;
+    this.sender_user_id = sender_user_id;
   }
 }

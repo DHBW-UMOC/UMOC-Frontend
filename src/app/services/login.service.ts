@@ -1,26 +1,30 @@
-import {EventEmitter, Injectable, Output} from "@angular/core";
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
-import { PRODUCTION } from '../../environments/environment';
+import { EnvironmentService } from './environment.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
   constructor(
-      private http: HttpClient,
-      private cookie: CookieService
-  ) {}
+    private http: HttpClient,
+    private cookie: CookieService,
+    private environmentService: EnvironmentService
+  ) {
+  }
 
   @Output() userLoggedIn = new EventEmitter<boolean>();
 
   public login(username: String, password: String): void {
     const params = new HttpParams()
-        .set('username', username.toString())
-        .set('password', password.toString());
-    this.http.get(`${PRODUCTION}/login`, { params }).subscribe({
+      .set('username', username.toString())
+      .set('password', password.toString());
+    this.http.get(
+      this.environmentService.getLoginUrl(),
+      {params}).subscribe({
       next: (response: any) => {
-        const { access_token, expires_in , user_id} = response;
+        const {access_token, expires_in, user_id} = response;
         this.cookie.set('auth_token', access_token);
         this.cookie.set('expires_in', expires_in.toString());
         this.cookie.set('userID', user_id.toString());

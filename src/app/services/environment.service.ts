@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { CURRENT_ENVIRONMENT } from '../environments/environments';
 
+// Coose environment out of the enum
 @Injectable({
   providedIn: 'root'
 })
-export class ApiConfigService {
-  // Base API URL - should come from environment in a real app
-  private apiUrl = 'https://api.umoc.chat';
+export class EnvironmentService {
+  private apiUrl = CURRENT_ENVIRONMENT;
 
-  // Authentication endpoints
+  // Authentication Endpoints
   getLoginUrl(): string {
     return `${this.apiUrl}/login`;
   }
@@ -21,12 +21,12 @@ export class ApiConfigService {
     return `${this.apiUrl}/register`;
   }
 
-  // Contact management endpoints
+  // Contact Management Endpoints
   getContactsUrl(): string {
     return `${this.apiUrl}/getContacts`;
   }
 
-  getAddContactUrl(): string {
+  public getAddContactUrl(): string {
     return `${this.apiUrl}/addContact`;
   }
 
@@ -34,7 +34,7 @@ export class ApiConfigService {
     return `${this.apiUrl}/changeContact`;
   }
 
-  // Messaging endpoints
+  // Messaging Endpoints
   getContactMessagesUrl(): string {
     return `${this.apiUrl}/getContactMessages`;
   }
@@ -43,7 +43,7 @@ export class ApiConfigService {
     return `${this.apiUrl}/saveMessage`;
   }
 
-  // Utility endpoints
+  // Utility Endpoints
   getDebugContactsUrl(): string {
     return `${this.apiUrl}/debugContacts`;
   }

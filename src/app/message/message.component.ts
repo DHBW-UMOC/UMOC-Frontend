@@ -1,29 +1,14 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule, NgClass } from '@angular/common';
 import { Message } from '../model/message.model';
-import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-message',
-  imports: [CommonModule, NgClass, NgIf],
+  imports: [CommonModule, NgClass],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
-export class MessageComponent implements OnInit {
-  currentUser: string | undefined = '';
-  @Input() message!: Message;
-  @Input() sender: string | undefined = '';
-
-  constructor(
-    private loginService: LoginService
-  ) {
-  }
-
-  ngOnInit(): void {
-    this.currentUser = this.loginService.getUserID();
-  }
-
-  isValidMessage(): boolean {
-    return !!this.message && !!this.message.message;
-  }
+export class MessageComponent {
+  @Input() message: Message | undefined;
+  @Input() currentUser: string | undefined = '';
 }

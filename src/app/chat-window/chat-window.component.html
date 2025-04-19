@@ -1,19 +1,25 @@
-<div class="chat-window-container" *ngIf="selectedContact">
-  <div class="chat-header">
-    {{ selectedContact.userName }}
-  </div>
+<ng-container *ngIf="selectedContact$ | async as selectedContact">
+  <div class="chat-window-container">
+    <div class="chat-header">
+      {{ selectedContact.userName }}
+    </div>
 
-  <div class="chat-messages">
-    <ng-container *ngIf="messages && messages.length > 0; else noMessages">
-      <app-message
-        *ngFor="let message of messages"
-        [message]="message"
-        [sender]="message.owner"
-      ></app-message>
-    </ng-container>
-    <ng-template #noMessages>
-      <div class="no-messages">No messages yet. Start a conversation!</div>
-    </ng-template>
+    <div class="chat-messages">
+      <ng-container *ngIf="messages$ | async as messages">
+        <ng-container *ngIf="messages.length > 0; else noMessages">
+          <app-message
+            *ngFor="let message of messages"
+            [message]="message"
+            [currentUser]="currentUser">
+          </app-message>
+        </ng-container>
+      </ng-container>
+
+      <ng-template #noMessages>
+<!--        Eventuell Platzhalter hier-->
+      </ng-template>
+    </div>
+
+    <app-chat-input [recipientID]="selectedContact.contactID"></app-chat-input>
   </div>
-  <app-chat-input></app-chat-input>
-</div>
+</ng-container>

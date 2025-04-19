@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LoginService } from './login.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
     selector: 'login-field',
