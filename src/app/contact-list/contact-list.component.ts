@@ -21,10 +21,8 @@ import { LoginService } from '../services/login.service';
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
-  protected contacts$ = this.contactService.fetchContacts();
-
   constructor(
-    private contactService: ContactService
+    protected contactService: ContactService
   ) {
   }
 

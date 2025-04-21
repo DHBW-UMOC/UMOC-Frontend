@@ -10,22 +10,19 @@ import { LoginService } from '../services/login.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  loginForm: FormGroup = this.formBuilder.group({
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]]
+  });
 
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService
   ) {
-    this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
-    });
   }
 
   onSubmit(): void {
-    if (this.loginForm.invalid) {
-      return;
-    }
+    if (this.loginForm.invalid) return;
     this.loginService.login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value);
   }
 }

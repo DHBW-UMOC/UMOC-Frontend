@@ -2,16 +2,17 @@
   <app-contact-list-header/>
   <app-contact-list-search-bar/>
   <div class="contact-list">
-    @defer (on immediate; prefetch on immediate) {
-      <contact-container
-        *ngFor="let contact of contacts$ | async"
-        [contact]="contact"
-        (contactClick)="openChat($event)"
-      ></contact-container>
+    @defer (when this.contactService.contacts().length > 0) {
+      @for (contact of this.contactService.contacts(); track contact.contactID) {
+        <contact-container
+          [contact]="contact"
+          (contactClick)="openChat($event)"
+        ></contact-container>
+      }
     } @placeholder (minimum 500ms) {
-      <div>
+      <ng-container>
         <img ngSrc="assets/duckduckgoes.gif" width="383" height="480" alt="Loading..."/>
-      </div>
+      </ng-container>
     }
   </div>
 </div>

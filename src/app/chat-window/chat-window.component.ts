@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, signal } from '@angular/core';
 import { MessageComponent } from '../message/message.component';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -6,8 +6,6 @@ import { Message } from '../model/message.model';
 import { ChatService } from '../services/chat.service';
 import { LoginService } from '../services/login.service';
 import { ContactService } from '../services/contact.service';
-import { Contact } from '../model/contact.model';
-import { Observable, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-chat-window',
@@ -16,19 +14,19 @@ import { Observable, of, switchMap } from 'rxjs';
   styleUrl: './chat-window.component.scss'
 })
 export class ChatWindowComponent {
-  protected messages$: Observable<Message[]> = this.contactService.currentContact$.pipe(
-    switchMap((contact: Contact | null) => {
-      if (contact) {
-        console.log('Fetching messages for contact:', contact.userName);
-        return this.chatService.fetchChatHistory(contact.contactID);
-      }
-      return of([]);
-    })
-  );
-  protected selectedContact$ = this.contactService.currentContact$;
-  protected currentUser: string | undefined = '';
+  protected currentUser: string | undefined = this.loginService.getUserID();
+  protected selectedContact = this.contactService.selectedContact;
+  protected messages = signal<Message[]>([]);
 
-  constructor(private chatService: ChatService, private loginService: LoginService, private contactService: ContactService) {
-    this.currentUser = this.loginService.getUserID();
+  constructor(private chatService: ChatService,
+              private loginService: LoginService,
+              private contactService: ContactService
+  ) {
+    effect(() => {
+        if (!this.selectedContact()) return;
+        this.chatService.fetchChatHistory(this.selectedContact()!.contactID)
+          .subscribe(newMessages => this.messages.set(newMessages));
+      }
+    );
   }
 }

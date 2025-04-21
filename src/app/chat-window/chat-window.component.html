@@ -1,29 +1,32 @@
-<ng-container class="placeholder">
-  <ng-container *ngIf="selectedContact$ | async as selectedContact">
+@if (selectedContact()) {
+  <ng-container>
     <div class="chat-window-container">
       <div class="chat-header">
-        {{ selectedContact.userName }}
+        {{ selectedContact()!.userName }}
       </div>
 
-      <div class="chat-messages" #messageContainer>
-        @defer (on immediate; prefetch on immediate) {
-          <ng-container *ngIf="messages$ | async as messages">
-            <ng-container *ngIf="messages.length > 0">
+      <div class="chat-messages">
+        @if (messages().length > 0) {
+          <ng-container>
+            @for (message of messages(); track message.sender_user_id + message.timeStamp) {
               <app-message
-                *ngFor="let message of messages"
                 [message]="message"
                 [currentUser]="currentUser">
               </app-message>
-            </ng-container>
+            }
           </ng-container>
-        } @loading (minimum 500ms) {
+        } @else {
           <div>
             <img ngSrc="assets/duckduckgoes.gif" width="383" height="480" alt="Loading..."/>
           </div>
         }
       </div>
 
-      <app-chat-input [recipientID]="selectedContact.contactID"></app-chat-input>
+      <app-chat-input [recipientID]="selectedContact()!.contactID"></app-chat-input>
     </div>
   </ng-container>
-</ng-container>
+} @else {
+  <ng-container>
+    Placeholder
+  </ng-container>
+}

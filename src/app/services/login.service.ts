@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { EnvironmentService } from './environment.service';
@@ -7,14 +7,14 @@ import { EnvironmentService } from './environment.service';
   providedIn: 'root'
 })
 export class LoginService {
+  userLoggedIn = signal(false);
+
   constructor(
     private http: HttpClient,
     private cookie: CookieService,
     private environmentService: EnvironmentService
   ) {
   }
-
-  @Output() userLoggedIn = new EventEmitter<boolean>();
 
   public login(username: String, password: String): void {
     const params = new HttpParams()
@@ -28,7 +28,8 @@ export class LoginService {
         this.cookie.set('auth_token', access_token);
         this.cookie.set('expires_in', expires_in.toString());
         this.cookie.set('userID', user_id.toString());
-        this.userLoggedIn.emit(true);
+
+        this.userLoggedIn.set(true);
       },
       error: (error) => {
         console.error('Login error:', error);
@@ -39,12 +40,9 @@ export class LoginService {
   public logout(): void {
     this.cookie.delete('auth_token');
     this.cookie.delete('expires_in');
-    this.userLoggedIn.emit(false);
-    window.location.reload();
-  }
 
-  public isLoggedIn(): boolean {
-    return this.cookie.check('auth_token');
+    this.userLoggedIn.set(true);
+    window.location.reload();
   }
 
   public getAuthToken(): string {

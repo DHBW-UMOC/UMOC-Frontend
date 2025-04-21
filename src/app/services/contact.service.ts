@@ -1,18 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, linkedSignal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contact } from '../model/contact.model';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  private contacts: Array<Contact> = [];
-  private contactSource = new BehaviorSubject<Contact | null>(null);
-  currentContact$ = this.contactSource.asObservable();
-
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
@@ -20,8 +17,24 @@ export class ContactService {
   ) {
   }
 
-  selectContact(contact: Contact): void {
-    this.contactSource.next(contact);
+  contacts = toSignal(this.fetchContacts(), {initialValue: []});
+  selectedContact = linkedSignal<Contact[], Contact | null>({
+    source: this.contacts,
+    computation: (newContacts, previous) => {
+      if (previous?.value) {
+        const found = newContacts.find((contact) => contact.contactID === previous.value!.contactID);
+        if (found) return found;
+      }
+      return null;
+    }
+  });
+
+  updateContacts() {
+    // Handle messages from new contacts received over websocket or add new contacts
+  }
+
+  selectContact(contact: Contact) {
+    this.selectedContact.set(contact);
   }
 
   public fetchContacts(): Observable<Contact[]> {
