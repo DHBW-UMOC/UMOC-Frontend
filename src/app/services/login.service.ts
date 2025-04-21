@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { EnvironmentService } from './environment.service';
 
@@ -7,7 +7,7 @@ import { EnvironmentService } from './environment.service';
   providedIn: 'root'
 })
 export class LoginService {
-  userLoggedIn = signal(false);
+  userLoggedIn = signal(this.cookie.check('auth_token'));
 
   constructor(
     private http: HttpClient,
@@ -31,18 +31,25 @@ export class LoginService {
 
         this.userLoggedIn.set(true);
       },
-      error: (error) => {
-        console.error('Login error:', error);
-      }
+      error: () => console.error('Login error')
     });
   }
 
   public logout(): void {
-    this.cookie.delete('auth_token');
-    this.cookie.delete('expires_in');
-
-    this.userLoggedIn.set(true);
-    window.location.reload();
+    this.http.post(
+      this.environmentService.getLogoutUrl(),
+      {},
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.getAuthToken()}`})}
+    ).subscribe({
+        next: () => {
+          console.log('Logout successful');
+          this.cookie.delete('auth_token');
+          this.cookie.delete('expires_in');
+          this.userLoggedIn.set(false);
+        },
+        error: () => console.error('Logout error')
+      }
+    );
   }
 
   public getAuthToken(): string {

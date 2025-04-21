@@ -1,13 +1,11 @@
 <div class="app-background">
-  @defer (when this.loginService.userLoggedIn()) {
+  @if (this.loginService.userLoggedIn()) {
     <button style="position: absolute; top: 10px; right: 10px;" (click)="logout()">Abmelden</button>
     <div class="app-container">
       <app-contact-list/>
       <app-chat-window/>
     </div>
-  } @placeholder {
+  } @else {
     <login-field/>
-  } @loading {
-    <img ngSrc="assets/duckduckgoes.gif" width="383" height="480" alt="Loading..."/>
   }
 </div>

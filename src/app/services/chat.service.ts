@@ -28,6 +28,7 @@ export class ChatService {
         const messagesData = Array.isArray(response) ? response : (response.messages ? response.messages : []);
         return messagesData.map((message: any) => {
           return new Message(
+            message.message_id,
             message.content,
             new Date(message.timestamp),
             message.sender_user_id

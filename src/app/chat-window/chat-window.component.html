@@ -8,7 +8,7 @@
       <div class="chat-messages">
         @if (messages().length > 0) {
           <ng-container>
-            @for (message of messages(); track message.sender_user_id + message.timeStamp) {
+            @for (message of messages(); track message.message_id) {
               <app-message
                 [message]="message"
                 [currentUser]="currentUser">
