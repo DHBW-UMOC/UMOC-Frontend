@@ -31,7 +31,7 @@ export class LoginService {
 
         this.userLoggedIn.set(true);
       },
-      error: () => console.error('Login error')
+      error: (err) => console.error('Login error: ', err),
     });
   }
 
@@ -43,9 +43,9 @@ export class LoginService {
     ).subscribe({
         next: () => {
           console.log('Logout successful');
-          this.cookie.delete('auth_token');
-          this.cookie.delete('expires_in');
+          this.cookie.deleteAll();
           this.userLoggedIn.set(false);
+          window.location.reload();
         },
         error: () => console.error('Logout error')
       }

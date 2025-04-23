@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Message } from '../model/message.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { finalize, map, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
 
@@ -9,6 +9,9 @@ import { EnvironmentService } from './environment.service';
   providedIn: 'root'
 })
 export class ChatService {
+
+  isLoading = signal(false);
+
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
@@ -16,12 +19,13 @@ export class ChatService {
   ) {
   }
 
-  public fetchChatHistory(contactID: string): Observable<Message[]> {
+  public fetchChatHistory(contact_id: string): Observable<Message[]> {
+    this.isLoading.set(true);
     return this.http.get<any>(
       this.environmentService.getContactMessagesUrl(),
       {
         headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`}),
-        params: new HttpParams().append('contactID', contactID)
+        params: new HttpParams().append('contact_id', contact_id)
       }
     ).pipe(
       map(response => {
@@ -34,7 +38,8 @@ export class ChatService {
             message.sender_user_id
           );
         });
-      })
+      }),
+      finalize(() => this.isLoading.set(false))
     );
   }
 
@@ -42,9 +47,9 @@ export class ChatService {
     return this.http.post(
       this.environmentService.getSaveMessageUrl(),
       {
-        recipientID: recipientID,
+        recipient_id: recipientID,
         content: message,
-        isGroup: false
+        is_group: false
       },
       {
         headers: new HttpHeaders({

@@ -1,5 +1,5 @@
 <div class="message-container"
      [ngClass]="(message?.sender_user_id == currentUser) ? 'message-sent' : 'message-received'">
   {{ message?.message }}
-  <div class="message-timestamp">{{ message?.timeStamp ? (message?.timeStamp | date: 'HH:mm') : 'ERR' }}</div>
+  <div class="message-timestamp">{{ message?.timestamp ? (message?.timestamp | date: 'HH:mm') : 'ERR' }}</div>
 </div>

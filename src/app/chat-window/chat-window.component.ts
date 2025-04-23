@@ -18,13 +18,14 @@ export class ChatWindowComponent {
   protected selectedContact = this.contactService.selectedContact;
   protected messages = signal<Message[]>([]);
 
-  constructor(private chatService: ChatService,
+  constructor(protected chatService: ChatService,
               private loginService: LoginService,
               private contactService: ContactService
   ) {
     effect(() => {
         if (!this.selectedContact()) return;
-        this.chatService.fetchChatHistory(this.selectedContact()!.contactID)
+        this.messages.set([]);
+        this.chatService.fetchChatHistory(this.selectedContact()!.contact_id)
           .subscribe(newMessages => this.messages.set(newMessages));
       }
     );

@@ -2,16 +2,20 @@
   <app-contact-list-header/>
   <app-contact-list-search-bar/>
   <div class="contact-list">
-    @defer (when this.contactService.contacts().length > 0) {
-      @for (contact of this.contactService.contacts(); track contact.contactID) {
+    @if (this.contactService.contacts().length > 0 && !this.contactService.isLoading()) {
+      @for (contact of this.contactService.contacts(); track contact.contact_id) {
         <contact-container
           [contact]="contact"
           (contactClick)="openChat($event)"
         ></contact-container>
       }
-    } @placeholder (minimum 500ms) {
+    } @else if (this.contactService.isLoading()) {
       <ng-container>
         <img ngSrc="assets/duckduckgoes.gif" width="383" height="480" alt="Loading..."/>
+      </ng-container>
+    } @else {
+      <ng-container>
+        <h2>No contacts found</h2>
       </ng-container>
     }
   </div>

@@ -2,11 +2,11 @@
   <ng-container>
     <div class="chat-window-container">
       <div class="chat-header">
-        {{ selectedContact()!.userName }}
+        {{ selectedContact()!.user_name }}
       </div>
 
       <div class="chat-messages">
-        @if (messages().length > 0) {
+        @if (messages().length > 0 && !this.chatService.isLoading()) {
           <ng-container>
             @for (message of messages(); track message.message_id) {
               <app-message
@@ -15,14 +15,17 @@
               </app-message>
             }
           </ng-container>
-        } @else {
+        } @else if (this.chatService.isLoading()) {
           <div>
             <img ngSrc="assets/duckduckgoes.gif" width="383" height="480" alt="Loading..."/>
           </div>
+        } @else {
+          <div class="no-messages">
+            <h2>No messages yet</h2>
+          </div>
         }
       </div>
-
-      <app-chat-input [recipientID]="selectedContact()!.contactID"></app-chat-input>
+      <app-chat-input [recipientID]="selectedContact()!.contact_id"></app-chat-input>
     </div>
   </ng-container>
 } @else {
