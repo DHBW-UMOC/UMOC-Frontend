@@ -25,7 +25,7 @@ export class ChatService {
       this.environmentService.getContactMessagesUrl(),
       {
         headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`}),
-        params: new HttpParams().append('chat', contact_id)
+        params: new HttpParams().append('chat_id', contact_id)
       }
     ).pipe(
       map(response => {

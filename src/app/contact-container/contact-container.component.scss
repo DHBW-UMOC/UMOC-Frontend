@@ -1,27 +1,57 @@
 @use "../../styles.scss" as global;
 
 .contact-container-details {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
 
-    &:hover {
-      background-color: global.$contact-list-hover;
+  &:hover {
+    background-color: global.$contact-list-hover;
+
+    button[mat-icon-button] {
+      visibility: visible;
+      opacity: 1;
     }
+  }
+
+  > div:first-child {
+    display: block;
+    cursor: pointer;
+    width: calc(100% - 48px);
 
     .contact-container-image {
+      float: left;
       width: 50px;
       height: 50px;
       border-radius: 50%;
       background-color: global.$contact-container-default-image;
-      margin-right: 10px;
     }
 
-    .contact-name {
-      font-weight: bold;
+    .contact-container-name {
+      margin-left: 60px;
       overflow: hidden;
-      white-space: nowrap;
       text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .contact-container-status {
+      display: block;
+      font-size: 0.8rem;
+      color: #888;
+      margin-left: 60px;
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
+
+  button[mat-icon-button] {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+    align-self: center;
+  }
+}

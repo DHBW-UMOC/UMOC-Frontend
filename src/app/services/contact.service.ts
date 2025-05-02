@@ -1,10 +1,12 @@
-import { Injectable, linkedSignal, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contact } from '../model/contact.model';
+import { Group } from '../model/group.model';
 import { finalize, map, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Chat } from '../model/chat.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,26 +20,11 @@ export class ContactService {
   }
 
   isLoading = signal(false);
+  selectedContact = signal<Chat | null>(null);
   contacts = toSignal(this.fetchContacts(), {initialValue: []});
-  selectedContact = linkedSignal<Contact[], Contact | null>({
-    source: this.contacts,
-    computation: (newContacts, previous) => {
-      if (previous?.value) {
-        const found = newContacts.find((contact) => contact.contact_id === previous.value!.contact_id);
-        console.log('Found contact: ', found!.name);
-        if (found) return found;
-      }
-      console.log('No contact selected');
-      return null;
-    }
-  });
 
-  updateContacts() {
-    // Handle messages from new contacts received over websocket or add new contacts
-  }
-
-  selectContact(contact: Contact) {
-    this.selectedContact.set(contact);
+  selectContact(chat: Chat) {
+    this.selectedContact.set(chat);
   }
 
   public fetchContacts(): Observable<Contact[]> {
@@ -47,17 +34,28 @@ export class ContactService {
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).pipe(
       map((response: any) => {
-        const contactsData = Array.isArray(response) ? response : (response.contacts ? response.contacts : []);
+        const contactsData = Array.isArray(response) ? response : (response.chats ? response.chats : []);
         return contactsData.map((contact: any) => {
-          console.log('Mapped contact');
-          return new Contact(
-            contact.is_group,
-            contact.contact_id,
-            contact.name,
-            contact.status,
-            contact.streak,
-            contact.url
-          );
+          console.log('Mapped chat');
+          if (contact.is_group) {
+            return new Group(
+              contact.is_group,
+              contact.group_id,
+              contact.group_name,
+              contact.url,
+              new Date(contact.created_at),
+              contact.admin_user_id
+            );
+          } else {
+            return new Contact(
+              contact.is_group,
+              contact.contact_id,
+              contact.name,
+              contact.url,
+              contact.status,
+              contact.streak
+            );
+          }
         });
       }),
       finalize(() => this.isLoading.set(false))

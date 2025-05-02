@@ -1,6 +1,47 @@
-<div class="contact-container-details" (click)="onContactClick()">
-  <div class="contact-container-image">
-    <img [ngSrc]="contact.picture_url" width="50" height="50" alt=""/>
+<div class="contact-container-details">
+  <div (click)="onContactClick()">
+    <div class="contact-container-image">
+      <img [ngSrc]="chat.picture_url" width="50" height="50" alt=""/>
+    </div>
+    <div class="contact-container-name">{{ chat.name }}</div>
+    @if (!chat.is_group) {
+      <div class="contact-container-status">
+        {{ isContact(chat) ? chat.status : 'Unbekannt' }}
+      </div>
+    }
   </div>
-  <div class="contact-container-name">{{ contact.name }}</div>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
 </div>
+
+
+<mat-menu #menu="matMenu">
+  @if (chat.is_group) {
+    <button mat-menu-item>
+      <span>Gruppe löschen</span>
+    </button>
+    <button mat-menu-item>
+      <span>Gruppe verlassen</span>
+    </button>
+    <button mat-menu-item>
+      <span>Gruppe umbenennen</span>
+    </button>
+    <button mat-menu-item>
+      <span>Gruppe bearbeiten</span>
+    </button>
+  } @else {
+    <button mat-menu-item>
+      <span>Befreunden</span>
+    </button>
+    <button mat-menu-item>
+      <span>Blockieren</span>
+    </button>
+    <button mat-menu-item>
+      <span>Blockieren</span>
+    </button>
+    <button mat-menu-item>
+      <span>Löschen</span>
+    </button>
+  }
+</mat-menu>

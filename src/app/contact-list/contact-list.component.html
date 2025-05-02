@@ -5,7 +5,7 @@
     @if (this.contactService.contacts().length > 0 && !this.contactService.isLoading()) {
       @for (contact of this.contactService.contacts(); track contact.contact_id) {
         <contact-container
-          [contact]="contact"
+          [chat]="contact"
           (contactClick)="openChat($event)"
         ></contact-container>
       }

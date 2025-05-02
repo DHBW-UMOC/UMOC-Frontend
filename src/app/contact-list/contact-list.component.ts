@@ -5,7 +5,7 @@ import { ContactListHeaderComponent } from '../contact-list-header/contact-list-
 import { ContactService } from '../services/contact.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login.service';
-import { Contact } from '../model/contact.model';
+import { Chat } from '../model/chat.model';
 
 @Component({
   selector: 'app-contact-list',
@@ -26,7 +26,7 @@ export class ContactListComponent {
   ) {
   }
 
-  openChat(contact: Contact) {
-    this.contactService.selectContact(contact);
+  openChat(chat: Chat) {
+    this.contactService.selectContact(chat);
   }
 }
