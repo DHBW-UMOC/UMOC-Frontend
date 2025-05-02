@@ -25,17 +25,20 @@ export class ChatService {
       this.environmentService.getContactMessagesUrl(),
       {
         headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`}),
-        params: new HttpParams().append('contact_id', contact_id)
+        params: new HttpParams().append('chat', contact_id)
       }
     ).pipe(
       map(response => {
         const messagesData = Array.isArray(response) ? response : (response.messages ? response.messages : []);
         return messagesData.map((message: any) => {
           return new Message(
-            message.message_id,
             message.content,
+            message.message_id,
+            message.recipient_id,
+            message.sender_user_id,
+            message.sender_username,
             new Date(message.timestamp),
-            message.sender_user_id
+            message.type
           );
         });
       }),

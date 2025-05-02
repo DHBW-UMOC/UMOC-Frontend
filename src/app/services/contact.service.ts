@@ -24,7 +24,7 @@ export class ContactService {
     computation: (newContacts, previous) => {
       if (previous?.value) {
         const found = newContacts.find((contact) => contact.contact_id === previous.value!.contact_id);
-        console.log('Found contact: ', found!.user_name);
+        console.log('Found contact: ', found!.name);
         if (found) return found;
       }
       console.log('No contact selected');
@@ -51,8 +51,11 @@ export class ContactService {
         return contactsData.map((contact: any) => {
           console.log('Mapped contact');
           return new Contact(
+            contact.is_group,
             contact.contact_id,
             contact.name,
+            contact.status,
+            contact.streak,
             contact.url
           );
         });

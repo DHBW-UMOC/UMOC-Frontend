@@ -23,7 +23,7 @@ export class EnvironmentService {
 
   // Contact Management Endpoints
   getContactsUrl(): string {
-    return `${this.apiUrl}/getContacts`;
+    return `${this.apiUrl}/getChats`;
   }
 
   public getAddContactUrl(): string {
@@ -36,11 +36,36 @@ export class EnvironmentService {
 
   // Messaging Endpoints
   getContactMessagesUrl(): string {
-    return `${this.apiUrl}/getContactMessages`;
+    return `${this.apiUrl}/getChatMessages`;
   }
 
   getSaveMessageUrl(): string {
     return `${this.apiUrl}/saveMessage`;
+  }
+
+  // Group Management Endpoints
+  getCreateGroupUrl(): string {
+    return `${this.apiUrl}/createGroup`;
+  }
+
+  getDeleteGroupUrl(): string {
+    return `${this.apiUrl}/deleteGroup`;
+  }
+
+  getChangeGroupUrl(): string {
+    return `${this.apiUrl}/changeGroup`;
+  }
+
+  getAddMemberUrl(): string {
+    return `${this.apiUrl}/addMember`;
+  }
+
+  getRemoveMemberUrl(): string {
+    return `${this.apiUrl}/removeMember`;
+  }
+
+  getGetGroupMembersUrl(): string {
+    return `${this.apiUrl}/getGroupMembers`;
   }
 
   // Utility Endpoints
