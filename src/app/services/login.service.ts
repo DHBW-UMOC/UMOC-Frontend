@@ -8,6 +8,7 @@ import { EnvironmentService } from './environment.service';
 })
 export class LoginService {
   userLoggedIn = signal(this.cookie.check('auth_token'));
+  loginInProgress = signal(false);
 
   constructor(
     private http: HttpClient,
@@ -16,7 +17,23 @@ export class LoginService {
   ) {
   }
 
+  public register(username: String, password: String): void {
+    this.loginInProgress.set(true);
+    this.http.post(
+      this.environmentService.getRegisterUrl(),
+      {username, password}
+    ).subscribe({
+      next: () => {
+        this.login(username, password);
+      },
+      error: (err) => {
+        console.error('Register error: ', err.error);
+        this.loginInProgress.set(false);},
+    });
+  }
+
   public login(username: String, password: String): void {
+    this.loginInProgress.set(true);
     const params = new HttpParams()
       .set('username', username.toString())
       .set('password', password.toString());
@@ -29,6 +46,7 @@ export class LoginService {
         this.cookie.set('expires_in', expires_in.toString());
         this.cookie.set('userID', user_id.toString());
 
+        this.loginInProgress.set(false);
         this.userLoggedIn.set(true);
       },
       error: (err) => console.error('Login error: ', err),
@@ -36,6 +54,7 @@ export class LoginService {
   }
 
   public logout(): void {
+    this.loginInProgress.set(true);
     this.http.post(
       this.environmentService.getLogoutUrl(),
       {},
@@ -45,6 +64,7 @@ export class LoginService {
           console.log('Logout successful');
           this.cookie.deleteAll();
           this.userLoggedIn.set(false);
+          this.loginInProgress.set(false);
           window.location.reload();
         },
         error: () => console.error('Logout error')
