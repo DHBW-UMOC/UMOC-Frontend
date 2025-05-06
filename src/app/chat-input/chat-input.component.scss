@@ -2,7 +2,7 @@
 
 .chat-input-container {
     display: flex;
-    background-color: global.$chat-input-background;
+    // background-color: global.$chat-input-background;
   
     input {
       flex: 1;
@@ -12,7 +12,7 @@
       margin-left: 5px;
       margin-top: 10px;
       margin-bottom: 10px;
-      border: 1px solid global.$chat-input-border;
+      border: 1px solid black; //global.$chat-input-border;
       outline: none;
     }
   

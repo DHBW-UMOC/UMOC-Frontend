@@ -5,13 +5,13 @@
     flex-direction: column;
     width: 25vw;
     height: 90vh;
-    background-color: global.$contact-list-background;
+    // background-color: global.$contact-list-background;
   
     .contact-list {
       list-style: none;
       padding: 0;
       margin: 0;
       overflow-y: auto;
-      border-bottom: 1px solid global.$contact-list-border;
+      border-bottom: 1px solid black; //global.$contact-list-border;
     }
   }

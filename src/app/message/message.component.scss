@@ -4,18 +4,18 @@
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 1px 2px global.$message-box-shadow;
+    box-shadow: 0 1px 2px black; //global.$message-box-shadow;
     max-width: 80%;
     word-wrap: break-word;
     position: relative;
 
   &.message-sent {
-    background-color: global.$message-sent-background;
+    // background-color: global.$message-sent-background;
     margin-left: auto;
   }
 
   &.message-received {
-    background-color: global.$message-received-background;
+    // background-color: global.$message-received-background;
     margin-right: auto;
   }
 
