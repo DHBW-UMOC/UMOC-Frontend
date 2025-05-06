@@ -9,6 +9,7 @@
 
   &:hover {
     background-color: var(--mat-sys-surface-container-high);
+    cursor: pointer;
     button[mat-icon-button] {
       visibility: visible;
       opacity: 1;
