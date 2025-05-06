@@ -2,7 +2,10 @@
 
 .chat-input-container {
     display: flex;
-    // background-color: global.$chat-input-background;
+    background-color: var(--mat-sys-surface-container);
+    border-width: 0;
+    border-right: 1px solid var(--mat-sys-outline);
+    border-left: 1px solid var(--mat-sys-outline);
   
     input {
       flex: 1;
@@ -12,7 +15,9 @@
       margin-left: 5px;
       margin-top: 10px;
       margin-bottom: 10px;
-      border: 1px solid black; //global.$chat-input-border;
+      border: 2px solid var(--mat-sys-primary);
+      background-color: var(--mat-sys-surface);
+      color: var(--mat-sys-on-surface);
       outline: none;
     }
   
@@ -23,7 +28,6 @@
       margin-right: 15px;
       border: none;
       border-radius: 4px;
-      cursor: pointer;
       outline: none;
   
       &:hover {

@@ -6,11 +6,16 @@
 html {
   @include mat.theme((
     color: (
+      primary: mat.$violet-palette,
+      tertiary: mat.$magenta-palette,
       theme-type: dark,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
     ),
     typography: Roboto,
-    density: 0,
+    density: 0
   ));
+}
+
+// I have no Idea why this is necessary, but this prevents the contact-list from being 1px taller than chat-window-component for whatever reasn -A
+* {
+  box-sizing: border-box;
 }

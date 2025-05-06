@@ -7,12 +7,13 @@
   }
 
 .app-background {
-    // background: linear-gradient(global.$global-background-top 15%, global.$global-background-bottom 15%);
+    background-color: var(--mat-sys-surface);
     padding-top: 5vh;
     padding-bottom: 5vh;
     padding-left: 10vw;
     padding-right: 10vw;
     .app-container {
         display: flex;
+        height: 90vh;
     }
 }

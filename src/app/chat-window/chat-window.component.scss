@@ -5,11 +5,13 @@
   display: flex;
   flex-direction: column;
   width: 55vw;
-  height: 90vh;
+  height: 100%;
+  border-bottom: 1px solid var(--mat-sys-outline);
 
   .chat-header {
     padding: 15px;
-    // background-color: global.$chat-window-header;
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
     cursor: pointer;
     font-weight: bold;
   }
@@ -19,8 +21,10 @@
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    // background-color: global.$chat-window-background;
+    background-color: var(--mat-sys-surface);
     flex-direction: column;
+    border-right: 1px solid var(--mat-sys-outline);
+    border-left: 1px solid var(--mat-sys-outline);
   }
 }
 

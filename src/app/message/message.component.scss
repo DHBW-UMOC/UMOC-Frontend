@@ -10,12 +10,14 @@
     position: relative;
 
   &.message-sent {
-    // background-color: global.$message-sent-background;
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
     margin-left: auto;
   }
 
   &.message-received {
-    // background-color: global.$message-received-background;
+    background-color: var(--mat-sys-secondary-container);
+    color: var(--mat-sys-on-secondary-container);
     margin-right: auto;
   }
 
