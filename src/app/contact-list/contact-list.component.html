@@ -18,5 +18,17 @@
         <h2>No contacts found</h2>
       </ng-container>
     }
+    <button mat-fab [matMenuTriggerFor]="menu" color="primary" class="fab-button" aria-label="Kontakt hinzufügen">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button mat-icon-button>
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon>group</mat-icon>
+  </button>
+</mat-menu>

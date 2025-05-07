@@ -27,7 +27,7 @@ export class LoginService {
         this.login(username, password);
       },
       error: (err) => {
-        console.error('Register error: ', err.error);
+        console.error('Register error: ', err.error, "teeeeeeeeeeeeeeeeeeeeest");
         this.loginInProgress.set(false);},
     });
   }

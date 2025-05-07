@@ -38,20 +38,22 @@ export class ContactService {
         return contactsData.map((contact: any) => {
           console.log('Mapped chat');
           if (contact.is_group) {
+            console.log("Mapped group");
             return new Group(
               contact.is_group,
-              contact.group_id,
-              contact.group_name,
-              contact.url,
+              contact.contact_id,
+              contact.name,
+              contact.picture_url,
               new Date(contact.created_at),
-              contact.admin_user_id
+              contact.members
             );
           } else {
+            console.log("Mapped contact");
             return new Contact(
               contact.is_group,
               contact.contact_id,
               contact.name,
-              contact.url,
+              contact.picture_url,
               contact.status,
               contact.streak
             );
