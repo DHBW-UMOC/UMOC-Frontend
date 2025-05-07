@@ -1,33 +1,70 @@
 @use "../../styles.scss" as global;
 
-.message-container {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 1px 2px black; //global.$message-box-shadow;
-    max-width: 80%;
-    word-wrap: break-word;
-    position: relative;
+// .message-container {
+//     margin-bottom: 10px;
+//     padding: 10px;
+//     border-radius: 5px;
+//     box-shadow: 0 1px 2px black; //global.$message-box-shadow;
+//     max-width: 80%;
+//     word-wrap: break-word;
+//     position: relative;
 
-  &.message-sent {
-    background-color: var(--mat-sys-primary-container);
-    color: var(--mat-sys-on-primary-container);
-    margin-left: auto;
-  }
+//   &.message-sent {
+//     background-color: var(--mat-sys-primary-container);
+//     color: var(--mat-sys-on-primary-container);
+//     margin-left: auto;
+//   }
+
+//   &.message-received {
+//     background-color: var(--mat-sys-secondary-container);
+//     color: var(--mat-sys-on-secondary-container);
+//     margin-right: auto;
+//   }
+
+//   .message-timestamp {
+//     font-size: 0.7em;
+//     color: #888;
+//     text-align: right;
+//     margin-top: 5px;
+//   }
+// }
+
+
+.message-container {
+
+  --r: 1em;
+  --t: 1.5em;
+  --message-custom-color: #fe6d00;
+
+
+
+  max-width: 80%;
+  padding: 1em;
+  border-inline: var(--t) solid #0000;
+  border-radius: calc(var(--r) + var(--t)) / var(--r);
+  mask: 
+    radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
+      var(--_p) 100%/var(--t) var(--t) no-repeat,
+    linear-gradient(#000 0 0) padding-box;
 
   &.message-received {
-    background-color: var(--mat-sys-secondary-container);
-    color: var(--mat-sys-on-secondary-container);
-    margin-right: auto;
+    --_p: 0;
+    border-bottom-left-radius: 0 0;
+    place-self: start;
+    background: linear-gradient(135deg,var(--message-custom-color),var(--mat-sys-primary-container)) border-box;
+    color: #fff;
   }
 
-  .message-timestamp {
-    font-size: 0.7em;
-    color: #888;
-    text-align: right;
-    margin-top: 5px;
+  &.message-sent {
+    --_p: 100%;
+    border-bottom-right-radius: 0 0;
+    place-self: end;
+    background: linear-gradient(135deg, var(--mat-sys-secondary-container), var(--mat-sys-primary-container)) border-box;
+    color: #fff;
   }
 }
+
+
 
 .no-messages {
   text-align: center;
