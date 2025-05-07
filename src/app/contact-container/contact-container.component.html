@@ -3,14 +3,12 @@
     <div class="contact-container-image">
       <img [ngSrc]="chat.picture_url" width="50" height="50" alt=""/>
     </div>
-    <div class="contact-container-informations">
-      <div class="contact-container-name">{{ chat.name }}</div>
-      @if (!chat.is_group) {
-        <div class="contact-container-status">
-          {{ isContact(chat) ? chat.status : 'Unbekannt' }}
-        </div>
-      }
-    </div>
+    <div class="contact-container-name">{{ chat.name }}</div>
+    @if (!chat.is_group) {
+      <div class="contact-container-status">
+        {{ isContact(chat) ? chat.status : 'Unbekannt' }}
+      </div>
+    }
   </div>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>

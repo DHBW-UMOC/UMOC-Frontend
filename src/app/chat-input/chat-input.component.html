@@ -1,6 +1,6 @@
 <form class="chat-input-container" (ngSubmit)="saveMessage(messageInput.value); messageInput.value=''">
-  <app-chat-input-extras/>
-  <app-chat-input-emojis/>
+  <app-chat-input-emojis></app-chat-input-emojis>
+  <app-chat-input-extras></app-chat-input-extras>
   <input type="text" placeholder="Nachricht schreiben" #messageInput name="message" ngModel required>
   <button type="submit" [disabled]="!messageInput.value.trim()">&#10146;</button>
 </form>
