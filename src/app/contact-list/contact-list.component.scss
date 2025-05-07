@@ -4,14 +4,20 @@
     display: flex;
     flex-direction: column;
     width: 25vw;
-    height: 90vh;
-    background-color: global.$contact-list-background;
+    height: 100%;
+    background-color: var(--mat-sys-surface-container);
+    color: var(--mat-sys-on-surface);
+
+    border-width: 0;
+    border-top: 1px solid var(--mat-sys-outline);
+    // border-right is defined in chat-window-component, chat-input; / placeholder, because I don't want the outline to conflict with the chat window header primary color
+    border-bottom: 1px solid var(--mat-sys-outline);
+    border-left: 1px solid var(--mat-sys-outline);
   
     .contact-list {
       list-style: none;
       padding: 0;
       margin: 0;
       overflow-y: auto;
-      border-bottom: 1px solid global.$contact-list-border;
     }
   }

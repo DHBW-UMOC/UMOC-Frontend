@@ -6,10 +6,11 @@ import { Message } from '../model/message.model';
 import { ChatService } from '../services/chat.service';
 import { LoginService } from '../services/login.service';
 import { ContactService } from '../services/contact.service';
+import { ChatPlaceholderComponent } from "../chat-placeholder/chat-placeholder.component";
 
 @Component({
   selector: 'app-chat-window',
-  imports: [CommonModule, MessageComponent, ChatInputComponent, NgOptimizedImage],
+  imports: [CommonModule, MessageComponent, ChatInputComponent, NgOptimizedImage, ChatPlaceholderComponent],
   templateUrl: './chat-window.component.html',
   styleUrl: './chat-window.component.scss'
 })

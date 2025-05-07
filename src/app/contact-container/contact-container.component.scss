@@ -1,15 +1,15 @@
 @use "../../styles.scss" as global;
 
 .contact-container-details {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  gap: 10px;
   padding: 10px;
   width: 100%;
 
   &:hover {
-    background-color: global.$contact-list-hover;
-
+    background-color: var(--mat-sys-surface-container-high);
+    cursor: pointer;
     button[mat-icon-button] {
       visibility: visible;
       opacity: 1;
@@ -17,20 +17,22 @@
   }
 
   > div:first-child {
-    display: block;
-    cursor: pointer;
-    width: calc(100% - 48px);
+    display: contents;
 
     .contact-container-image {
-      float: left;
-      width: 50px;
+      aspect-ratio: 1 / 1;
       height: 50px;
       border-radius: 50%;
-      background-color: global.$contact-container-default-image;
+    }
+
+    .contact-container-informations {
+      display: flex;
+      flex-direction: column;
+      border-bottom: 1px solid var(--mat-sys-outline-variant);
+      height: 100%;
     }
 
     .contact-container-name {
-      margin-left: 60px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -40,7 +42,6 @@
       display: block;
       font-size: 0.8rem;
       color: #888;
-      margin-left: 60px;
       margin-top: 2px;
       overflow: hidden;
       text-overflow: ellipsis;
