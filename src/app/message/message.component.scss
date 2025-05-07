@@ -51,8 +51,12 @@
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
-    background: linear-gradient(135deg,var(--message-custom-color),var(--mat-sys-primary-container)) border-box;
-    color: #fff;
+    background: linear-gradient(135deg,var(--mat-sys-secondary-container),var(--mat-sys-secondary-container)) border-box;
+    .message-text {
+      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-secondary-container));
+      color: transparent;
+      background-clip: text;
+    }
   }
 
   &.message-sent {
@@ -60,7 +64,11 @@
     border-bottom-right-radius: 0 0;
     place-self: end;
     background: linear-gradient(135deg, var(--mat-sys-secondary-container), var(--mat-sys-primary-container)) border-box;
-    color: #fff;
+    .message-text {
+      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-primary-container));
+      color: transparent;
+      background-clip: text;
+    }
   }
 }
 
