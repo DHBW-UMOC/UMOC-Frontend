@@ -2,7 +2,7 @@
 
 .chat-input-container {
     display: flex;
-    background-color: var(--mat-sys-surface-container);
+    background-color: var(--mat-sys-surface-container-high);
     border-width: 0;
     border-right: 1px solid var(--mat-sys-outline);
     border-left: 1px solid var(--mat-sys-outline);
@@ -16,7 +16,7 @@
       margin-top: 10px;
       margin-bottom: 10px;
       border: 2px solid var(--mat-sys-primary);
-      background-color: var(--mat-sys-surface);
+      background-color: var(--mat-sys-surface-container-highest);
       color: var(--mat-sys-on-surface);
       outline: none;
     }

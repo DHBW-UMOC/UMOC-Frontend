@@ -24,7 +24,9 @@
     background: url('/assets/MessageBackTODO2.png') no-repeat top left;
     background-size: cover;
     flex-direction: column;
+    border-top: 2px solid var(--mat-sys-outline);
     border-right: 1px solid var(--mat-sys-outline);
+    border-bottom: 2px solid var(--mat-sys-outline);
     border-left: 1px solid var(--mat-sys-outline);
   }
 }

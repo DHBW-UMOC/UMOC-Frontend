@@ -12,6 +12,7 @@
       border-radius: 4px;
       border: 1px solid var(--mat-sys-primary);
       color: var(--mat-sys-on-surface);
-      background-color: var(--mat-sys-surface);
+      background-color: var(--mat-sys-surface-container-highest);
+      outline: none;
     }
   }
