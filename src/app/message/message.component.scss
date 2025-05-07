@@ -1,35 +1,5 @@
 @use "../../styles.scss" as global;
 
-// .message-container {
-//     margin-bottom: 10px;
-//     padding: 10px;
-//     border-radius: 5px;
-//     box-shadow: 0 1px 2px black; //global.$message-box-shadow;
-//     max-width: 80%;
-//     word-wrap: break-word;
-//     position: relative;
-
-//   &.message-sent {
-//     background-color: var(--mat-sys-primary-container);
-//     color: var(--mat-sys-on-primary-container);
-//     margin-left: auto;
-//   }
-
-//   &.message-received {
-//     background-color: var(--mat-sys-secondary-container);
-//     color: var(--mat-sys-on-secondary-container);
-//     margin-right: auto;
-//   }
-
-//   .message-timestamp {
-//     font-size: 0.7em;
-//     color: #888;
-//     text-align: right;
-//     margin-top: 5px;
-//   }
-// }
-
-
 .message-container {
 
   --r: 1em;
@@ -51,9 +21,9 @@
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
-    background: linear-gradient(135deg,var(--mat-sys-secondary-container),var(--mat-sys-secondary-container)) border-box;
+    background: linear-gradient(135deg,var(--mat-sys-tertiary-container),var(--mat-sys-secondary-container)) border-box;
     .message-text {
-      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-secondary-container));
+      background-image: linear-gradient(135deg, var(--mat-sys-on-tertiary-container), var(--mat-sys-on-secondary-container));
       color: transparent;
       background-clip: text;
     }
@@ -70,9 +40,14 @@
       background-clip: text;
     }
   }
+
+  .message-timestamp {
+    font-size: 0.7em;
+    color: var(--mat-sys-on-primary-container);
+    text-align: right;
+    margin-top: 5px;
+  }
 }
-
-
 
 .no-messages {
   text-align: center;
