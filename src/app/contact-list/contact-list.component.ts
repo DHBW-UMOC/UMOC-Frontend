@@ -6,6 +6,9 @@ import { ContactService } from '../services/contact.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login.service';
 import { Chat } from '../model/chat.model';
+import { MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'app-contact-list',
@@ -14,7 +17,12 @@ import { Chat } from '../model/chat.model';
     ContactListSearchBarComponent,
     ContactListHeaderComponent,
     CommonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatFabButton,
+    MatIcon,
+    MatMenuTrigger,
+    MatMenu,
+    MatIconButton
   ],
   providers: [LoginService],
   templateUrl: './contact-list.component.html',

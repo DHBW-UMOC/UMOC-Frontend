@@ -29,7 +29,7 @@ export class ChatInputComponent {
     ).pipe(
       take(1),
       catchError(() => {
-        console.error('Error sending message');
+        console.error('Error sending messages');
         return of(null);
       })
     ).subscribe({
