@@ -5,8 +5,11 @@ import { NgIf } from '@angular/common';
   selector: 'app-ad-banner',
   imports: [NgIf],
   templateUrl: './ad-banner.component.html',
-  styleUrl: './ad-banner.component.scss'
+  styleUrls: ['./ad-banner.component.scss']
 })
 export class AdBannerComponent {
   @Input() hidden: boolean = false;
+  @Input() imageSrc?: string;
+  @Input() videoSrc?: string;
+  @Input() altText: string = 'Ad Banner';
 }
