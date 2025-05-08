@@ -1,61 +1,96 @@
+@use "../../styles.scss" as global;
+
 .login-container {
+  background-color: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface);
   max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 60px auto;
+  padding: 32px 28px 24px 28px;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10), 0 1.5px 4px 0 rgba(0,0,0,0.08);
+  border: 1px solid var(--mat-sys-outline);
+
+  .mat-tab-group {
+    background: transparent;
+    border-radius: 8px;
+    box-shadow: none;
+    .mat-tab-label {
+      color: var(--mat-sys-on-surface);
+    }
+    .mat-tab-label-active {
+      color: var(--mat-sys-primary);
+    }
+    .mat-ink-bar {
+      background: var(--mat-sys-primary);
+    }
+  }
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: var(--mat-sys-primary);
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface-variant, #666);
 }
 
 input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 12px;
+  border: 1px solid var(--mat-sys-outline);
+  border-radius: 6px;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font-size: 1rem;
+  transition: border-color 0.2s;
 }
 
 input.invalid {
-  border-color: #ff0000;
+  border-color: #ff5252;
+  background: #fff0f0;
 }
 
 button {
   width: 100%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
+  padding: 12px;
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 12px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 button:disabled {
-  background-color: #cccccc;
+  background-color: var(--mat-sys-outline);
+  color: #bbb;
   cursor: not-allowed;
 }
 
 .error-message {
-  color: #ff0000;
-  font-size: 12px;
+  color: #ff5252;
+  font-size: 13px;
   margin-top: 5px;
 }
 
 .error-alert {
-  color: #ff0000;
+  color: #ff5252;
   margin-top: 15px;
   text-align: center;
 }
