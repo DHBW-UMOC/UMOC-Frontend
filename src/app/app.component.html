@@ -4,30 +4,19 @@
     {{ adBannerHidden ? 'Show Ad Banner' : 'Hide Ad Banner' }}
   </button>
   
+  <div class="app-container">
+    <app-ad-banner [hidden]="adBannerHidden"
+    [imageSrc]="'assets/UMOCUS-ad.gif'"
+    [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
+    [altText]="'AD'"/>
   @if (this.loginService.userLoggedIn()) {
-    <div class="app-container">
-      <app-ad-banner [hidden]="adBannerHidden"
-      [imageSrc]="'assets/adDDG.gif'"
-      [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
-      [altText]="'AD'"/>
-      <app-contact-list/>
-      <app-chat-window/>
-      <app-ad-banner [hidden]="adBannerHidden"
-      [imageSrc]="'https://gifdb.com/images/high/gummibar-gummy-bear-break-dance-fortnite-dance-7lonn1izgkap3jj1.gif'"
-      [videoSrc]="'https://cdn.revid.ai/backgrounds/fortnite/video_lowres_4.mp4'"/>
-    </div>
+    <app-contact-list/>
+    <app-chat-window/>
   } @else {
     <login-field/>
   }
+  <app-ad-banner [hidden]="adBannerHidden"
+  [imageSrc]="'https://gifdb.com/images/high/gummibar-gummy-bear-break-dance-fortnite-dance-7lonn1izgkap3jj1.gif'"
+  [videoSrc]="'https://cdn.revid.ai/backgrounds/fortnite/video_lowres_4.mp4'"/>
+  </div>
 </div>
-
-<!-- <app-ad-banner
-  [imageSrc]="'assets/ad1.gif'"
-  [videoSrc]="null"
-  altText="Ad 1"
-></app-ad-banner>
-<app-ad-banner
-  [imageSrc]="null"
-  [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
-  altText="Ad 2"
-></app-ad-banner> -->
