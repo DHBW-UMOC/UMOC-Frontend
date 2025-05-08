@@ -9,6 +9,7 @@ import { Chat } from '../model/chat.model';
 import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { OwnContactComponent } from "../own-contact/own-contact.component";
 
 @Component({
   selector: 'app-contact-list',
@@ -22,8 +23,9 @@ import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
     MatIcon,
     MatMenuTrigger,
     MatMenu,
-    MatIconButton
-  ],
+    MatIconButton,
+    OwnContactComponent
+],
   providers: [LoginService],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss'
