@@ -8,6 +8,7 @@ html {
   @include mat.theme((
     color: (
       primary: mat.$azure-palette,
+      tertiary: mat.$violet-palette
     ),
     typography: Roboto,
     density: 0
