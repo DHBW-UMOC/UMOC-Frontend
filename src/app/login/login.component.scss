@@ -5,7 +5,7 @@
   color: var(--mat-sys-on-surface);
   max-width: 400px;
   margin: 60px auto;
-  padding: 32px 28px 24px 28px;
+  padding: 10px 28px 24px 28px;
   border-radius: 12px;
   box-shadow: 0 2px 16px 0 rgba(0,0,0,0.10), 0 1.5px 4px 0 rgba(0,0,0,0.08);
   border: 1px solid var(--mat-sys-outline);
@@ -53,6 +53,7 @@ input {
   color: var(--mat-sys-on-surface);
   font-size: 1rem;
   transition: border-color 0.2s;
+  background-color: var(--mat-sys-surface-container-highest);
 }
 
 input.invalid {
@@ -94,4 +95,17 @@ button:disabled {
   color: #ff5252;
   margin-top: 15px;
   text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+
+  img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+  }
 }
