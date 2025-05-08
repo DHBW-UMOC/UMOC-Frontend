@@ -1,9 +1,7 @@
 @if (selectedContact()) {
   <ng-container>
     <div class="chat-window-container">
-      <div class="chat-header">
-        {{ selectedContact()!.name }}
-      </div>
+      <app-chat-header/>
 
       <div class="chat-messages">
         @if (messages().length > 0 && !this.chatService.isLoading()) {
@@ -17,7 +15,7 @@
           </ng-container>
         } @else if (this.chatService.isLoading()) {
           <div>
-            <img ngSrc="assets/duckduckgoes.gif" width="383" height="480" alt="Loading..."/>
+            <img ngSrc="assets/UMOCUS.gif" width="383" height="480" alt="Loading..."/>
           </div>
         } @else {
           <div class="no-messages">

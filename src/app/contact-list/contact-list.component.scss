@@ -3,7 +3,7 @@
 .contact-list-container {
     display: flex;
     flex-direction: column;
-    width: 25vw;
+    width: 20vw;
     height: 100%;
     background-color: var(--mat-sys-surface-container);
     color: var(--mat-sys-on-surface);
@@ -15,15 +15,18 @@
     border-left: 1px solid var(--mat-sys-outline);
   
     .contact-list {
+      flex: 1;  // This allows the list to take remaining space
       list-style: none;
       padding: 0;
       margin: 0;
       overflow-y: auto;
+
+      border-top: 1px solid var(--mat-sys-outline);
     }
     .fab-button {
     position: absolute;
     bottom: 16px;
-    right: 16px;
+    left: 16px;
     z-index: 10;
     }
   }

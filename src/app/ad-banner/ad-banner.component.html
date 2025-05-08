@@ -1,9 +1,23 @@
 <div class="ad-banner">
     <div class="ad-banner-content">
-        <img class="ad-banner-gif" src="assets/adDDG.gif" alt="Ad Banner" />
+        <img
+          class="ad-banner-gif"
+          *ngIf="imageSrc && !hidden"
+          [src]="imageSrc"
+          [alt]="altText"
+        />
         <div class="ad-banner-text">
-            <p>Ihre Werbung könnte hier stehen!</p>
+            <p *ngIf="!hidden">Hier könnte Ihre Werbung stehen!</p>
         </div>
-        <img class="ad-banner-gif" src="assets/adDDG.gif" alt="Ad Banner" />
+        <video
+          *ngIf="videoSrc && !hidden"
+          autoplay
+          loop
+          muted
+          playsinline
+          style="width: 100%; max-width: 100%;"
+        >
+            <source [src]="videoSrc" type="video/mp4">
+        </video>
     </div>
 </div>

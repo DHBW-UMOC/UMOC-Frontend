@@ -25,4 +25,8 @@ export class ContactContainerComponent {
   isContact(chat: Chat): chat is Contact {
     return !chat.is_group;
   }
+
+  getContactImage(): string | undefined {
+    return this.chat?.picture_url;
+  }
 }
