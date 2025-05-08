@@ -3,7 +3,7 @@
 .contact-list-container {
     display: flex;
     flex-direction: column;
-    width: 25vw;
+    width: 20vw;
     height: 100%;
     background-color: var(--mat-sys-surface-container);
     color: var(--mat-sys-on-surface);
@@ -23,7 +23,7 @@
     .fab-button {
     position: absolute;
     bottom: 16px;
-    right: 16px;
+    left: 16px;
     z-index: 10;
     }
   }
