@@ -1,9 +1,9 @@
 <div class="ad-banner">
     <div class="ad-banner-content">
-        <img class="ad-banner-gif" src="assets/adDDG.gif" alt="Ad Banner" />
+        <img class="ad-banner-gif" src="assets/adDDG.gif" alt="Ad Banner" *ngIf="!hidden"/>
         <div class="ad-banner-text">
-            <p>Hier könnte Ihre Werbung stehen!</p>
+            <p *ngIf="!hidden">Hier könnte Ihre Werbung stehen!</p>
         </div>
-        <img class="ad-banner-gif" src="assets/adDDG.gif" alt="Ad Banner" />
+        <img class="ad-banner-gif" src="assets/adDDG.gif" alt="Ad Banner" *ngIf="!hidden"/>
     </div>
 </div>

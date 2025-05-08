@@ -1,12 +1,15 @@
 <div class="app-background">
   <button style="position: absolute; top: 10px; left: 10px;" (click)="logout()">Abmelden</button>
+  <button style="position: absolute; top: 40px; left: 10px;" (click)="toggleAdBanner()">
+    {{ adBannerHidden ? 'Show Ad Banner' : 'Hide Ad Banner' }}
+  </button>
   
   @if (this.loginService.userLoggedIn()) {
     <div class="app-container">
-      <app-ad-banner/>
+      <app-ad-banner [hidden]="adBannerHidden"></app-ad-banner>
       <app-contact-list/>
       <app-chat-window/>
-      <app-ad-banner/>
+      <app-ad-banner [hidden]="adBannerHidden"></app-ad-banner>
     </div>
   } @else {
     <login-field/>
