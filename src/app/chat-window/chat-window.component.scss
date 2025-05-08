@@ -7,14 +7,9 @@
   width: 55vw;
   height: 100%;
   border-bottom: 1px solid var(--mat-sys-outline);
-
-  .chat-header {
-    padding: 15px;
-    background-color: var(--mat-sys-primary);
-    color: var(--mat-sys-on-primary);
-    cursor: pointer;
-    font-weight: bold;
-  }
+  border-right: 1px solid var(--mat-sys-outline);
+  border-left: 1px solid var(--mat-sys-outline);
+  border-top: 1px solid var(--mat-sys-outline);
 
   .chat-messages {
     display: flex;
@@ -25,9 +20,7 @@
     background-size: cover;
     flex-direction: column;
     border-top: 2px solid var(--mat-sys-outline);
-    border-right: 1px solid var(--mat-sys-outline);
     border-bottom: 2px solid var(--mat-sys-outline);
-    border-left: 1px solid var(--mat-sys-outline);
 
     gap: 20px;
   }

@@ -1,9 +1,7 @@
 @if (selectedContact()) {
   <ng-container>
     <div class="chat-window-container">
-      <div class="chat-header">
-        {{ selectedContact()!.name }}
-      </div>
+      <app-chat-header/>
 
       <div class="chat-messages">
         @if (messages().length > 0 && !this.chatService.isLoading()) {

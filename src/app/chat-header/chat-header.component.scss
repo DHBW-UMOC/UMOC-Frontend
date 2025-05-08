@@ -1,0 +1,23 @@
+.chat-header {
+    display: flex;
+    align-items: center;
+    background-color: var(--mat-sys-surface-container-highest);
+    color: var(--mat-sys-on-surface);
+    cursor: pointer;
+    font-weight: bold;
+    border-bottom: 1px solid var(--mat-sys-outline);
+    padding: 10px;
+
+    .chat-header-icon {
+        width: 40px;
+        height: 40px;
+
+        img {
+            border-radius: 50%;
+        }
+    }
+
+    .chat-header-name {
+        margin-left: 10px;
+    }
+  }
