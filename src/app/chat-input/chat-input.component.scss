@@ -15,10 +15,12 @@
       margin-left: 5px;
       margin-top: 10px;
       margin-bottom: 10px;
-      border: 2px solid var(--mat-sys-primary);
+      border: none;
       background-color: var(--mat-sys-surface-container-highest);
       color: var(--mat-sys-on-surface);
       outline: none;
+
+      box-shadow: var(--mat-sys-level2);
     }
   
     button {
@@ -29,6 +31,7 @@
       border: none;
       border-radius: 4px;
       outline: none;
+      color: var(--mat-sys-on-surface);
   
       &:hover {
         cursor: pointer;
