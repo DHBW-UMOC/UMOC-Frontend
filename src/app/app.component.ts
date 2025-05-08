@@ -13,7 +13,7 @@ import { AdBannerComponent } from "./ad-banner/ad-banner.component";
 })
 export class AppComponent {
   title = 'UMOC-Frontend';
-  adBannerHidden = false; // Add this property
+  adBannerHidden = true; // Add this property
 
   constructor(protected loginService: LoginService) {
   }
