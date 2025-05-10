@@ -7,7 +7,7 @@ import { EnvironmentService } from './environment.service';
   providedIn: 'root'
 })
 export class LoginService {
-  userLoggedIn = signal(this.cookie.check('auth_token'));
+  userLoggedIn = signal(false);
   loginInProgress = signal(false);
 
   constructor(
@@ -15,6 +15,15 @@ export class LoginService {
     private cookie: CookieService,
     private environmentService: EnvironmentService
   ) {
+    if (this.cookie.check('auth_token') && this.cookie.check('expires_in')) {
+      if (new Date(parseInt(this.cookie.get('expires_in'))) < new Date()) {
+        this.userLoggedIn.set(false);
+        this.cookie.deleteAll();
+        window.location.reload();
+      } else {
+        this.userLoggedIn.set(true);
+      }
+    }
   }
 
   public register(username: String, password: String): void {
@@ -27,8 +36,9 @@ export class LoginService {
         this.login(username, password);
       },
       error: (err) => {
-        console.error('Register error: ', err.error, "teeeeeeeeeeeeeeeeeeeeest");
-        this.loginInProgress.set(false);},
+        console.error('Register error: ', err.error);
+        this.loginInProgress.set(false);
+      }
     });
   }
 
@@ -41,15 +51,14 @@ export class LoginService {
       this.environmentService.getLoginUrl(),
       {params}).subscribe({
       next: (response: any) => {
-        const {access_token, expires_in, user_id} = response;
-        this.cookie.set('auth_token', access_token);
-        this.cookie.set('expires_in', expires_in.toString());
-        this.cookie.set('userID', user_id.toString());
+        this.cookie.set('auth_token', response.access_token);
+        this.cookie.set('expires_in', (Date.now() + (response.expires_in * 1000)).toString());
+        this.cookie.set('userID', response.user_id.toString());
 
         this.loginInProgress.set(false);
         this.userLoggedIn.set(true);
       },
-      error: (err) => console.error('Login error: ', err),
+      error: (err) => console.error('Login error: ', err)
     });
   }
 
@@ -59,17 +68,11 @@ export class LoginService {
       this.environmentService.getLogoutUrl(),
       {},
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.getAuthToken()}`})}
-    ).subscribe({
-        next: () => {
-          console.log('Logout successful');
-          this.cookie.deleteAll();
-          this.userLoggedIn.set(false);
-          this.loginInProgress.set(false);
-          window.location.reload();
-        },
-        error: () => console.error('Logout error')
-      }
     );
+    this.cookie.deleteAll();
+    this.userLoggedIn.set(false);
+    this.loginInProgress.set(false);
+    window.location.reload();
   }
 
   public getAuthToken(): string {
