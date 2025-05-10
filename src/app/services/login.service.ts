@@ -79,10 +79,6 @@ export class LoginService {
     return this.cookie.get('auth_token');
   }
 
-  public getTimeLeft(): string {
-    return this.cookie.get('expires_in');
-  }
-
   public getUserID(): string {
     return this.cookie.get('userID');
   }
