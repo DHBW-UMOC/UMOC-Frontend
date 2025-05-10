@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { ContactContainerComponent } from '../contact-container/contact-container.component';
-import { ContactListSearchBarComponent } from '../contact-list-search-bar/contact-list-search-bar.component';
-import { ContactListHeaderComponent } from '../contact-list-header/contact-list-header.component';
 import { ContactService } from '../services/contact.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login.service';
@@ -15,8 +13,6 @@ import { OwnContactComponent } from "../own-contact/own-contact.component";
   selector: 'app-contact-list',
   imports: [
     ContactContainerComponent,
-    ContactListSearchBarComponent,
-    ContactListHeaderComponent,
     CommonModule,
     NgOptimizedImage,
     MatFabButton,

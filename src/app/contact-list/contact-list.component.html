@@ -1,6 +1,17 @@
 <div class="contact-list-container">
-  <app-contact-list-header/>
-  <app-contact-list-search-bar/>
+  <ng-container>
+    <div class="contact-list-header">
+      <h2>Chats</h2>
+    </div>
+    <div class="contact-list-search-add">
+      <div class="search-container">
+        <input type="text" placeholder="Kontakte oder Gruppen suchen (nicht implementiert)" />
+        <button mat-fab [matMenuTriggerFor]="menu" color="primary" class="fab-button" aria-label="Chats hinzufügen">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-container>
   <div class="contact-list">
     @if (this.contactService.contacts().length > 0 && !this.contactService.isLoading()) {
       @for (contact of this.contactService.contacts(); track contact.contact_id) {
@@ -18,9 +29,6 @@
         <h2>No contacts found</h2>
       </ng-container>
     }
-    <button mat-fab [matMenuTriggerFor]="menu" color="primary" class="fab-button" aria-label="Kontakt hinzufügen">
-      <mat-icon>add</mat-icon>
-    </button>
   </div>
   <app-own-contact/>
 </div>
