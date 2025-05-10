@@ -1,6 +1,13 @@
 <div class="own-contact-container">
+  @if (this.contactservice.self() != {}) {
+    <div class="own-contact-container-image">
+      <img [ngSrc]="contactservice.self().profile_picture" width="58" height="58" alt="UMOCUS"/>
+    </div>
+    <div class="own-contact-container-name">{{contactservice.self().username}}</div>
+  } @else {
     <div class="own-contact-container-image">
         <img src="assets/UMOCUS.gif" width="58" height="58" alt="UMOCUS"/>
     </div>
-    <div class="own-contact-container-name">Du</div>
+    <div class="own-contact-container-name">  ...</div>
+  }
 </div>

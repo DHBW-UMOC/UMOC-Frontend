@@ -21,6 +21,7 @@ export class ContactService {
 
   isLoading = signal(false);
   selectedContact = signal<Chat | null>(null);
+  self = toSignal(this.fetchOwnUserInfo(), {initialValue: {}});
   contacts = toSignal(this.fetchContacts(), {initialValue: []});
 
   selectContact(chat: Chat) {
@@ -36,9 +37,7 @@ export class ContactService {
       map((response: any) => {
         const contactsData = Array.isArray(response) ? response : (response.chats ? response.chats : []);
         return contactsData.map((contact: any) => {
-          console.log('Mapped chat');
           if (contact.is_group) {
-            console.log("Mapped group");
             return new Group(
               contact.is_group,
               contact.contact_id,
@@ -48,7 +47,6 @@ export class ContactService {
               contact.members
             );
           } else {
-            console.log("Mapped contact");
             return new Contact(
               contact.is_group,
               contact.contact_id,
@@ -61,6 +59,13 @@ export class ContactService {
         });
       }),
       finalize(() => this.isLoading.set(false))
+    );
+  }
+
+  private fetchOwnUserInfo() {
+    return this.http.get<any>(
+      this.environmentService.getGetOwnProfileUrl(),
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     );
   }
 }

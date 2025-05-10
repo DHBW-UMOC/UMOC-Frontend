@@ -18,7 +18,6 @@ export class ContactContainerComponent {
   @Output() contactClick = new EventEmitter<Contact | Group>();
 
   onContactClick() {
-    console.log(this.chat);
     this.contactClick.emit(this.chat);
   }
 

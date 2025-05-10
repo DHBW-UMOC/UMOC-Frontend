@@ -3,20 +3,29 @@
   <button style="position: absolute; top: 40px; left: 10px;" (click)="toggleAdBanner()">
     {{ adBannerHidden ? 'Show Ad Banner' : 'Hide Ad Banner' }}
   </button>
-  
+
   <div class="app-container">
     <app-ad-banner [hidden]="adBannerHidden"
-    [imageSrc]="'assets/UMOCUS-ad.gif'"
-    [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
-    [altText]="'AD'"/>
-  @if (this.loginService.userLoggedIn()) {
-    <app-contact-list/>
-    <app-chat-window/>
-  } @else {
-    <login-field/>
-  }
-  <app-ad-banner [hidden]="adBannerHidden"
-  [imageSrc]="'https://gifdb.com/images/high/gummibar-gummy-bear-break-dance-fortnite-dance-7lonn1izgkap3jj1.gif'"
-  [videoSrc]="'https://cdn.revid.ai/backgrounds/fortnite/video_lowres_4.mp4'"/>
+                   [imageSrc]="'assets/UMOCUS-ad.gif'"
+                   [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
+                   [altText]="'AD'"/>
+
+    @if (this.loginService.userLoggedIn()) {
+      <app-contact-list/>
+      @if (false) {
+        umoc shop
+      } @else if (false) {
+        info contact/self/group
+      } @else if (this.contactService.selectedContact()) {
+        <app-chat-window/>
+      } @else {
+        <app-chat-placeholder/>
+      }
+    } @else {
+      <login-field/>
+    }
+    <app-ad-banner [hidden]="adBannerHidden"
+                   [imageSrc]="'https://gifdb.com/images/high/gummibar-gummy-bear-break-dance-fortnite-dance-7lonn1izgkap3jj1.gif'"
+                   [videoSrc]="'https://cdn.revid.ai/backgrounds/fortnite/video_lowres_4.mp4'"/>
   </div>
 </div>

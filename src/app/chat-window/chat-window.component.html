@@ -1,33 +1,27 @@
-@if (selectedContact()) {
-  <ng-container>
-    <div class="chat-window-container">
-      <app-chat-header/>
+<ng-container>
+  <div class="chat-window-container">
+    <app-chat-header/>
 
-      <div class="chat-messages">
-        @if (messages().length > 0 && !this.chatService.isLoading()) {
-          <ng-container>
-            @for (message of messages(); track message.message_id) {
-              <app-message
-                [message]="message"
-                [currentUser]="currentUser">
-              </app-message>
-            }
-          </ng-container>
-        } @else if (this.chatService.isLoading()) {
-          <div>
-            <img ngSrc="assets/UMOCUS.gif" width="383" height="480" alt="Loading..."/>
-          </div>
-        } @else {
-          <div class="no-messages">
-            <h2>No messages yet</h2>
-          </div>
-        }
-      </div>
-      <app-chat-input [recipientID]="selectedContact()!.contact_id"></app-chat-input>
+    <div class="chat-messages">
+      @if (messages().length > 0 && !this.chatService.isLoading()) {
+        <ng-container>
+          @for (message of messages(); track message.message_id) {
+            <app-message
+              [message]="message"
+              [currentUser]="currentUser">
+            </app-message>
+          }
+        </ng-container>
+      } @else if (this.chatService.isLoading()) {
+        <div>
+          <img ngSrc="assets/UMOCUS.gif" width="383" height="480" alt="Loading..."/>
+        </div>
+      } @else {
+        <div class="no-messages">
+          <h2>No messages yet</h2>
+        </div>
+      }
     </div>
-  </ng-container>
-} @else {
-  <ng-container>
-    <app-chat-placeholder/>
-  </ng-container>
-}
+    <app-chat-input [recipientID]="this.contactService.selectedContact()!.contact_id"></app-chat-input>
+  </div>
+</ng-container>

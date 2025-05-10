@@ -68,6 +68,10 @@ export class EnvironmentService {
     return `${this.apiUrl}/getGroupMembers`;
   }
 
+  getGetOwnProfileUrl() {
+    return `${this.apiUrl}/getOwnProfile`;
+  }
+
   // Utility Endpoints
   getDebugContactsUrl(): string {
     return `${this.apiUrl}/debugContacts`;
