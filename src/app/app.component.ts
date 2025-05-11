@@ -6,10 +6,11 @@ import { LoginService } from './services/login.service';
 import { AdBannerComponent } from "./ad-banner/ad-banner.component";
 import { ContactService } from './services/contact.service';
 import { ChatPlaceholderComponent } from './chat-placeholder/chat-placeholder.component';
+import { InfoWindowComponent } from './info-window/info-window.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ContactListComponent, ChatWindowComponent, LoginComponent, AdBannerComponent, ChatPlaceholderComponent],
+  imports: [ContactListComponent, ChatWindowComponent, LoginComponent, AdBannerComponent, ChatPlaceholderComponent, InfoWindowComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

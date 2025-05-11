@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { ContactService } from '../services/contact.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Contact } from '../model/contact.model';
+import { Group } from '../model/group.model';
 
 @Component({
   selector: 'app-chat-header',
@@ -8,12 +9,10 @@ import { ContactService } from '../services/contact.service';
   styleUrl: './chat-header.component.scss'
 })
 export class ChatHeaderComponent {
-  constructor(private contactService: ContactService) {}
+  @Input() selectedUser: Contact | Group | null = null;
+  @Output() infoSelect = new EventEmitter<Contact | Group>();
 
-  protected selectedContact = this.contactService.selectedContact;
-
-  getContactImage(): string | undefined {
-    const contact = this.selectedContact();
-    return contact?.picture_url;
+  onInfoSelect() {
+    this.infoSelect.emit(this.selectedUser!);
   }
 }

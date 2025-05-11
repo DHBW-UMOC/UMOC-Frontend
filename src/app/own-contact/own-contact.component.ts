@@ -15,4 +15,7 @@ export class OwnContactComponent {
   constructor(protected contactservice: ContactService) {
   }
 
+  selectSelf() {
+    this.contactservice.selectContactToEdit(this.contactservice.self()!)
+  }
 }

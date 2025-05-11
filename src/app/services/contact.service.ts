@@ -1,31 +1,48 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
 import { finalize, map, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { Chat } from '../model/chat.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
+  isLoading = signal(false);
+  selectedContact = signal<Contact | Group | null>(null);
+  self = signal<Contact | null>(null);
+  contacts = signal<(Contact | Group)[]>([]);
+  showInfoOf = signal<Contact | Group | null>(null);
+
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
     private environmentService: EnvironmentService
   ) {
+    effect(() => {
+      if (this.loginService.userLoggedIn()) {
+        this.fetchOwnUserInfo().subscribe(userData => {
+          this.self.set(userData);
+        });
+        this.fetchContacts().subscribe(contactsData => {
+          this.contacts.set(contactsData);
+        });
+      } else {
+        this.contacts.set([]);
+        this.self.set(null);
+      }
+    });
   }
 
-  isLoading = signal(false);
-  selectedContact = signal<Chat | null>(null);
-  self = toSignal(this.fetchOwnUserInfo(), {initialValue: {}});
-  contacts = toSignal(this.fetchContacts(), {initialValue: []});
-
-  selectContact(chat: Chat) {
+  selectContact(chat: Contact | Group) {
+    this.showInfoOf.set(null);
     this.selectedContact.set(chat);
+  }
+
+  selectContactToEdit(chat: Contact | Group) {
+    this.showInfoOf.set(chat);
   }
 
   public fetchContacts(): Observable<Contact[]> {
@@ -66,6 +83,22 @@ export class ContactService {
     return this.http.get<any>(
       this.environmentService.getGetOwnProfileUrl(),
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).pipe(
+      map((response: any) => {
+        return new Contact(
+          false,
+          response.user_id,
+          response.username,
+          response.profile_picture,
+          'Friend',
+          0
+        );
+      })
     );
+  }
+
+  getOwnUserID(): string {
+    console.log('getOwnUserID() called');
+    return this.loginService.getUserID();
   }
 }

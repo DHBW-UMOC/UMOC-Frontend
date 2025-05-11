@@ -1,0 +1,11 @@
+<ng-container>
+  <div class="info-window-container">
+    @if (isContact(contactService.showInfoOf()!)){
+      <h1>Group</h1>
+    } @else if(contactService.showInfoOf()!.contact_id == ownUserID){
+      <h1>Self</h1>
+    } @else {
+      <h1>Contact</h1>
+    }
+  </div>
+</ng-container>

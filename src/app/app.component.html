@@ -11,11 +11,12 @@
                    [altText]="'AD'"/>
 
     @if (this.loginService.userLoggedIn()) {
+
       <app-contact-list/>
       @if (false) {
         umoc shop
-      } @else if (false) {
-        info contact/self/group
+      } @else if (this.contactService.showInfoOf()) {
+        <app-info-window/>
       } @else if (this.contactService.selectedContact()) {
         <app-chat-window/>
       } @else {

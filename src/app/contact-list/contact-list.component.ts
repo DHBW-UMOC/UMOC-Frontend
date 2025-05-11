@@ -3,11 +3,12 @@ import { ContactContainerComponent } from '../contact-container/contact-containe
 import { ContactService } from '../services/contact.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login.service';
-import { Chat } from '../model/chat.model';
 import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
-import { OwnContactComponent } from "../own-contact/own-contact.component";
+import { OwnContactComponent } from '../own-contact/own-contact.component';
+import { Contact } from '../model/contact.model';
+import { Group } from '../model/group.model';
 
 @Component({
   selector: 'app-contact-list',
@@ -21,7 +22,7 @@ import { OwnContactComponent } from "../own-contact/own-contact.component";
     MatMenu,
     MatIconButton,
     OwnContactComponent
-],
+  ],
   providers: [LoginService],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss'
@@ -32,7 +33,7 @@ export class ContactListComponent {
   ) {
   }
 
-  openChat(chat: Chat) {
+  openChat(chat: Contact | Group) {
     this.contactService.selectContact(chat);
   }
 }

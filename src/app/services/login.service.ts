@@ -53,7 +53,7 @@ export class LoginService {
       next: (response: any) => {
         this.cookie.set('auth_token', response.access_token);
         this.cookie.set('expires_in', (Date.now() + (response.expires_in * 1000)).toString());
-        this.cookie.set('userID', response.user_id.toString());
+        this.cookie.set('user_id', response.user_id.toString());
 
         this.loginInProgress.set(false);
         this.userLoggedIn.set(true);
@@ -80,6 +80,6 @@ export class LoginService {
   }
 
   public getUserID(): string {
-    return this.cookie.get('userID');
+    return this.cookie.get('user_id');
   }
 }
