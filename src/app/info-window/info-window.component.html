@@ -1,11 +1,20 @@
 <ng-container>
   <div class="info-window-container">
-    @if (isContact(contactService.showInfoOf()!)){
-      <h1>Group</h1>
-    } @else if(contactService.showInfoOf()!.contact_id == ownUserID){
-      <h1>Self</h1>
-    } @else {
-      <h1>Contact</h1>
+    @if (contactService.showInfoOf(); as chat) {
+      @if (isGroup(chat)) {
+        <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Group image">
+        <h1>Group: {{chat.name}}</h1>
+        <p>{{chat.contact_id}}</p>
+        <p>Erstellt am: {{chat.created_at.toString()}}</p>
+        @for (member of chat.members; track member.user_id) {
+          <app-member-container [member]="member"/>
+        }
+      } @else if (isContact(chat)) {
+        <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Contact image">
+        <p>{{chat.name}}</p>
+        <p>{{chat.contact_id}}</p>
+        <p>Streak: {{chat.streak}}</p>
+      }
     }
   </div>
 </ng-container>

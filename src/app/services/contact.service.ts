@@ -5,6 +5,7 @@ import { Group } from '../model/group.model';
 import { finalize, map, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
+import { Member } from '../model/member.model';
 
 @Injectable({
   providedIn: 'root'
@@ -55,13 +56,21 @@ export class ContactService {
         const contactsData = Array.isArray(response) ? response : (response.chats ? response.chats : []);
         return contactsData.map((contact: any) => {
           if (contact.is_group) {
+            const members = contact.members.map((member: any) => {
+              return new Member(
+                member.contact_id,
+                member.name,
+                member.picture_url,
+                member.role
+              )
+            });
             return new Group(
               contact.is_group,
               contact.contact_id,
               contact.name,
               contact.picture_url,
               new Date(contact.created_at),
-              contact.members
+              members
             );
           } else {
             return new Contact(
@@ -98,7 +107,6 @@ export class ContactService {
   }
 
   getOwnUserID(): string {
-    console.log('getOwnUserID() called');
     return this.loginService.getUserID();
   }
 }

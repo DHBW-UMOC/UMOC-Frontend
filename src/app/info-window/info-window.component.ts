@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import { ContactService } from '../services/contact.service';
-import { Chat } from '../model/chat.model';
 import { Group } from '../model/group.model';
+import { NgOptimizedImage } from '@angular/common';
+import { Contact } from '../model/contact.model';
+import { MemberContainerComponent } from '../member-container/member-container.component';
 
 @Component({
   selector: 'app-info-window',
-  imports: [],
+  imports: [
+    NgOptimizedImage,
+    MemberContainerComponent
+  ],
   templateUrl: './info-window.component.html',
   styleUrl: './info-window.component.scss'
 })
@@ -16,7 +21,11 @@ export class InfoWindowComponent {
     this.ownUserID = this.contactService.getOwnUserID();
   }
 
-  isContact(chat: Chat): chat is Group {
-    return chat.is_group;
+  isContact(obj: any): obj is Contact {
+    return obj && !obj.is_group;
+  }
+
+  isGroup(obj: any): obj is Group {
+    return obj && obj.is_group;
   }
 }
