@@ -21,9 +21,9 @@
 
 
 <mat-menu #menu="matMenu">
-  @if (chat.is_group) {
+  @if (isGroup(chat)) {
     <button mat-menu-item>
-      <span>Gruppe löschen</span>
+      <span>Gruppe bearbeiten</span>
     </button>
     <button mat-menu-item>
       <span>Gruppe verlassen</span>
@@ -34,18 +34,24 @@
     <button mat-menu-item>
       <span>Gruppe bearbeiten</span>
     </button>
-  } @else {
-    <button mat-menu-item>
-      <span>Befreunden</span>
-    </button>
-    <button mat-menu-item>
-      <span>Blockieren</span>
-    </button>
-    <button mat-menu-item>
-      <span>Blockieren</span>
-    </button>
-    <button mat-menu-item>
-      <span>Löschen</span>
-    </button>
+  } @else if (isContact(chat)) {
+    @if (chat.status == "friend") {
+      <button mat-menu-item (click)='onOptionSelect("unfriend")'>
+        <span>Entfreunden</span>
+      </button>
+    } @else {
+      <button mat-menu-item (click)='onOptionSelect("friend")'>
+        <span>Befreunden</span>
+      </button>
+    }
+    @if (chat.status == 'blocked') {
+      <button mat-menu-item (click)='onOptionSelect("BLOCKED")'>
+        <span>Blockieren</span>
+      </button>
+    } @else {
+      <button mat-menu-item (click)='onOptionSelect("unblocked")'>
+        <span>Blockieren</span>
+      </button>
+    }
   }
 </mat-menu>

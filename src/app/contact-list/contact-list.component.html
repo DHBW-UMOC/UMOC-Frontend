@@ -18,6 +18,7 @@
         <contact-container
           [chat]="contact"
           (contactClick)="openChat($event)"
+          (optionSelect)="selectOption(contact.contact_id, $event)"
         ></contact-container>
       }
     } @else if (this.contactService.isLoading()) {

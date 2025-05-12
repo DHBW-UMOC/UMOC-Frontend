@@ -109,4 +109,15 @@ export class ContactService {
   getOwnUserID(): string {
     return this.loginService.getUserID();
   }
+
+  changeContactStatus(contact_id: string , $option: string) {
+    this.http.post(
+      this.environmentService.getChangeContactUrl(),
+      {
+        "contact_id": `${contact_id}`,
+        "status": `${$option}`
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    )
+  }
 }

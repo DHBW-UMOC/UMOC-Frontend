@@ -36,4 +36,8 @@ export class ContactListComponent {
   openChat(chat: Contact | Group) {
     this.contactService.selectContact(chat);
   }
+
+  selectOption(user_id: string, $option: string) {
+    this.contactService.changeContactStatus(user_id, $option);
+  }
 }
