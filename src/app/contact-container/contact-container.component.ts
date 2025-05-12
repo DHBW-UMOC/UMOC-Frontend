@@ -16,6 +16,7 @@ export class ContactContainerComponent {
   @Input() chat!: Contact | Group;
   @Output() contactClick = new EventEmitter<Contact | Group>();
   @Output() optionSelect = new EventEmitter<string>();
+  @Output() optionSelectGroup = new EventEmitter<string>();
 
   onContactClick() {
     this.contactClick.emit(this.chat);
@@ -23,6 +24,10 @@ export class ContactContainerComponent {
 
   onOptionSelect(value: string) {
     this.optionSelect.emit(value);
+  }
+
+  onOptionSelectGroup(value: string) {
+    this.optionSelectGroup.emit(value);
   }
 
   isContact(obj: any): obj is Contact {

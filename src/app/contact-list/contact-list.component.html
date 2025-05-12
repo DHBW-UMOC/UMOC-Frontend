@@ -19,6 +19,7 @@
           [chat]="contact"
           (contactClick)="openChat($event)"
           (optionSelect)="selectOption(contact.contact_id, $event)"
+          (optionSelectGroup)="selectOptionGroup(contact, $event)"
         ></contact-container>
       }
     } @else if (this.contactService.isLoading()) {

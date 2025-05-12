@@ -62,7 +62,7 @@ export class ContactService {
                 member.name,
                 member.picture_url,
                 member.role
-              )
+              );
             });
             return new Group(
               contact.is_group,
@@ -110,14 +110,24 @@ export class ContactService {
     return this.loginService.getUserID();
   }
 
-  changeContactStatus(contact_id: string , $option: string) {
+  changeContactStatus(contact_id: string, $option: string) {
     this.http.post(
       this.environmentService.getChangeContactUrl(),
       {
-        "contact_id": `${contact_id}`,
-        "status": `${$option}`
+        'contact_id': `${contact_id}`,
+        'status': `${$option}`
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
-    )
+    ).subscribe();
+  }
+
+  leaveGroup(group_id: string) {
+    this.http.post(
+      this.environmentService.getLeaveGroupUrl(),
+      {
+        'group_id': `${group_id}`
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe();
   }
 }

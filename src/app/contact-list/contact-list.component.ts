@@ -40,4 +40,12 @@ export class ContactListComponent {
   selectOption(user_id: string, $option: string) {
     this.contactService.changeContactStatus(user_id, $option);
   }
+
+  selectOptionGroup(contact: Contact | Group, $event: string) {
+    if ($event == 'edit') {
+      this.contactService.showInfoOf.set(contact);
+    } else if ($event == 'leave') {
+      this.contactService.leaveGroup(contact.contact_id);
+    }
+  }
 }
