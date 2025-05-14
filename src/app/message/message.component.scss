@@ -33,9 +33,9 @@
     --_p: 100%;
     border-bottom-right-radius: 0 0;
     place-self: end;
-    background: linear-gradient(135deg, var(--mat-sys-secondary-container), var(--mat-sys-primary-container)) border-box;
+    background: linear-gradient(135deg, var(--mat-sys-tertiary-container), var(--mat-sys-primary-container)) border-box;
     .message-text {
-      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-primary-container));
+      background-image: linear-gradient(135deg, var(--mat-sys-on-tertiary-container), var(--mat-sys-on-primary-container));
       color: transparent;
       background-clip: text;
     }
