@@ -17,6 +17,11 @@ export class ChatWindowComponent {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   protected currentUser: string = this.contactService.getOwnUserID();
   protected messages = signal<Message[]>([]);
+  protected useAltBackground = false;
+
+  toggleBackground() {
+    this.useAltBackground = !this.useAltBackground;
+  }
 
   constructor(protected chatService: ChatService,
               protected contactService: ContactService

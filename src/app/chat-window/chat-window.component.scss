@@ -17,16 +17,32 @@
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    background: url('/assets/MessageBackTODO2.png') fixed no-repeat top left; /* Add 'fixed' */
     background-size: cover;
-    background-attachment: fixed; /* Add this line */
+    background-attachment: fixed;
     flex-direction: column;
     border-top: 2px solid var(--mat-sys-outline);
     border-bottom: 2px solid var(--mat-sys-outline);
     gap: 20px;
+
+    // Remove the default background from here
+    
+    &.alt-bg {
+      background-image: url('/assets/UMOCUS.gif');
+    }
+
+    &:not(.alt-bg):not(.loading) {
+      background-image: url('/assets/MessageBackTODO2.png');
+    }
   
     &.loading {
       background: var(--mat-sys-surface);
     }
+  }
+
+  .bg-toggle-btn {
+    position: absolute;
+    top: 70px;
+    left: 10px;
+    z-index: 100;
   }
 }
