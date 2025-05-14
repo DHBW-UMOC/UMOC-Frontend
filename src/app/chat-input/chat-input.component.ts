@@ -5,10 +5,18 @@ import { ContactService } from '../services/contact.service';
 import { ChatService } from '../services/chat.service';
 import { FormsModule } from '@angular/forms';
 import { catchError, of, take } from 'rxjs';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-chat-input',
-  imports: [ChatInputEmojisComponent, ChatInputExtrasComponent, FormsModule],
+  imports: [
+    ChatInputEmojisComponent, 
+    ChatInputExtrasComponent, 
+    FormsModule,
+    MatIconModule,
+    MatButtonModule
+  ],
   templateUrl: './chat-input.component.html',
   styleUrl: './chat-input.component.scss'
 })
