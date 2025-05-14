@@ -5,19 +5,13 @@
     background-color: var(--mat-sys-surface-container-high);
     border-width: 0;
   
-    input {
+    .input-wrapper {
+      display: flex;
       flex: 1;
-      padding: 8px;
-      border-radius: 10px;
-      margin-right: 5px;
-      margin-left: 5px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      border: none;
+      align-items: center;
       background-color: var(--mat-sys-surface-container-highest);
-      color: var(--mat-sys-on-surface);
-      outline: none;
-
+      border-radius: 10px;
+      margin: 10px 5px;
       box-shadow: var(--mat-sys-level2);
     }
 
@@ -25,16 +19,14 @@
       flex: 1;
       padding: 8px;
       border-radius: 10px;
-      margin: 10px 5px;
       border: none;
-      background-color: var(--mat-sys-surface-container-highest);
+      background-color: transparent;
       color: var(--mat-sys-on-surface);
       outline: none;
       resize: none;
       min-height: 20px;
       max-height: 150px;
       line-height: 1.2;
-      box-shadow: var(--mat-sys-level2);
       white-space: pre-wrap;
     }
   
