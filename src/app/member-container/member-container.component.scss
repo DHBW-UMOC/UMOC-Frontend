@@ -1,0 +1,48 @@
+div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+  }
+
+  p {
+    margin: 0 12px 0 0;
+
+    &:first-of-type {
+      font-weight: 500;
+      min-width: 120px;
+    }
+
+    &:nth-of-type(2) {
+      color: #666;
+      min-width: 80px;
+    }
+  }
+
+  mat-button-toggle {
+    margin-right: 12px;
+  }
+
+  .fab-button {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+
+    mat-icon {
+      font-size: 18px;
+      line-height: 18px;
+      height: 18px;
+      width: 18px;
+    }
+  }
+}

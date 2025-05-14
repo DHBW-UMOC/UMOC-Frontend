@@ -4,12 +4,16 @@ import { Group } from '../model/group.model';
 import { NgOptimizedImage } from '@angular/common';
 import { Contact } from '../model/contact.model';
 import { MemberContainerComponent } from '../member-container/member-container.component';
+import { MatFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-info-window',
   imports: [
     NgOptimizedImage,
-    MemberContainerComponent
+    MemberContainerComponent,
+    MatFabButton,
+    MatIcon
   ],
   templateUrl: './info-window.component.html',
   styleUrl: './info-window.component.scss'

@@ -130,4 +130,48 @@ export class ContactService {
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe();
   }
+
+  deleteGroup(group_id: string) {
+    this.http.post(
+      this.environmentService.getDeleteGroupUrl(),
+      {
+        'group_id': `${group_id}`
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe();
+  }
+
+  changeGroup(action: string, group_id: string, new_value: string) {
+    this.http.post(
+      this.environmentService.getDeleteGroupUrl(),
+      {
+        'action': `${action}`,
+        'group_id': `${group_id}`,
+        'new_value': `${new_value}`
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe();
+  }
+
+  addMember(group_id: string, new_member_id: string) {
+    this.http.post(
+      this.environmentService.getAddMemberUrl(),
+      {
+        'group_id': `${group_id}`,
+        'new_member_id': `${new_member_id}`
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe();
+  }
+
+  removeMember(group_id: string, new_member_id: string) {
+    this.http.post(
+      this.environmentService.getRemoveMemberUrl(),
+      {
+        'group_id': `${group_id}`,
+        'new_member_id': `${new_member_id}`
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe();
+  }
 }

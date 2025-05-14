@@ -3,12 +3,18 @@
     @if (contactService.showInfoOf(); as chat) {
       @if (isGroup(chat)) {
         <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Group image">
-        <h1>Group: {{chat.name}}</h1>
+        <input placeholder="{{chat.name}}">
         <p>{{chat.contact_id}}</p>
         <p>Erstellt am: {{chat.created_at.toString()}}</p>
+        <button mat-fab color="primary" class="fab-button" aria-label="Gruppe Löschen">
+          <mat-icon>delete</mat-icon>
+        </button>
         @for (member of chat.members; track member.user_id) {
           <app-member-container [member]="member"/>
         }
+        <button mat-fab color="primary" class="fab-button" aria-label="Mitglied hinzufügen">
+          <mat-icon>add</mat-icon>
+        </button>
       } @else if (isContact(chat)) {
         <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Contact image">
         <p>{{chat.name}}</p>
