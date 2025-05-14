@@ -39,7 +39,7 @@
           <mat-card-header>
             <p>Members</p>
           </mat-card-header>
-          <mat-card-content>
+          <mat-card-content >
             @for (member of chat.members; track member.user_id) {
               <app-member-container [member]="member"/>
             }
