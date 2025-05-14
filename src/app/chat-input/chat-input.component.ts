@@ -52,7 +52,7 @@ export class ChatInputComponent implements AfterViewInit {
   adjustTextareaHeight() {
     const textarea = this.messageInput.nativeElement;
     textarea.style.height = '0';
-    const newHeight = Math.min(textarea.scrollHeight, 150);
+    const newHeight = Math.min(textarea.scrollHeight, 180);
     textarea.style.height = newHeight + 'px';
   }
 
