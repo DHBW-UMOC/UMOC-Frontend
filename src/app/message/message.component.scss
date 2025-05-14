@@ -21,9 +21,9 @@
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
-    background: linear-gradient(135deg,var(--mat-sys-tertiary-container),var(--mat-sys-secondary-container)) border-box;
+    background: linear-gradient(135deg,var(--mat-sys-secondary-container),var(--mat-sys-secondary-container)) border-box;
     .message-text {
-      background-image: linear-gradient(135deg, var(--mat-sys-on-tertiary-container), var(--mat-sys-on-secondary-container));
+      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-secondary-container));
       color: transparent;
       background-clip: text;
     }
@@ -47,10 +47,9 @@
   }
 
   .message-sender {
-    font-size: 0.8em;
-    font-weight: bold;
     margin-bottom: 4px;
-    background-image: linear-gradient(135deg, var(--mat-sys-on-tertiary-container), var(--mat-sys-on-secondary-container));
+    font-weight: bold;
+    background: red;
     color: transparent;
     background-clip: text;
   }
