@@ -2,6 +2,14 @@
   display: flex;
   align-items: center;
 
+  mat-card {
+    flex: 1;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
   img {
     border-radius: 50%;
     object-fit: cover;
