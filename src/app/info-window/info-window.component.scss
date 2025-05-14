@@ -9,9 +9,10 @@
   gap: 16px;
   background-color: var(--mat-sys-surface-container);
   border: 1px solid var(--mat-sys-outline);
+  padding: 20px;
 
   img {
-    border: 2px solid var(--mat-sys-outline);
+    border: 1px solid var(--mat-sys-outline);
   }
 
   .name-container {
@@ -43,12 +44,13 @@
     max-width: 300px;
   }
 
-  p {
-    color: var(--mat-sys-on-surface);
-    margin: 4px 0;
-  }
-
   .fab-button {
     margin: 8px 0;
+  }
+
+  .group-info .contact-info {
+    margin-top: 20px;
+    color: var(--mat-sys-on-surface);
+    font: var(--mat-sys-body-small);
   }
 }

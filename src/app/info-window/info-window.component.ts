@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ContactService } from '../services/contact.service';
 import { Group } from '../model/group.model';
 import { NgOptimizedImage } from '@angular/common';
@@ -6,6 +6,7 @@ import { Contact } from '../model/contact.model';
 import { MemberContainerComponent } from '../member-container/member-container.component';
 import { MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-info-window',
@@ -13,7 +14,8 @@ import { MatIcon } from '@angular/material/icon';
     NgOptimizedImage,
     MemberContainerComponent,
     MatFabButton,
-    MatIcon
+    MatIcon,
+    MatCardModule
   ],
   templateUrl: './info-window.component.html',
   styleUrl: './info-window.component.scss',
