@@ -8,7 +8,8 @@
           @for (message of messages(); track message.message_id) {
             <app-message
               [message]="message"
-              [currentUser]="this.currentUser"/>
+              [currentUser]="this.currentUser"
+              [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
           }
         </ng-container>
       } @else if (this.chatService.isLoading()) {

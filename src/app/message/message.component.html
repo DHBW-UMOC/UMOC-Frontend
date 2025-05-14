@@ -1,5 +1,8 @@
 <div class="message-container"
      [ngClass]="(message?.sender_user_id == currentUser) ? 'message-sent' : 'message-received'">
+     @if (isGroupChat && message?.sender_user_id != currentUser) {
+       <div class="message-sender">{{message?.sender_username}}</div>
+     }
      <span class="message-text">{{message?.content}}</span>
   <div class="message-timestamp">{{ message?.timestamp ? (message?.timestamp | date: 'HH:mm') : 'ERR' }}</div>
 </div>

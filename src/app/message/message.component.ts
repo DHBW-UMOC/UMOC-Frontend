@@ -11,4 +11,5 @@ import { Message } from '../model/message.model';
 export class MessageComponent {
   @Input() message: Message | undefined;
   @Input() currentUser: string | undefined = '';
+  @Input() isGroupChat: boolean = false;
 }
