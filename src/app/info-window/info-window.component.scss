@@ -53,4 +53,13 @@
     color: var(--mat-sys-on-surface);
     font: var(--mat-sys-body-small);
   }
+
+  mat-card {
+    width: 100%;
+  }
+
+  mat-button-toggle {
+    margin: 10px;
+    padding: 10px;
+  }
 }

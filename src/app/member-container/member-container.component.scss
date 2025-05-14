@@ -20,7 +20,15 @@ div {
       min-width: 80px;
     }
   }
-
+  
+  mat-button-toggle {
+    margin-right: 12px;
+    min-width: 100px; // Add minimum width
+    display: inline-flex; // Ensure proper display
+    align-items: center;
+    justify-content: center;
+  }
+  
   .fab-button {
     width: 36px;
     height: 36px;
@@ -33,4 +41,5 @@ div {
       width: 18px;
     }
   }
+
 }
