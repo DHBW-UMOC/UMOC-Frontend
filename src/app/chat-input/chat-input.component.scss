@@ -26,8 +26,10 @@
       resize: none;
       min-height: 20px;
       max-height: 150px;
-      line-height: 1.2;
+      line-height: 1.4;
       white-space: pre-wrap;
+      overflow-y: auto;
+      box-sizing: border-box;
     }
   
     button {

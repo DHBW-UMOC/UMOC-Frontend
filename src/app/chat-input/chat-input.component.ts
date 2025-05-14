@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, AfterViewInit } from '@angular/core';
 import { ChatInputEmojisComponent } from '../chat-input-emojis/chat-input-emojis.component';
 import { ChatInputExtrasComponent } from '../chat-input-extras/chat-input-extras.component';
 import { ContactService } from '../services/contact.service';
@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './chat-input.component.html',
   styleUrl: './chat-input.component.scss'
 })
-export class ChatInputComponent {
+export class ChatInputComponent implements AfterViewInit {
   @Input() recipientID = '';
   @ViewChild('messageInput') messageInput!: ElementRef;
 
@@ -30,6 +30,10 @@ export class ChatInputComponent {
   ) {
   }
 
+  ngAfterViewInit() {
+    this.adjustTextareaHeight();
+  }
+
   onKeydown(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       if (!event.shiftKey) {
@@ -37,9 +41,19 @@ export class ChatInputComponent {
         if (this.messageInput.nativeElement.value.trimStart()) {
           this.saveMessage(this.messageInput.nativeElement.value);
           this.messageInput.nativeElement.value = '';
+          this.adjustTextareaHeight();
         }
+      } else {
+        this.adjustTextareaHeight();
       }
     }
+  }
+
+  adjustTextareaHeight() {
+    const textarea = this.messageInput.nativeElement;
+    textarea.style.height = '0';
+    const newHeight = Math.min(textarea.scrollHeight, 150);
+    textarea.style.height = newHeight + 'px';
   }
 
   saveMessage(messageContent: string) {

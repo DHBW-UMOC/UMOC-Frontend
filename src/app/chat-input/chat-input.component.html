@@ -1,4 +1,4 @@
-<form class="chat-input-container" (ngSubmit)="saveMessage(messageInput.value); messageInput.value=''">
+<form class="chat-input-container" (ngSubmit)="saveMessage(messageInput.value); messageInput.value=''; adjustTextareaHeight()">
   <app-chat-input-extras/>
   <div class="input-wrapper">
     <app-chat-input-emojis/>
@@ -9,6 +9,7 @@
       required
       placeholder="Nachricht schreiben"
       (keydown)="onKeydown($event)"
+      (input)="adjustTextareaHeight()"
       rows="1"></textarea>
   </div>
   <button mat-icon-button type="submit" [disabled]="!messageInput.value.trimStart()">
