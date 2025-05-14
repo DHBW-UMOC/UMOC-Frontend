@@ -22,6 +22,18 @@ export class ChatInputComponent {
   ) {
   }
 
+  onKeydown(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      if (!event.shiftKey) {
+        event.preventDefault();
+        if (this.messageInput.nativeElement.value.trim()) {
+          this.saveMessage(this.messageInput.nativeElement.value);
+          this.messageInput.nativeElement.value = '';
+        }
+      }
+    }
+  }
+
   saveMessage(messageContent: string) {
     this.chatService.saveMessage(
       this.recipientID,
