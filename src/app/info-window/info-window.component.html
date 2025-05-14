@@ -1,5 +1,8 @@
 <ng-container>
   <div class="info-window-container">
+    <button mat-icon-button class="close-button" (click)="closeInfoWindow()">
+      <mat-icon>close</mat-icon>
+    </button>
     @if (contactService.showInfoOf(); as chat) {
       <img [ngSrc]="chat.picture_url" width="116" height="116" alt="{{isGroup(chat) ? 'Group' : 'Contact'}} image">
       <mat-card appearance="raised">

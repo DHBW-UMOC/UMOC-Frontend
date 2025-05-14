@@ -10,6 +10,7 @@
   background-color: var(--mat-sys-surface-container);
   border: 1px solid var(--mat-sys-outline);
   padding: 20px;
+  position: relative;
 
   img {
     border: 1px solid var(--mat-sys-outline);
@@ -61,5 +62,15 @@
   mat-button-toggle {
     margin: 10px;
     padding: 10px;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--mat-sys-primary);
+    &:hover {
+      opacity: 0.8;
+    }
   }
 }

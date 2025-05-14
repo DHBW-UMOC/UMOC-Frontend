@@ -47,6 +47,10 @@ export class InfoWindowComponent {
     }
   }
 
+  closeInfoWindow(): void {
+    this.contactService.hideInfo();
+  }
+
   isContact(obj: any): obj is Contact {
     return obj && !obj.is_group;
   }
