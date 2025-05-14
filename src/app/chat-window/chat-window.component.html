@@ -1,14 +1,21 @@
 <ng-container>
   <div class="chat-window-container">
+    <button class="bg-toggle-btn" (click)="toggleBackground()">
+      {{ useAltBackground ? 'Default BG' : 'Alt BG' }}
+    </button>
     <app-chat-header [selectedUser]="this.contactService.selectedContact()" (infoSelect)="this.contactService.selectContactToEdit($event)"/>
 
-    <div class="chat-messages">
+    <div #messagesContainer 
+         class="chat-messages" 
+         [class.loading]="this.chatService.isLoading()"
+         [class.alt-bg]="useAltBackground">
       @if (messages().length > 0 && !this.chatService.isLoading()) {
         <ng-container>
           @for (message of messages(); track message.message_id) {
             <app-message
               [message]="message"
-              [currentUser]="this.currentUser"/>
+              [currentUser]="this.currentUser"
+              [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
           }
         </ng-container>
       } @else if (this.chatService.isLoading()) {

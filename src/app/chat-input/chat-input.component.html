@@ -1,6 +1,18 @@
-<form class="chat-input-container" (ngSubmit)="saveMessage(messageInput.value); messageInput.value=''">
+<form class="chat-input-container" (ngSubmit)="saveMessage(messageInput.value); messageInput.value=''; adjustTextareaHeight()">
   <app-chat-input-extras/>
-  <app-chat-input-emojis/>
-  <input type="text" placeholder="Nachricht schreiben" #messageInput name="message" ngModel required>
-  <button type="submit" [disabled]="!messageInput.value.trim()">&#10146;</button>
+  <div class="input-wrapper">
+    <app-chat-input-emojis/>
+    <textarea 
+      #messageInput
+      name="message" 
+      ngModel 
+      required
+      placeholder="Nachricht schreiben"
+      (keydown)="onKeydown($event)"
+      (input)="adjustTextareaHeight()"
+      rows="1"></textarea>
+  </div>
+  <button mat-icon-button type="submit" [disabled]="!messageInput.value.trimStart()">
+    <mat-icon>send</mat-icon>
+  </button>
 </form>
