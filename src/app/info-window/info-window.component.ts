@@ -16,13 +16,33 @@ import { MatIcon } from '@angular/material/icon';
     MatIcon
   ],
   templateUrl: './info-window.component.html',
-  styleUrl: './info-window.component.scss'
+  styleUrl: './info-window.component.scss',
+  standalone: true
 })
 export class InfoWindowComponent {
   ownUserID: string = '';
+  isEditing: boolean = false;
 
   constructor(protected contactService: ContactService) {
     this.ownUserID = this.contactService.getOwnUserID();
+  }
+
+  startEditing(): void {
+    this.isEditing = true;
+  }
+
+  finishEditing(newName: string): void {
+    this.isEditing = false;
+    const currentChat = this.contactService.showInfoOf();
+    if (currentChat && newName.trim() !== '') {
+      if (this.isGroup(currentChat)) {
+        // Implement group name update logic here
+        // this.contactService.updateGroupName(currentChat.contact_id, newName);
+      } else if (this.isContact(currentChat)) {
+        // Implement contact name update logic here
+        // this.contactService.updateContactName(currentChat.contact_id, newName);
+      }
+    }
   }
 
   isContact(obj: any): obj is Contact {
