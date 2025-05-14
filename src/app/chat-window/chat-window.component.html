@@ -2,7 +2,7 @@
   <div class="chat-window-container">
     <app-chat-header [selectedUser]="this.contactService.selectedContact()" (infoSelect)="this.contactService.selectContactToEdit($event)"/>
 
-    <div class="chat-messages">
+    <div class="chat-messages" [class.loading]="this.chatService.isLoading()">
       @if (messages().length > 0 && !this.chatService.isLoading()) {
         <ng-container>
           @for (message of messages(); track message.message_id) {

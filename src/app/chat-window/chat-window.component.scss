@@ -23,5 +23,9 @@
     border-top: 2px solid var(--mat-sys-outline);
     border-bottom: 2px solid var(--mat-sys-outline);
     gap: 20px;
+
+    &.loading {
+      background: var(--mat-sys-surface);
+    }
   }
 }
