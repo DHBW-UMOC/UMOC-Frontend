@@ -5,6 +5,7 @@
     align-items: flex-end;  // Add this line to align all items to bottom
     background-color: var(--mat-sys-surface-container-high);
     border-width: 0;
+    padding: 4px;
   
     .input-wrapper {
       display: flex;
