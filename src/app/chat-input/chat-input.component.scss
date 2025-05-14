@@ -2,6 +2,7 @@
 
 .chat-input-container {
     display: flex;
+    align-items: flex-end;  // Add this line to align all items to bottom
     background-color: var(--mat-sys-surface-container-high);
     border-width: 0;
   
