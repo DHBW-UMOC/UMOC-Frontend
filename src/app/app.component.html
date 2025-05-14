@@ -15,12 +15,8 @@
       <app-contact-list/>
       @if (false) {
         umoc shop
-      } @else if (this.contactService.showInfoOf()) {
-        <app-info-window/>
-      } @else if (this.contactService.selectedContact()) {
-        <app-chat-window/>
       } @else {
-        <app-chat-placeholder/>
+        <app-main-window/>
       }
     } @else {
       <login-field/>

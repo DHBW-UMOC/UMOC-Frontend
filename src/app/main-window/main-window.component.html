@@ -1,0 +1,9 @@
+<div class="main-window-container">
+  @if (this.contactService.showInfoOf()) {
+    <app-info-window/>
+  } @else if (this.contactService.selectedContact()) {
+    <app-chat-window/>
+  } @else {
+    <app-chat-placeholder/>
+  }
+</div>

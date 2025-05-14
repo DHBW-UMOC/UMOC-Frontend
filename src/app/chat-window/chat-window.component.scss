@@ -1,16 +1,17 @@
 @use "../../styles.scss" as global;
 
 .chat-window-container {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  width: 50vw;
   height: 100%;
-  border-bottom: 1px solid var(--mat-sys-outline);
-  border-right: 1px solid var(--mat-sys-outline);
-  border-left: 1px solid var(--mat-sys-outline);
-  border-top: 1px solid var(--mat-sys-outline);
+  flex: 1;
 
+  .chat-window {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+  }
   .chat-messages {
     display: flex;
     flex: 1;
@@ -21,7 +22,6 @@
     flex-direction: column;
     border-top: 2px solid var(--mat-sys-outline);
     border-bottom: 2px solid var(--mat-sys-outline);
-
     gap: 20px;
   }
 }
