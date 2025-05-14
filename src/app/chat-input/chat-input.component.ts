@@ -37,7 +37,7 @@ export class ChatInputComponent {
   saveMessage(messageContent: string) {
     this.chatService.saveMessage(
       this.recipientID,
-      messageContent.trimStart().trimEnd()
+      messageContent.trim()  // Changed from trimStart().trimEnd() to trim()
     ).pipe(
       take(1),
       catchError(() => {
