@@ -3,11 +3,16 @@
     @if (contactService.showInfoOf(); as chat) {
       @if (isGroup(chat)) {
         <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Group image">
-        @if (isEditing) {
-          <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
-        } @else {
-          <p class="editable-text" (click)="startEditing()">{{chat.name}}</p>
-        }
+        <div class="name-container">
+          @if (isEditing) {
+            <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
+          } @else {
+            <p class="editable-text">{{chat.name}}</p>
+            <button mat-icon-button class="edit-button" (click)="startEditing()">
+              <mat-icon>edit</mat-icon>
+            </button>
+          }
+        </div>
         <p>{{chat.contact_id}}</p>
         <p>Erstellt am: {{chat.created_at.toString()}}</p>
         <button mat-fab color="primary" class="fab-button" aria-label="Gruppe Löschen">
@@ -21,11 +26,16 @@
         </button>
       } @else if (isContact(chat)) {
         <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Contact image">
-        @if (isEditing) {
-          <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
-        } @else {
-          <p class="editable-text" (click)="startEditing()">{{chat.name}}</p>
-        }
+        <div class="name-container">
+          @if (isEditing) {
+            <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
+          } @else {
+            <p class="editable-text">{{chat.name}}</p>
+            <button mat-icon-button class="edit-button" (click)="startEditing()">
+              <mat-icon>edit</mat-icon>
+            </button>
+          }
+        </div>
         <p>{{chat.contact_id}}</p>
         <p>Streak: {{chat.streak}}</p>
       }
