@@ -1,0 +1,120 @@
+@use "../../styles.scss" as global;
+
+.login-background {
+  background-color: var(--mat-sys-surface-container);
+  border: 1px solid var(--mat-sys-outline);
+  width: 70vw;
+  height: 100vh;
+  margin: auto;
+}
+
+.login-container {
+  background-color: var(--mat-sys-surface-container-high);
+  color: var(--mat-sys-on-surface);
+  max-width: 400px;
+  margin: -35px auto 0px auto;
+  padding: 10px 28px 24px 28px;
+  border-radius: 12px;
+  box-shadow: var(--mat-sys-level5);
+  border: 1px solid var(--mat-sys-outline);
+
+  .mat-tab-group {
+    background: transparent;
+    border-radius: 8px;
+    box-shadow: none;
+    .mat-tab-label {
+      color: var(--mat-sys-on-surface);
+    }
+    .mat-tab-label-active {
+      color: var(--mat-sys-primary);
+    }
+    .mat-ink-bar {
+      background: var(--mat-sys-primary);
+    }
+  }
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--mat-sys-primary);
+}
+
+.form-group {
+  margin-bottom: 18px;
+  margin-top: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--mat-sys-on-surface-variant, #666);
+  font: var(--mat-sys-title-medium);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--mat-sys-outline);
+  border-radius: 6px;
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  transition: border-color 0.2s;
+  background-color: var(--mat-sys-surface-container-highest);
+  font: var(--mat-sys-body-large);
+}
+
+input.invalid {
+  border-color: #ff5252;
+  background: #fff0f0;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: 500;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: var(--mat-sys-title-large);
+}
+
+button:disabled {
+  background-color: var(--mat-sys-outline);
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #ff5252;
+  margin-top: 5px;
+  font: var(--mat-sys-body-small);
+}
+
+.error-alert {
+  color: #ff5252;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+
+  img {
+    max-width: 300px;
+    height: auto;
+    display: block;
+    }
+}

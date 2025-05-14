@@ -1,6 +1,51 @@
-<div class="contact-container-details" (click)="onContactClick()">
+<div class="contact-container-details">
+  <div (click)="onContactClick()">
     <div class="contact-container-image">
-<!--      <img ngSrc="{{contact.profilePicture}}">-->
+      <img [ngSrc]="chat.picture_url" width="50" height="50" alt=""/>
     </div>
-    <div class="contact-container-name">{{ contact.userName }}</div>
+    <div class="contact-container-informations">
+      <div class="contact-container-name">{{ chat.name }}</div>
+      @if (!chat.is_group) {
+        <div class="contact-container-status">
+          {{ isContact(chat) ? chat.status : 'Unbekannt' }}
+        </div>
+      }
+    </div>
+    <div class="contact-container-button">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
 </div>
+
+
+<mat-menu #menu="matMenu">
+  @if (isGroup(chat)) {
+    <button mat-menu-item (click)='onOptionSelectGroup("edit")'>
+      <span>Gruppe bearbeiten</span>
+    </button>
+    <button mat-menu-item (click)='onOptionSelectGroup("leave")'>
+      <span>Gruppe verlassen</span>
+    </button>
+  } @else if (isContact(chat)) {
+    @if (chat.status == 'friend') {
+      <button mat-menu-item (click)='onOptionSelect("unfriend")'>
+        <span>Entfreunden</span>
+      </button>
+    } @else {
+      <button mat-menu-item (click)='onOptionSelect("friend")'>
+        <span>Befreunden</span>
+      </button>
+    }
+    @if (chat.status == 'blocked') {
+      <button mat-menu-item (click)='onOptionSelect("blocked")'>
+        <span>Entblocken</span>
+      </button>
+    } @else {
+      <button mat-menu-item (click)='onOptionSelect("unblocked")'>
+        <span>Blocken</span>
+      </button>
+    }
+  }
+</mat-menu>

@@ -1,0 +1,49 @@
+.member-container {
+  display: flex;
+  align-items: center;
+
+  mat-card {
+    flex: 1;
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  img {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  p {
+    &:first-of-type {
+      font: var(--mat-sys-title-medium);
+      min-width: 120px;
+    }
+
+    &:nth-of-type(2) {
+      font: var(--mat-sys-body-medium);
+      min-width: 80px;
+    }
+  }
+  
+  mat-button-toggle {    
+    display: inline-flex; // Ensure proper display
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .fab-button {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+
+    mat-icon {
+      font-size: 18px;
+      line-height: 18px;
+      height: 18px;
+      width: 18px;
+    }
+  }
+
+}

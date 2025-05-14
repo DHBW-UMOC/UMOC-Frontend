@@ -1,40 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
-import { ContactContainerComponent } from "../contact-container/contact-container.component";
-import { ContactListSearchBarComponent } from "../contact-list-search-bar/contact-list-search-bar.component";
-import { ContactListHeaderComponent } from "../contact-list-header/contact-list-header.component";
-import { ContactListService } from "./contact-list.service";
-import { Contact } from "../model/contact.model";
-import { CommonModule } from "@angular/common";
-import { LoginService } from "../login/login.service";
+import { Component } from '@angular/core';
+import { ContactContainerComponent } from '../contact-container/contact-container.component';
+import { ContactService } from '../services/contact.service';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { LoginService } from '../services/login.service';
+import { MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { OwnContactComponent } from '../own-contact/own-contact.component';
+import { Contact } from '../model/contact.model';
+import { Group } from '../model/group.model';
 
 @Component({
   selector: 'app-contact-list',
-  standalone: true,
   imports: [
     ContactContainerComponent,
-    ContactListSearchBarComponent,
-    ContactListHeaderComponent,
     CommonModule,
-    HttpClientModule
+    NgOptimizedImage,
+    MatFabButton,
+    MatIcon,
+    MatMenuTrigger,
+    MatMenu,
+    MatIconButton,
+    OwnContactComponent
   ],
   providers: [LoginService],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss'
 })
-export class ContactListComponent implements OnInit {
-  protected contacts: Array<Contact> = [];
-
+export class ContactListComponent {
   constructor(
-    private contactService: ContactListService,
-    private loginService: LoginService,
-  ) { }
-
-  ngOnInit(): void {
-    this.contacts = this.contactService.fetchContacts(this.loginService.sessionID);
+    protected contactService: ContactService
+  ) {
   }
 
-  openChat(contact: Contact) {
-    this.contactService.selectContact(contact);
+  openChat(chat: Contact | Group) {
+    this.contactService.selectContact(chat);
+  }
+
+  selectOption(user_id: string, $option: string) {
+    this.contactService.changeContactStatus(user_id, $option);
+  }
+
+  selectOptionGroup(contact: Contact | Group, $event: string) {
+    if ($event == 'edit') {
+      this.contactService.showInfoOf.set(contact);
+    } else if ($event == 'leave') {
+      this.contactService.leaveGroup(contact.contact_id);
+    }
   }
 }

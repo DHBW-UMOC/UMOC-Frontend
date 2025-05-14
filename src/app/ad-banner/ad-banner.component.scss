@@ -1,0 +1,50 @@
+.ad-banner {
+    height: 100%;
+    // width: 100%;
+    width: 15vw;
+    padding-left: 5%;
+    padding-right: 5%;
+
+    .ad-banner-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+
+        .ad-banner-gif {
+            width: 100%;
+            height: auto;
+        }
+    
+        .ad-banner-text {
+            font: var(--mat-sys-headline-large);
+            animation: rainbow-text 3s linear infinite;
+            background: linear-gradient(
+                90deg,
+                #ff0000,
+                #ff9900,
+                #ffff00,
+                #33ff00,
+                #00ffff,
+                #3300ff,
+                #ff00cc,
+                #ff0000
+            );
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    
+        @keyframes rainbow-text {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+    }
+}

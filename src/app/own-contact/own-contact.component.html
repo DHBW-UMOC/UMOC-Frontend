@@ -1,0 +1,8 @@
+<div class="own-contact-container" (click)="selectSelf()">
+  @if (this.contactservice.self()) {
+    <div class="own-contact-container-image">
+      <img [ngSrc]="contactservice.self()?.picture_url!" width="58" height="58" alt="UMOCUS"/>
+    </div>
+    <div class="own-contact-container-name">{{contactservice.self()?.name!}}</div>
+  }
+</div>
