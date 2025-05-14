@@ -9,5 +9,5 @@
     placeholder="Nachricht schreiben"
     (keydown)="onKeydown($event)"
     rows="1"></textarea>
-  <button type="submit" [disabled]="!messageInput.value.trim()">&#10146;</button>
+  <button type="submit" [disabled]="!messageInput.value.trimStart()">&#10146;</button>
 </form>

@@ -26,7 +26,7 @@ export class ChatInputComponent {
     if (event.key === 'Enter') {
       if (!event.shiftKey) {
         event.preventDefault();
-        if (this.messageInput.nativeElement.value.trim()) {
+        if (this.messageInput.nativeElement.value.trimStart()) {
           this.saveMessage(this.messageInput.nativeElement.value);
           this.messageInput.nativeElement.value = '';
         }
@@ -37,7 +37,7 @@ export class ChatInputComponent {
   saveMessage(messageContent: string) {
     this.chatService.saveMessage(
       this.recipientID,
-      messageContent.trim()
+      messageContent.trimStart().trimEnd()
     ).pipe(
       take(1),
       catchError(() => {
