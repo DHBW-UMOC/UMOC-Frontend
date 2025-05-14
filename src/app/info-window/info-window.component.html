@@ -2,7 +2,7 @@
   <div class="info-window-container">
     @if (contactService.showInfoOf(); as chat) {
       <img [ngSrc]="chat.picture_url" width="116" height="116" alt="{{isGroup(chat) ? 'Group' : 'Contact'}} image">
-      <mat-card appearance="outlined">
+      <mat-card appearance="raised">
         <mat-card-header> 
           <div class="name-container">
             @if (isEditing) {
@@ -25,18 +25,31 @@
             }
           </div>
         </mat-card-content>
+        @if (isGroup(chat)) {
+            <mat-card-actions>
+              <button mat-fab color="primary" class="fab-button" aria-label="Gruppe Löschen">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-card-actions>
+          }
       </mat-card>
       
       @if (isGroup(chat)) {
-        <button mat-fab color="primary" class="fab-button" aria-label="Gruppe Löschen">
-          <mat-icon>delete</mat-icon>
-        </button>
-        @for (member of chat.members; track member.user_id) {
-          <app-member-container [member]="member"/>
-        }
-        <button mat-fab color="primary" class="fab-button" aria-label="Mitglied hinzufügen">
-          <mat-icon>add</mat-icon>
-        </button>
+        <mat-card appearance="raised">
+          <mat-card-header>
+            <p>Members</p>
+          </mat-card-header>
+          <mat-card-content>
+            @for (member of chat.members; track member.user_id) {
+              <app-member-container [member]="member"/>
+            }
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-fab color="primary" class="fab-button" aria-label="Mitglied hinzufügen">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
       }
     }
   </div>

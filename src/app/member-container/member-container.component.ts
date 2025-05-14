@@ -4,6 +4,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { MatButtonToggle } from '@angular/material/button-toggle';
 import { MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-member-container',
@@ -11,7 +12,8 @@ import { MatIcon } from '@angular/material/icon';
     NgOptimizedImage,
     MatButtonToggle,
     MatFabButton,
-    MatIcon
+    MatIcon, 
+    MatCardModule
   ],
   templateUrl: './member-container.component.html',
   styleUrl: './member-container.component.scss'
