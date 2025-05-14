@@ -49,10 +49,11 @@
   .message-sender {
     margin-bottom: 4px;
     font-weight: bold;
+    font: var(--mat-sys-title-medium);
   }
 
   .message-timestamp {
-    font-size: 0.7em;
+    font: var(--mat-sys-body-small);
     color: var(--mat-sys-on-primary-container);
     text-align: right;
     margin-top: 5px;
@@ -63,4 +64,5 @@
   text-align: center;
   padding: 20px;
   color: #888;
+  font: var(--mat-sys-body-large);
 }

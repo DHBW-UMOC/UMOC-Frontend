@@ -17,13 +17,13 @@
         margin-top: 8vh;
         // margin-bottom: auto;
         h1 {
-            font-size: 4rem;
+            font: var(--mat-sys-display-large);
             letter-spacing: 0.1em;
             color: var(--mat-sys-primary);
             margin: 0;
         }
         h2 {
-            font-size: 1.5rem;
+            font: var(--mat-sys-headline-medium);
             font-weight: 400;
             color: var(--mat-sys-on-surface);
             margin: 0.5rem 0 0 0;

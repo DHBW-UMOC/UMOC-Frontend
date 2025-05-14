@@ -16,14 +16,13 @@
   }
 
   p {
-
     &:first-of-type {
-      font-weight: 500;
+      font: var(--mat-sys-title-medium);
       min-width: 120px;
     }
 
     &:nth-of-type(2) {
-      color: #666;
+      font: var(--mat-sys-body-medium);
       min-width: 80px;
     }
   }
@@ -40,7 +39,7 @@
     line-height: 36px;
 
     mat-icon {
-      font-size: 18px;
+      font: var(--mat-sys-body-medium);
       line-height: 18px;
       height: 18px;
       width: 18px;

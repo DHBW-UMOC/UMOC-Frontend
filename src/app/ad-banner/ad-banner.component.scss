@@ -19,7 +19,7 @@
         }
     
         .ad-banner-text {
-            font-size: 2rem;
+            font: var(--mat-sys-headline-large);
             animation: rainbow-text 3s linear infinite;
             background: linear-gradient(
                 90deg,
