@@ -1,28 +1,33 @@
 <ng-container>
   <div class="info-window-container">
     @if (contactService.showInfoOf(); as chat) {
-      @if (isGroup(chat)) {
-        <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Group image">
-        <mat-card appearance="outlined">
-          <mat-card-header> 
-            <div class="name-container">
-              @if (isEditing) {
-                <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
-              } @else {
-                <p class="editable-text">{{chat.name}}</p>
-                <button mat-icon-button class="edit-button" (click)="startEditing()">
-                  <mat-icon>edit</mat-icon>
-                </button>
-              }
-            </div>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="contact-info">
-              <p>{{chat.contact_id}}</p>
+      <img [ngSrc]="chat.picture_url" width="116" height="116" alt="{{isGroup(chat) ? 'Group' : 'Contact'}} image">
+      <mat-card appearance="outlined">
+        <mat-card-header> 
+          <div class="name-container">
+            @if (isEditing) {
+              <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
+            } @else {
+              <p class="editable-text">{{chat.name}}</p>
+              <button mat-icon-button class="edit-button" (click)="startEditing()">
+                <mat-icon>edit</mat-icon>
+              </button>
+            }
+          </div>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="contact-info">
+            <p>{{chat.contact_id}}</p>
+            @if (isGroup(chat)) {
               <p>Erstellt am: {{chat.created_at.toString()}}</p>
-            </div>
-          </mat-card-content>
-        </mat-card>
+            } @else {
+              <p>Streak: {{chat.streak}}</p>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+      
+      @if (isGroup(chat)) {
         <button mat-fab color="primary" class="fab-button" aria-label="Gruppe Löschen">
           <mat-icon>delete</mat-icon>
         </button>
@@ -32,28 +37,6 @@
         <button mat-fab color="primary" class="fab-button" aria-label="Mitglied hinzufügen">
           <mat-icon>add</mat-icon>
         </button>
-      } @else if (isContact(chat)) {
-        <img [ngSrc]="chat.picture_url" width="116" height="116" alt="Contact image">
-        <mat-card>
-          <mat-card-header>
-            <div class="name-container">
-              @if (isEditing) {
-                <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
-              } @else {
-                <p class="editable-text">{{chat.name}}</p>
-                <button mat-icon-button class="edit-button" (click)="startEditing()">
-                  <mat-icon>edit</mat-icon>
-                </button>
-              }
-            </div>
-          </mat-card-header>
-          <mat-card-content>
-            <div class="contact-info">
-              <p>{{chat.contact_id}}</p>
-              <p>Streak: {{chat.streak}}</p>
-            </div>
-          </mat-card-content>
-        </mat-card>
       }
     }
   </div>
