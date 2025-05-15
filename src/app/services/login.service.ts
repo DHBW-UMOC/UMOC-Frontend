@@ -58,7 +58,10 @@ export class LoginService {
         this.loginInProgress.set(false);
         this.userLoggedIn.set(true);
       },
-      error: (err) => console.error('Login error: ', err)
+      error: (err) => {
+        this.loginInProgress.set(false);
+        console.error('Login error: ', err);
+      }
     });
   }
 
