@@ -1,4 +1,4 @@
-import { effect, Injectable, signal } from '@angular/core';
+import { effect, Injectable, linkedSignal, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
@@ -12,10 +12,26 @@ import { Member } from '../model/member.model';
 })
 export class ContactService {
   isLoading = signal(false);
-  selectedContact = signal<Contact | Group | null>(null);
   self = signal<Contact | null>(null);
   contacts = signal<(Contact | Group)[]>([]);
-  showInfoOf = signal<Contact | Group | null>(null);
+  selectedContact = linkedSignal<(Contact | Group)[], (Contact | Group | null)>({
+    source: this.contacts,
+    computation: (source, previous) => {
+      if (previous?.value){
+        return(source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
+      }
+      return null;
+    }
+  });
+  showInfoOf = linkedSignal<(Contact | Group)[], Contact | Group | null>({
+    source: this.contacts,
+    computation: (source, previous) => {
+      if (previous?.value){
+        return(source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
+      }
+      return null;
+    }
+  });
 
   constructor(
     private http: HttpClient,
