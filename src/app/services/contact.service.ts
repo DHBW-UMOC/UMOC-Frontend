@@ -147,9 +147,6 @@ export class ContactService {
   }
 
   changeGroup(action: string, group_id: string, new_value: string) {
-    console.log("action", action);
-    console.log("group", group_id);
-    console.log("new val", new_value);
     this.http.post(
       this.environmentService.getChangeGroupUrl(),
       {
@@ -173,7 +170,6 @@ export class ContactService {
   }
 
   removeMember(group_id: string, new_member_id: string) {
-    console.log("called");
     this.http.post(
       this.environmentService.getRemoveMemberUrl(),
       {

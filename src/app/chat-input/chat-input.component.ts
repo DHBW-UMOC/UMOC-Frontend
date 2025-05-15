@@ -60,16 +60,6 @@ export class ChatInputComponent implements AfterViewInit {
     this.chatService.saveMessage(
       this.recipientID,
       messageContent.trim()  // Changed from trimStart().trimEnd() to trim()
-    ).pipe(
-      take(1),
-      catchError(() => {
-        console.error('Error sending messages');
-        return of(null);
-      })
-    ).subscribe({
-      next: (() => {
-        console.log('Message sent successfully');
-      })
-    });
+    ).subscribe();
   }
 }
