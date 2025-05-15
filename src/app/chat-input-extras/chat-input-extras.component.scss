@@ -1,28 +1,15 @@
 .chat-input-extras {
-  display: flex;
-  align-items: center;
+    button {
+        border: none;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        padding: 0;
+        font-size: 30px;
+        color: var(--mat-sys-on-surface);
+        background-color: transparent;
 
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    margin-bottom: 10px;
-    padding: 8px;
-    width: 40px;
-    height: 40px;
-    color: var(--mat-sys-on-surface);
-    background-color: transparent;
-
-    mat-icon {
-      font-size: 24px;
-      height: 24px;
-      width: 24px;
-      line-height: 24px;
+        &:hover {
+            cursor: pointer;
+        }
     }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 }

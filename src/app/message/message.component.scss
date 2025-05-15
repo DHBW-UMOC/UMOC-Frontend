@@ -21,9 +21,9 @@
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
-    background: linear-gradient(135deg,var(--mat-sys-secondary-container),var(--mat-sys-secondary-container)) border-box;
+    background: linear-gradient(135deg,var(--mat-sys-tertiary-container),var(--mat-sys-secondary-container)) border-box;
     .message-text {
-      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-secondary-container));
+      background-image: linear-gradient(135deg, var(--mat-sys-on-tertiary-container), var(--mat-sys-on-secondary-container));
       color: transparent;
       background-clip: text;
     }
@@ -33,32 +33,19 @@
     --_p: 100%;
     border-bottom-right-radius: 0 0;
     place-self: end;
-    background: linear-gradient(135deg, var(--mat-sys-tertiary-container), var(--mat-sys-primary-container)) border-box;
+    background: linear-gradient(135deg, var(--mat-sys-secondary-container), var(--mat-sys-primary-container)) border-box;
     .message-text {
-      background-image: linear-gradient(135deg, var(--mat-sys-on-tertiary-container), var(--mat-sys-on-primary-container));
+      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-primary-container));
       color: transparent;
       background-clip: text;
     }
   }
 
-  .message-text {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  .message-sender {
-    margin-bottom: 4px;
-    font-weight: bold;
-    font: var(--mat-sys-title-medium);
-    margin-top: -10px;
-  }
-
   .message-timestamp {
-    font: var(--mat-sys-body-small);
+    font-size: 0.7em;
     color: var(--mat-sys-on-primary-container);
     text-align: right;
     margin-top: 5px;
-    margin-bottom: -10px;
   }
 }
 
@@ -66,5 +53,4 @@
   text-align: center;
   padding: 20px;
   color: #888;
-  font: var(--mat-sys-body-large);
 }

@@ -46,10 +46,6 @@ export class ContactService {
     this.showInfoOf.set(chat);
   }
 
-  hideInfo(): void {
-    this.showInfoOf.set(null);
-  }
-
   public fetchContacts(): Observable<Contact[]> {
     this.isLoading.set(true);
     return this.http.get<any>(

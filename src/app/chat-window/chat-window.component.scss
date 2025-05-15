@@ -1,48 +1,27 @@
 @use "../../styles.scss" as global;
 
 .chat-window-container {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  width: 50vw;
   height: 100%;
-  flex: 1;
+  border-bottom: 1px solid var(--mat-sys-outline);
+  border-right: 1px solid var(--mat-sys-outline);
+  border-left: 1px solid var(--mat-sys-outline);
+  border-top: 1px solid var(--mat-sys-outline);
 
-  .chat-window {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    height: 100%;
-  }
   .chat-messages {
     display: flex;
     flex: 1;
     overflow-y: auto;
     padding: 20px;
+    background: url('/assets/MessageBackTODO2.png') no-repeat top left;
     background-size: cover;
-    background-attachment: fixed;
     flex-direction: column;
     border-top: 2px solid var(--mat-sys-outline);
     border-bottom: 2px solid var(--mat-sys-outline);
+
     gap: 20px;
-
-    // Remove the default background from here
-    
-    &.alt-bg {
-      background-image: url('/assets/UMOCUS.gif');
-    }
-
-    &:not(.alt-bg):not(.loading) {
-      background-image: url('/assets/MessageBackTODO2.png');
-    }
-  
-    &.loading {
-      background: var(--mat-sys-surface);
-    }
-  }
-
-  .bg-toggle-btn {
-    position: absolute;
-    top: 70px;
-    left: 10px;
-    z-index: 100;
   }
 }

@@ -1,27 +1,15 @@
 .chat-input-emojis {
-  display: flex;
-  align-items: center;
-
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 8px;
-    color: var(--mat-sys-on-surface);
-    background-color: transparent;
-    align-self: flex-end;
-    margin-bottom: 8px;
-
-    mat-icon {
-      font-size: 24px;
-      height: 24px;
-      width: 24px;
-      line-height: 24px;
+    button {
+        border: none;
+        margin-bottom: 5px;
+        margin-top: 5px;
+        padding: 0;
+        font-size: 50px;
+        color: var(--mat-sys-on-surface);
+        background-color: transparent;
+    
+        &:hover {
+            cursor: pointer;
+        }
     }
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
 }

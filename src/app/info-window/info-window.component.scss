@@ -4,75 +4,10 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  width: 50vw;
   height: 100%;
-  gap: 16px;
-  background-color: var(--mat-sys-surface-container);
-  border: 1px solid var(--mat-sys-outline);
-  padding: 20px;
-  position: relative;
-
-  img {
-    border: 1px solid var(--mat-sys-outline);
-  }
-
-  .name-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .editable-text {
-    color: var(--mat-sys-on-surface);
-    font: var(--mat-sys-title-large);
-    color: var(--mat-sys-primary);
-  }
-
-  .edit-button {
-    color: var(--mat-sys-primary);
-    &:hover {
-      opacity: 0.8;
-      cursor: pointer;
-    }
-  }
-
-  input {
-    background-color: var(--mat-sys-surface-container-high);
-    border: 1px solid var(--mat-sys-outline);
-    padding: 8px;
-    border-radius: 4px;
-    color: var(--mat-sys-on-surface);
-    width: 80%;
-    max-width: 300px;
-  }
-
-  .fab-button {
-    margin: 8px 0;
-  }
-
-  .contact-info {
-    margin-top: 20px;
-    color: var(--mat-sys-on-surface);
-    font: var(--mat-sys-body-small);
-  }
-
-  mat-card {
-    width: 100%;
-  }
-
-  mat-button-toggle {
-    margin: 10px;
-    padding: 10px;
-  }
-
-  .close-button {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    color: var(--mat-sys-primary);
-    &:hover {
-      opacity: 0.8;
-      cursor: pointer;
-    }
-  }
+  border-bottom: 1px solid var(--mat-sys-outline);
+  border-right: 1px solid var(--mat-sys-outline);
+  border-left: 1px solid var(--mat-sys-outline);
+  border-top: 1px solid var(--mat-sys-outline);
 }

@@ -50,7 +50,6 @@ label {
   margin-bottom: 6px;
   font-weight: 500;
   color: var(--mat-sys-on-surface-variant, #666);
-  font: var(--mat-sys-title-medium);
 }
 
 input {
@@ -60,9 +59,9 @@ input {
   border-radius: 6px;
   background: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
+  font-size: 1rem;
   transition: border-color 0.2s;
   background-color: var(--mat-sys-surface-container-highest);
-  font: var(--mat-sys-body-large);
 }
 
 input.invalid {
@@ -79,13 +78,13 @@ button {
   border-radius: 6px;
   cursor: pointer;
   margin-top: 12px;
+  font-size: 1.1rem;
   font-weight: 500;
   transition: background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font: var(--mat-sys-title-large);
 }
 
 button:disabled {
@@ -96,8 +95,8 @@ button:disabled {
 
 .error-message {
   color: #ff5252;
+  font-size: 13px;
   margin-top: 5px;
-  font: var(--mat-sys-body-small);
 }
 
 .error-alert {
