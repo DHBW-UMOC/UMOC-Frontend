@@ -17,17 +17,17 @@ export class ContactService {
   selectedContact = linkedSignal<(Contact | Group)[], (Contact | Group | null)>({
     source: this.contacts,
     computation: (source, previous) => {
-      if (previous?.value){
-        return(source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
+      if (previous?.value) {
+        return (source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
       }
       return null;
     }
   });
-  showInfoOf = linkedSignal<(Contact | Group)[], Contact | Group | null>({
+  showInfoOf = linkedSignal<(Contact | Group)[], (Contact | Group | null)>({
     source: this.contacts,
     computation: (source, previous) => {
-      if (previous?.value){
-        return(source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
+      if (previous?.value) {
+        return (source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
       }
       return null;
     }
