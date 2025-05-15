@@ -3,14 +3,18 @@
     <mat-card-header>
       <img mat-card-avatar [ngSrc]="member!.picture_url" width="58" height="58" alt="img">
       <mat-card-title>
-        {{member!.name}}
+        {{ member!.name }}
       </mat-card-title>
     </mat-card-header>
-    <mat-card-actions>
-      <mat-button-toggle>Admin</mat-button-toggle>
-      <button mat-fab color="primary" class="fab-button" aria-label="Mitglied entfernen">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
+    @if (editable) {
+      <mat-card-actions>
+        <mat-button-toggle [checked]="isAdmin()" (change)="onToggleAdmin()" [disabled]="flipped" >Admin</mat-button-toggle>
+        <button mat-fab color="primary" class="fab-button" (click)="onRemoveMember()" aria-label="Mitglied entfernen">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-card-actions>
+    } @else {
+      {{ member!.role }}
+    }
   </mat-card>
 </div>

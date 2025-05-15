@@ -1,12 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ContactService } from '../services/contact.service';
 import { Group } from '../model/group.model';
 import { NgOptimizedImage } from '@angular/common';
 import { Contact } from '../model/contact.model';
 import { MemberContainerComponent } from '../member-container/member-container.component';
-import { MatFabButton } from '@angular/material/button';
+import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-info-window',
@@ -15,7 +15,8 @@ import {MatCardModule} from '@angular/material/card';
     MemberContainerComponent,
     MatFabButton,
     MatIcon,
-    MatCardModule
+    MatCardModule,
+    MatIconButton
   ],
   templateUrl: './info-window.component.html',
   styleUrl: './info-window.component.scss',
@@ -33,13 +34,12 @@ export class InfoWindowComponent {
     this.isEditing = true;
   }
 
-  finishEditing(newName: string): void {
+  finishEditing(contact_id: string, newName: string): void {
     this.isEditing = false;
     const currentChat = this.contactService.showInfoOf();
     if (currentChat && newName.trim() !== '') {
       if (this.isGroup(currentChat)) {
-        // Implement group name update logic here
-        // this.contactService.updateGroupName(currentChat.contact_id, newName);
+        this.contactService.changeGroup("name", contact_id, newName)
       } else if (this.isContact(currentChat)) {
         // Implement contact name update logic here
         // this.contactService.updateContactName(currentChat.contact_id, newName);
@@ -57,5 +57,26 @@ export class InfoWindowComponent {
 
   isGroup(obj: any): obj is Group {
     return obj && obj.is_group;
+  }
+
+  canEdit(): boolean {
+    const currentChat = this.contactService.showInfoOf();
+    if (this.isGroup(currentChat)) {
+      return currentChat.am_admin;
+    } else {
+      return currentChat!.contact_id == this.ownUserID;
+    }
+  }
+
+  onAdminChange($event: string, group_id: string, user_id: string) {
+    this.contactService.changeGroup($event, group_id, user_id);
+  }
+
+  onRemoveMember(group_id: string, user_id: string) {
+    this.contactService.removeMember(group_id, user_id);
+  }
+
+  deleteGroup(group_id: string) {
+    this.contactService.deleteGroup(group_id);
   }
 }

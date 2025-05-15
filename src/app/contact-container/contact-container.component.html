@@ -39,11 +39,11 @@
       </button>
     }
     @if (chat.status == 'blocked') {
-      <button mat-menu-item (click)='onOptionSelect("blocked")'>
+      <button mat-menu-item (click)='onOptionSelect("block")'>
         <span>Entblocken</span>
       </button>
     } @else {
-      <button mat-menu-item (click)='onOptionSelect("unblocked")'>
+      <button mat-menu-item (click)='onOptionSelect("unblock")'>
         <span>Blocken</span>
       </button>
     }

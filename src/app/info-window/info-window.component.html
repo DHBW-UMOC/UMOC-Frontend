@@ -6,52 +6,61 @@
     @if (contactService.showInfoOf(); as chat) {
       <img [ngSrc]="chat.picture_url" width="116" height="116" alt="{{isGroup(chat) ? 'Group' : 'Contact'}} image">
       <mat-card appearance="raised">
-        <mat-card-header> 
+        <mat-card-header>
           <div class="name-container">
             @if (isEditing) {
-              <input #nameInput [value]="chat.name" (blur)="finishEditing(nameInput.value)">
+              <input #nameInput [value]="chat.name" (keyup.enter)="finishEditing(chat.contact_id, nameInput.value)">
             } @else {
-              <p class="editable-text">{{chat.name}}</p>
-              <button mat-icon-button class="edit-button" (click)="startEditing()">
-                <mat-icon>edit</mat-icon>
-              </button>
+              <p class="editable-text">{{ chat.name }}</p>
+              @if (canEdit()) {
+                <button mat-icon-button class="edit-button" (click)="startEditing()">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              }
             }
           </div>
         </mat-card-header>
         <mat-card-content>
           <div class="contact-info">
-            <p>{{chat.contact_id}}</p>
+            <p>{{ chat.contact_id }}</p>
             @if (isGroup(chat)) {
-              <p>Erstellt am: {{chat.created_at.toString()}}</p>
+              <p>Erstellt am: {{ chat.created_at.toString() }}</p>
             } @else {
-              <p>Streak: {{chat.streak}}</p>
+              <p>Streak: {{ chat.streak }}</p>
             }
           </div>
         </mat-card-content>
-        @if (isGroup(chat)) {
-            <mat-card-actions>
-              <button mat-fab color="primary" class="fab-button" aria-label="Gruppe Löschen">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </mat-card-actions>
-          }
+        @if (isGroup(chat) && canEdit()) {
+          <mat-card-actions>
+            <button mat-fab color="primary" class="fab-button" (click)="deleteGroup(chat.contact_id)" aria-label="Gruppe Löschen">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        }
       </mat-card>
-      
+
       @if (isGroup(chat)) {
         <mat-card appearance="raised">
           <mat-card-header>
             <p>Members</p>
           </mat-card-header>
-          <mat-card-content >
+          <mat-card-content>
             @for (member of chat.members; track member.user_id) {
-              <app-member-container [member]="member"/>
+              <app-member-container
+                [member]="member"
+                [editable]="canEdit()"
+                (adminChange)="onAdminChange($event, chat.contact_id, member.user_id)"
+                (removeMember)="onRemoveMember(chat.contact_id, member.user_id)"
+              />
             }
           </mat-card-content>
-          <mat-card-actions>
-            <button mat-fab color="primary" class="fab-button" aria-label="Mitglied hinzufügen">
-              <mat-icon>add</mat-icon>
-            </button>
-          </mat-card-actions>
+          @if (canEdit()) {
+            <mat-card-actions>
+              <button mat-fab color="primary" class="fab-button" aria-label="Mitglied hinzufügen">
+                <mat-icon>add</mat-icon>
+              </button>
+            </mat-card-actions>
+          }
         </mat-card>
       }
     }

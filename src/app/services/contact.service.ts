@@ -74,7 +74,8 @@ export class ContactService {
               contact.name,
               contact.picture_url,
               new Date(contact.created_at),
-              members
+              members,
+              contact.am_admin
             );
           } else {
             return new Contact(
@@ -146,8 +147,11 @@ export class ContactService {
   }
 
   changeGroup(action: string, group_id: string, new_value: string) {
+    console.log("action", action);
+    console.log("group", group_id);
+    console.log("new val", new_value);
     this.http.post(
-      this.environmentService.getDeleteGroupUrl(),
+      this.environmentService.getChangeGroupUrl(),
       {
         'action': `${action}`,
         'group_id': `${group_id}`,
@@ -169,11 +173,12 @@ export class ContactService {
   }
 
   removeMember(group_id: string, new_member_id: string) {
+    console.log("called");
     this.http.post(
       this.environmentService.getRemoveMemberUrl(),
       {
         'group_id': `${group_id}`,
-        'new_member_id': `${new_member_id}`
+        'member_id': `${new_member_id}`
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe();
