@@ -1,27 +1,25 @@
-@use "../../styles.scss" as global;
+@import "../../styles.scss";
 
 .chat-window-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  width: 50vw;
-  height: 100%;
-  border-bottom: 1px solid var(--mat-sys-outline);
-  border-right: 1px solid var(--mat-sys-outline);
-  border-left: 1px solid var(--mat-sys-outline);
-  border-top: 1px solid var(--mat-sys-outline);
-
-  .chat-messages {
-    display: flex;
     flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    background: url('/assets/MessageBackTODO2.png') no-repeat top left;
-    background-size: cover;
+    display: flex;
     flex-direction: column;
-    border-top: 2px solid var(--mat-sys-outline);
-    border-bottom: 2px solid var(--mat-sys-outline);
-
-    gap: 20px;
+    width: 55vw;
+    height: 90vh;
+  
+    .chat-header {
+      padding: 15px;
+      background-color: $chat-window-header;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  
+    .chat-messages {
+      display: flex;
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      background-color: $chat-window-background;
+      flex-direction: column-reverse;
+    }
   }
-}

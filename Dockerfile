@@ -1,7 +1,7 @@
-FROM node:22 AS build
+FROM node:20 AS build
 WORKDIR /app
 COPY . .
-RUN npm install && npm run build -- --configuration=production
+RUN npm install && npm run build --prod
 
 FROM nginx:alpine
 COPY --from=build /app/dist/umoc-frontend/browser/ /usr/share/nginx/html/

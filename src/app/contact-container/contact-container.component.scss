@@ -1,78 +1,27 @@
-@use "../../styles.scss" as global;
+@import "../../styles.scss";  
 
 .contact-container-details {
-  display: grid;
-  grid-template-columns: 50px 1fr 50px;
-  gap: 10px;
-  // padding: 10px;
-  width: 100%;
-  border-bottom: 1px solid var(--mat-sys-outline-variant);
-
-
-  &:hover {
-    background-color: var(--mat-sys-surface-container-high);
+    display: flex;
+    align-items: center;
+    padding: 10px;
     cursor: pointer;
-    button[mat-icon-button] {
-      visibility: visible;
-      opacity: 1;
-    }
-  }
 
-  > div:first-child {
-    display: contents;
+    &:hover {
+      background-color: $contact-list-hover;
+    }
 
     .contact-container-image {
-      aspect-ratio: 1 / 1;
+      width: 50px;
       height: 50px;
       border-radius: 50%;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      margin-left: 5px;
-      margin-right: 5px;
-
-      img {
-        border-radius: 50%;
-      }
-    }
-    
-    .contact-container-informations {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      height: 100%;
+      background-color: $contact-container-default-image;
+      margin-right: 10px;
     }
 
-    .contact-container-name {
+    .contact-name {
+      font-weight: bold;
       overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
-    }
-
-    .contact-container-status {
-      display: block;
-      font-size: 0.8rem;
-      color: #888;
-      margin-top: 2px;
-      overflow: hidden;
       text-overflow: ellipsis;
-      white-space: nowrap;
     }
   }
-
-  .contact-container-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-  }
-
-  button[mat-icon-button] {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.2s, opacity 0.2s;
-    align-self: center;
-  }
-}

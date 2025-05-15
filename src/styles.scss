@@ -1,20 +1,39 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+/* You can add global styles to this file, and also import other style files */
 
-html {
-  color-scheme: dark;
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$violet-palette
-    ),
-    typography: Roboto,
-    density: 0
-  ));
-}
+// Was ich da mach is warscheinlich bad practice und so, aber juckt...
 
-// I have no Idea why this is necessary, but this prevents the contact-list from being 1px taller than chat-window-component for whatever reasn -A
-* {
-  box-sizing: border-box;
-}
+// APP.component
+$global-background-top: #424242;
+$global-background-bottom: #a6a6a6;
+
+// CHAT-INPUT.component
+$chat-input-background: #f1f1f1;
+$chat-input-border: #f1f1f1;
+$chat-input-send-button-normal: #ff9999;
+$chat-input-send-button-hover: #ff3030;
+
+// CHAT-WINDOW.component
+$chat-window-background: #dddddd;
+$chat-window-header: #f1f1f1;
+
+// CONTACT-LIST.component
+$contact-list-background: #fafafa;
+$contact-list-border: #ccc;
+
+// CONTACT-LIST-HEADER.component
+$contact-list-header-font: #000000;
+
+// CONTACT-CONTAINER
+$contact-list-hover: #eeeeee;
+$contact-container-default-image: #aaa;
+
+// CONTACT-LIST-SEARCH-BAR.component
+$contact-list-search-bar-background: #fafafa;
+$contact-list-search-bar-border: #ccc;
+
+// MESSAGE.component
+$message-sent-background: #ffe1e1;
+$message-received-background: #fafafa;
+$message-box-shadow: rgba(0, 0, 0, 0.1);
+
+$white: #f0f0f0;

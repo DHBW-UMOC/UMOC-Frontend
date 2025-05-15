@@ -1,9 +1,8 @@
-@use "../../styles.scss" as global;
+@import "../../styles.scss";
 
 .chat-input-container {
     display: flex;
-    background-color: var(--mat-sys-surface-container-high);
-    border-width: 0;
+    background-color: $chat-input-background;
   
     input {
       flex: 1;
@@ -13,12 +12,8 @@
       margin-left: 5px;
       margin-top: 10px;
       margin-bottom: 10px;
-      border: none;
-      background-color: var(--mat-sys-surface-container-highest);
-      color: var(--mat-sys-on-surface);
+      border: 1px solid $chat-input-border;
       outline: none;
-
-      box-shadow: var(--mat-sys-level2);
     }
   
     button {
@@ -28,8 +23,8 @@
       margin-right: 15px;
       border: none;
       border-radius: 4px;
+      cursor: pointer;
       outline: none;
-      color: var(--mat-sys-on-surface);
   
       &:hover {
         cursor: pointer;
