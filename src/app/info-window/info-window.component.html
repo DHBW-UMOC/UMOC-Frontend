@@ -75,6 +75,12 @@
           </mat-card-content>
         </mat-card>
       }
+
+      @if (isContact(chat) && canEdit()) {
+        <button mat-fab (click)="logout()" color="primary" class="logout-button" aria-label="Ausloggen">
+          <mat-icon>logout</mat-icon>
+        </button>
+      }
     }
   </div>
 </ng-container>

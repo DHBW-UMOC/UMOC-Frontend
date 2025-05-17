@@ -8,6 +8,7 @@ import { MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ContactContainerComponent } from '../contact-container/contact-container.component';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-info-window',
@@ -30,8 +31,12 @@ export class InfoWindowComponent {
   ownUserID: string = '';
   isEditing: boolean = false;
 
-  constructor(protected contactService: ContactService) {
+  constructor(protected contactService: ContactService, private loginService: LoginService) {
     this.ownUserID = this.contactService.getOwnUserID();
+  }
+
+  logout() {
+    this.loginService.logout();
   }
 
   startEditing(): void {

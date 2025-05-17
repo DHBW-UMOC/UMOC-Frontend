@@ -22,7 +22,11 @@ export class OwnContactComponent {
   }
 
   selectSelf(ownContact: Contact | Group) {
-    this.contactservice.selectContactToEdit(ownContact);
+    if (this.contactservice.showInfoOf()?.contact_id == this.contactservice.self()?.contact_id) {
+      this.contactservice.showInfoOf.set(null);
+    } else {
+      this.contactservice.selectContactToEdit(ownContact);
+    }
   }
 
   ominousMessage() {

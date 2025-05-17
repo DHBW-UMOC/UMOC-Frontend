@@ -23,13 +23,13 @@
   }
 
   .editable-text {
-    color: var(--mat-sys-on-surface);
     font: var(--mat-sys-title-large);
     color: var(--mat-sys-primary);
   }
 
   .edit-button {
     color: var(--mat-sys-primary);
+
     &:hover {
       opacity: 0.8;
       cursor: pointer;
@@ -70,6 +70,19 @@
     top: 10px;
     left: 10px;
     color: var(--mat-sys-primary);
+
+    &:hover {
+      opacity: 0.8;
+      cursor: pointer;
+    }
+  }
+
+  .logout-button {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: var(--mat-sys-primary);
+
     &:hover {
       opacity: 0.8;
       cursor: pointer;

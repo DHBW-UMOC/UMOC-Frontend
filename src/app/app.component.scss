@@ -1,19 +1,30 @@
 @use "../styles.scss" as global;
 
-// Irgendwas aus Stackoverflow um Margin in Angular zu removen.
-::ng-deep * { 
-    margin: 0;
-    padding: 0;
+::ng-deep * {
+  margin: 0;
+  padding: 0;
 }
 
 .app-background {
-    background-color: var(--mat-sys-surface);
-    // background:
-    //     linear-gradient(217deg, rgba(153, 0, 153, 0.8), rgba(153, 0, 153, 0) 70.71%),
-    //     linear-gradient(127deg, rgba(76, 0, 153, 0.8), rgba(76, 0, 153, 0) 70.71%),
-    //     linear-gradient(336deg, rgba(0, 61, 153, 1), rgba(0, 61, 153, 0) 70.71%);
-    .app-container {
-        display: flex;
-        height: 100vh;
-    }
+  background-color: var(--mat-sys-surface);
+
+  .app-container {
+    display: flex;
+    height: 100vh;
+  }
+}
+
+.chat-area {
+  position: relative;
+  flex: 1;
+  display: flex;
+}
+
+app-info-window {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  z-index: 10;
 }
