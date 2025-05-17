@@ -3,9 +3,8 @@ import { ContactContainerComponent } from '../contact-container/contact-containe
 import { ContactService } from '../services/contact.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LoginService } from '../services/login.service';
-import { MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatFabButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { OwnContactComponent } from '../own-contact/own-contact.component';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
@@ -18,9 +17,6 @@ import { Group } from '../model/group.model';
     NgOptimizedImage,
     MatFabButton,
     MatIcon,
-    MatMenuTrigger,
-    MatMenu,
-    MatIconButton,
     OwnContactComponent
   ],
   providers: [LoginService],
@@ -85,5 +81,9 @@ export class ContactListComponent {
       this.filteredContacts.set([]);
       this.searchResults.set([]);
     }
+  }
+
+  createNewGroup() {
+    this.contactService.createGroup();
   }
 }

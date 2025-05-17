@@ -219,4 +219,17 @@ export class ContactService {
       })
     );
   }
+
+  createGroup() {
+    // this.http.post(
+    //   this.environmentService.getCreateGroupUrl(),
+    //   {
+    //     group_name: "Neue Gruppe",
+    //     group_pic: "https://cdn6.aptoide.com/imgs/1/2/2/1221bc0bdd2354b42b293317ff2adbcf_icon.png",
+    //     group_members: [`${this.self()?.contact_id}`, `00000000-0000-0000-0000-000000000005`]
+    //   },
+    //   {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    // ).subscribe();
+    console.error("not yet");
+  }
 }

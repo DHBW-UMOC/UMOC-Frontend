@@ -7,7 +7,7 @@
       <div class="search-container">
         <input type="text" placeholder="Kontakte oder Gruppen suchen" #searchBox
                (keyup)="searchContacts(searchBox.value)"/>
-        <button mat-fab [matMenuTriggerFor]="menu" color="primary" class="fab-button" aria-label="Chats hinzufügen">
+        <button mat-fab (click)="createNewGroup()" color="primary" class="fab-button" aria-label="Gruppe erstellen">
           <mat-icon>add</mat-icon>
         </button>
       </div>
@@ -59,12 +59,3 @@
   </div>
   <app-own-contact/>
 </div>
-
-<mat-menu #menu="matMenu">
-  <button mat-icon-button>
-    <mat-icon>account_circle</mat-icon>
-  </button>
-  <button mat-icon-button>
-    <mat-icon>group</mat-icon>
-  </button>
-</mat-menu>
