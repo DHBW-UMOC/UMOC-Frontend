@@ -32,7 +32,8 @@
         </mat-card-content>
         @if (isGroup(chat) && canEdit()) {
           <mat-card-actions>
-            <button mat-fab color="primary" class="fab-button" (click)="deleteGroup(chat.contact_id)" aria-label="Gruppe Löschen">
+            <button mat-fab color="primary" class="fab-button" (click)="deleteGroup(chat.contact_id)"
+                    aria-label="Gruppe Löschen">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card-actions>
@@ -56,11 +57,22 @@
           </mat-card-content>
           @if (canEdit()) {
             <mat-card-actions>
-              <button mat-fab color="primary" class="fab-button" aria-label="Mitglied hinzufügen">
-                <mat-icon>add</mat-icon>
-              </button>
+              <input type="text" placeholder="Neue Member suchen" #searchBox
+                     (keyup)="searchNewMembers(searchBox.value)"/>
             </mat-card-actions>
           }
+          <mat-card-content>
+            @if (this.searchResults().length > 0) {
+              <p>Neue Member:</p>
+              @for (newMember of this.searchResults(); track newMember.contact_id) {
+                <contact-container
+                  [chat]="newMember"
+                  [known]="false"
+                  (contactClick)="addMember($event)"
+                />
+              }
+            }
+          </mat-card-content>
         </mat-card>
       }
     }

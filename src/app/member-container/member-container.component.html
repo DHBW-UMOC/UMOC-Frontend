@@ -8,8 +8,10 @@
     </mat-card-header>
     @if (editable) {
       <mat-card-actions>
-        <mat-button-toggle [checked]="isAdmin()" (change)="onToggleAdmin()" [disabled]="flipped" >Admin</mat-button-toggle>
-        <button mat-fab color="primary" class="fab-button" (click)="onRemoveMember()" aria-label="Mitglied entfernen">
+        <mat-button-toggle [checked]="isAdmin()" (change)="onToggleAdmin()" [disabled]="flipped">Admin
+        </mat-button-toggle>
+        <button mat-fab color="primary" class="fab-button" (click)="onRemoveMember()" aria-label="Mitglied entfernen"
+                [disabled]="pressed">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-card-actions>

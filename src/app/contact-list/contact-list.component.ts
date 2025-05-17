@@ -74,7 +74,7 @@ export class ContactListComponent {
             contact => !existingContactIds.has(contact.contact_id)
           );
 
-          this.searchResults.set(uniqueContacts);//hier
+          this.searchResults.set(uniqueContacts);
         },
         () => {
           console.error('error searching contacts');

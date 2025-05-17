@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
     NgOptimizedImage,
     MatButtonToggle,
     MatFabButton,
-    MatIcon, 
+    MatIcon,
     MatCardModule
   ],
   templateUrl: './member-container.component.html',
@@ -25,6 +25,7 @@ export class MemberContainerComponent {
   @Output() removeMember = new EventEmitter();
 
   protected flipped: boolean = false;
+  protected pressed: boolean = false;
 
   isAdmin(): boolean {
     return this.member?.role === 'admin';
@@ -35,7 +36,8 @@ export class MemberContainerComponent {
     this.flipped = true;
   }
 
-  onRemoveMember():void {
-    this.removeMember.emit()
+  onRemoveMember(): void {
+    this.removeMember.emit();
+    this.pressed = true;
   }
 }
