@@ -1,3 +1,4 @@
+@if (known) {
 <div class="contact-container-details">
   <div (click)="onContactClick()">
     <div class="contact-container-image">
@@ -18,8 +19,6 @@
     </div>
   </div>
 </div>
-
-
 <mat-menu #menu="matMenu">
   @if (isGroup(chat)) {
     <button mat-menu-item (click)='onOptionSelectGroup("edit")'>
@@ -49,3 +48,15 @@
     }
   }
 </mat-menu>
+} @else {
+  <div class="contact-container-details">
+    <div (click)="onContactClick()">
+      <div class="contact-container-image">
+        <img [ngSrc]="chat.picture_url" width="50" height="50" alt=""/>
+      </div>
+      <div class="contact-container-informations">
+        <div class="contact-container-name">{{ chat.name }}</div>
+      </div>
+    </div>
+  </div>
+}

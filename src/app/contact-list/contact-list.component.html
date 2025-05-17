@@ -5,7 +5,8 @@
     </div>
     <div class="contact-list-search-add">
       <div class="search-container">
-        <input type="text" placeholder="Kontakte oder Gruppen suchen (nicht implementiert)" />
+        <input type="text" placeholder="Kontakte oder Gruppen suchen" #searchBox
+               (keyup)="searchContacts(searchBox.value)"/>
         <button mat-fab [matMenuTriggerFor]="menu" color="primary" class="fab-button" aria-label="Chats hinzufügen">
           <mat-icon>add</mat-icon>
         </button>
@@ -13,23 +14,47 @@
     </div>
   </ng-container>
   <div class="contact-list">
-    @if (this.contactService.contacts().length > 0 && !this.contactService.isLoading()) {
-      @for (contact of this.contactService.contacts(); track contact.contact_id) {
-        <contact-container
-          [chat]="contact"
-          (contactClick)="openChat($event)"
-          (optionSelect)="selectOption(contact.contact_id, $event)"
-          (optionSelectGroup)="selectOptionGroup(contact, $event)"
-        ></contact-container>
+    @if (!this.contactService.isLoading()) {
+      @if (searchBox.value && this.filteredContacts().length > 0) {
+        @for (contact of this.filteredContacts(); track contact.contact_id) {
+          <contact-container
+            [chat]="contact"
+            [known]="true"
+            (contactClick)="openChat($event)"
+            (optionSelect)="selectOption(contact.contact_id, $event)"
+            (optionSelectGroup)="selectOptionGroup(contact, $event)"
+          />
+        }
+      } @else if (!searchBox.value && this.contactService.contacts().length > 0) {
+        @for (contact of this.contactService.contacts(); track contact.contact_id) {
+          <contact-container
+            [chat]="contact"
+            [known]="true"
+            (contactClick)="openChat($event)"
+            (optionSelect)="selectOption(contact.contact_id, $event)"
+            (optionSelectGroup)="selectOptionGroup(contact, $event)"
+          />
+        }
+      } @else {
+        <ng-container>
+          <p>Keine vorhandenen Chats</p>
+        </ng-container>
       }
-    } @else if (this.contactService.isLoading()) {
+    } @else {
       <ng-container>
         <img ngSrc="assets/UMOCUS.gif" width="383" height="480" alt="Loading..."/>
       </ng-container>
-    } @else {
-      <ng-container>
-        <h2>No contacts found</h2>
-      </ng-container>
+    }
+
+    @if (this.searchResults().length > 0) {
+      <p>Neue Chats:</p>
+      @for (newContact of this.searchResults(); track newContact.contact_id) {
+        <contact-container
+          [chat]="newContact"
+          [known]="false"
+          (contactClick)="openChat($event)"
+        />
+      }
     }
   </div>
   <app-own-contact/>

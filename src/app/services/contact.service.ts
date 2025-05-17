@@ -1,5 +1,5 @@
 import { effect, Injectable, linkedSignal, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
 import { finalize, map, Observable } from 'rxjs';
@@ -194,5 +194,29 @@ export class ContactService {
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe();
+  }
+
+  fetchNewContacts(newContactName: string): Observable<Contact[]> {
+    return this.http.get<any>(
+      this.environmentService.getGetAllUsersUrl(),
+      {
+        headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`}),
+        params: new HttpParams().append('searchBy', newContactName)
+      }
+    ).pipe(
+      map((response: any) => {
+        const contactsData = Array.isArray(response) ? response : (response.users ? response.users : []);
+        return contactsData.map((contact: any) => {
+          return new Contact(
+            false,
+            contact.user_id,
+            contact.username,
+            contact.profile_picture,
+            '',
+            0
+          );
+        });
+      })
+    );
   }
 }

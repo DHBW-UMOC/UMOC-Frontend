@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, signal, ViewChild } from '@angular/core';
 import { ContactContainerComponent } from '../contact-container/contact-container.component';
 import { ContactService } from '../services/contact.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
@@ -28,6 +28,10 @@ import { Group } from '../model/group.model';
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
+  @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
+  searchResults = signal<Contact[]>([]);
+  filteredContacts = signal<(Contact | Group)[]>([]);
+
   constructor(
     protected contactService: ContactService
   ) {
@@ -35,6 +39,10 @@ export class ContactListComponent {
 
   openChat(chat: Contact | Group) {
     this.contactService.selectContact(chat);
+    if (this.searchBox) {
+      this.searchBox.nativeElement.value = '';
+      this.searchResults.set([]);
+    }
   }
 
   selectOption(user_id: string, $option: string) {
@@ -46,6 +54,36 @@ export class ContactListComponent {
       this.contactService.showInfoOf.set(contact);
     } else if ($event == 'leave') {
       this.contactService.leaveGroup(contact.contact_id);
+    }
+  }
+
+  searchContacts(searchTerm: string) {
+    if (searchTerm && searchTerm.length > 0) {
+      const term = searchTerm.toLowerCase();
+      this.filteredContacts.set(
+        this.contactService.contacts().filter(contact =>
+          contact.name.toLowerCase().startsWith(term)
+        )
+      );
+      this.contactService.fetchNewContacts(searchTerm).subscribe(
+        (contacts) => {
+          const existingContactIds = new Set(
+            this.contactService.contacts().map(contact => contact.contact_id)
+          );
+          const uniqueContacts = contacts.filter(
+            contact => !existingContactIds.has(contact.contact_id)
+          );
+
+          this.searchResults.set(uniqueContacts);//hier
+        },
+        () => {
+          console.error('error searching contacts');
+          this.searchResults.set([]);
+        }
+      );
+    } else {
+      this.filteredContacts.set([]);
+      this.searchResults.set([]);
     }
   }
 }

@@ -26,16 +26,17 @@ export class EnvironmentService {
     return `${this.apiUrl}/getChats`;
   }
 
-  getAddContactUrl(): string {
-    return `${this.apiUrl}/addContact`;
-  }
-
   getChangeContactUrl(): string {
     return `${this.apiUrl}/changeContact`;
   }
 
   getGetOwnProfileUrl() {
     return `${this.apiUrl}/getOwnProfile`;
+  }
+
+
+  getGetAllUsersUrl() {
+    return `${this.apiUrl}/getAllUsers`;
   }
 
   // Messaging Endpoints
@@ -66,10 +67,6 @@ export class EnvironmentService {
 
   getRemoveMemberUrl(): string {
     return `${this.apiUrl}/removeMember`;
-  }
-
-  getGetGroupMembersUrl(): string {
-    return `${this.apiUrl}/getGroupMembers`;
   }
 
   getLeaveGroupUrl() {
