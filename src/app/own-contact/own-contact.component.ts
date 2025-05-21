@@ -5,6 +5,7 @@ import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Group } from '../model/group.model';
 import { Contact } from '../model/contact.model';
+import { UmocService } from '../services/umoc.service';
 
 @Component({
   selector: 'app-own-contact',
@@ -18,7 +19,7 @@ import { Contact } from '../model/contact.model';
 })
 export class OwnContactComponent {
 
-  constructor(protected contactservice: ContactService) {
+  constructor(protected contactservice: ContactService, private umocService: UmocService) {
   }
 
   selectSelf(ownContact: Contact | Group) {
@@ -29,7 +30,7 @@ export class OwnContactComponent {
     }
   }
 
-  ominousMessage() {
-    console.log('soon ...');
+  toggleShop() {
+    this.umocService.toggleShop()
   }
 }

@@ -8,6 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { OwnContactComponent } from '../own-contact/own-contact.component';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
+import { UmocService } from '../services/umoc.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -29,12 +30,14 @@ export class ContactListComponent {
   filteredContacts = signal<(Contact | Group)[]>([]);
 
   constructor(
-    protected contactService: ContactService
+    protected contactService: ContactService,
+    private umocService: UmocService
   ) {
   }
 
   openChat(chat: Contact | Group) {
     this.contactService.selectContact(chat);
+    this.umocService.showShop.set(false);
     if (this.searchBox) {
       this.searchBox.nativeElement.value = '';
       this.searchResults.set([]);

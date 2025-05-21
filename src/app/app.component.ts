@@ -7,21 +7,18 @@ import { ContactService } from './services/contact.service';
 import { ChatPlaceholderComponent } from './chat-placeholder/chat-placeholder.component';
 import { ChatWindowComponent } from './chat-window/chat-window.component';
 import { InfoWindowComponent } from './info-window/info-window.component';
+import { UmocService } from './services/umoc.service';
+import { UmocShopComponent } from './umoc-shop/umoc-shop.component';
 
 @Component({
   selector: 'app-root',
-  imports: [ContactListComponent, LoginComponent, AdBannerComponent, ChatPlaceholderComponent, ChatWindowComponent, InfoWindowComponent],
+  imports: [ContactListComponent, LoginComponent, AdBannerComponent, ChatPlaceholderComponent, ChatWindowComponent, InfoWindowComponent, UmocShopComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'UMOC-Frontend';
-  adBannerHidden = true;
 
-  constructor(protected loginService: LoginService, protected contactService: ContactService) {
-  }
-
-  toggleAdBanner() {
-    this.adBannerHidden = !this.adBannerHidden;
+  constructor(protected loginService: LoginService, protected contactService: ContactService, protected umocService: UmocService) {
   }
 }

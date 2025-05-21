@@ -6,6 +6,7 @@ import { Message } from '../model/message.model';
 import { ChatService } from '../services/chat.service';
 import { ContactService } from '../services/contact.service';
 import { ChatHeaderComponent } from '../chat-header/chat-header.component';
+import { UmocService } from '../services/umoc.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -17,14 +18,11 @@ export class ChatWindowComponent {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   protected currentUser: string = this.contactService.getOwnUserID();
   protected messages = signal<Message[]>([]);
-  protected useAltBackground = false;
 
-  toggleBackground() {
-    this.useAltBackground = !this.useAltBackground;
-  }
-
-  constructor(protected chatService: ChatService,
-              protected contactService: ContactService
+  constructor(
+    protected chatService: ChatService,
+    protected contactService: ContactService,
+    protected umocService: UmocService
   ) {
     effect(() => {
         if (!this.contactService.selectedContact()) return;
@@ -41,6 +39,7 @@ export class ChatWindowComponent {
   private scrollToBottom(): void {
     try {
       this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+    } catch (err) {
+    }
   }
 }

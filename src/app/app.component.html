@@ -1,11 +1,7 @@
 <div class="app-background">
-  <button style="position: absolute; top: 40px; left: 10px;" (click)="toggleAdBanner()">
-    {{ adBannerHidden ? 'Show Ad Banner' : 'Hide Ad Banner' }}
-  </button>
-
-  <div class="app-container">
+    <div class="app-container">
     <app-ad-banner
-      [hidden]="adBannerHidden"
+      [hidden]="!this.umocService.showAdBanners()"
       [imageSrc]="'assets/UMOCUS-ad.gif'"
       [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
       [altText]="'AD'"
@@ -14,7 +10,9 @@
     @if (this.loginService.userLoggedIn()) {
       <app-contact-list/>
       <div class="chat-area">
-        @if (this.contactService.selectedContact()) {
+        @if (this.umocService.showShop()){
+          <app-umoc-shop/>
+        }@else if (this.contactService.selectedContact()) {
           <app-chat-window/>
         } @else {
           <app-chat-placeholder/>
@@ -27,7 +25,7 @@
       <login-field/>
     }
     <app-ad-banner
-      [hidden]="adBannerHidden"
+      [hidden]="!this.umocService.showAdBanners()"
       [imageSrc]="'https://gifdb.com/images/high/gummibar-gummy-bear-break-dance-fortnite-dance-7lonn1izgkap3jj1.gif'"
       [videoSrc]="'https://cdn.revid.ai/backgrounds/fortnite/video_lowres_4.mp4'"
     />

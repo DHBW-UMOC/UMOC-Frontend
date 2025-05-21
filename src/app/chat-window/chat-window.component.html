@@ -1,14 +1,13 @@
 <ng-container>
   <div class="chat-window-container">
-    <button class="bg-toggle-btn" (click)="toggleBackground()">
-      {{ useAltBackground ? 'Default BG' : 'Alt BG' }}
-    </button>
-    <app-chat-header [selectedUser]="this.contactService.selectedContact()" (infoSelect)="this.contactService.selectContactToEdit($event)"/>
-
-    <div #messagesContainer 
-         class="chat-messages" 
+    <app-chat-header
+      [selectedUser]="this.contactService.selectedContact()"
+      (infoSelect)="this.contactService.selectContactToEdit($event)"
+    />
+    <div #messagesContainer
+         class="chat-messages"
          [class.loading]="this.chatService.isLoading()"
-         [class.alt-bg]="useAltBackground">
+         [class.alt-bg]="this.umocService.showDuckBackground()">
       @if (messages().length > 0 && !this.chatService.isLoading()) {
         <ng-container>
           @for (message of messages(); track message.message_id) {
