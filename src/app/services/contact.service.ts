@@ -160,6 +160,8 @@ export class ContactService {
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe();
+    this.showInfoOf.set(null);
+    this.selectedContact.set(null);
   }
 
   changeGroup(action: string, group_id: string, new_value: string) {
@@ -220,16 +222,32 @@ export class ContactService {
     );
   }
 
-  createGroup() {
-    // this.http.post(
-    //   this.environmentService.getCreateGroupUrl(),
-    //   {
-    //     group_name: "Neue Gruppe",
-    //     group_pic: "https://cdn6.aptoide.com/imgs/1/2/2/1221bc0bdd2354b42b293317ff2adbcf_icon.png",
-    //     group_members: [`${this.self()?.contact_id}`, `00000000-0000-0000-0000-000000000005`]
-    //   },
-    //   {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
-    // ).subscribe();
-    console.error("not yet");
+  createGroup(): Observable<string> {
+    return this.http.post<string>(
+      this.environmentService.getCreateGroupUrl(),
+      {},
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    );
+  }
+
+  changeProfile(action: string, new_value: string, old_password?: string) {
+    if (this.self() && action == 'name') {
+      const new_self = {...this.self()!, name: new_value};
+      this.self.set(new_self);
+      this.showInfoOf.set(new_self);
+    } else if (this.self() && action == 'picture') {
+      const new_self = {...this.self()!, picture_url: new_value};
+      this.self.set(new_self);
+      this.showInfoOf.set(new_self);
+    }
+    this.http.post(
+      this.environmentService.getChangeProfileUrl(),
+      {
+        action: action,
+        new_value: new_value,
+        old_password: old_password
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe();
   }
 }

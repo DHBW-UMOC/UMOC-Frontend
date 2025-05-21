@@ -9,6 +9,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ContactContainerComponent } from '../contact-container/contact-container.component';
 import { LoginService } from '../services/login.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-info-window',
@@ -19,7 +20,8 @@ import { LoginService } from '../services/login.service';
     MatIcon,
     MatCardModule,
     MatIconButton,
-    ContactContainerComponent
+    ContactContainerComponent,
+    ReactiveFormsModule
   ],
   templateUrl: './info-window.component.html',
   styleUrl: './info-window.component.scss',
@@ -28,10 +30,17 @@ import { LoginService } from '../services/login.service';
 export class InfoWindowComponent {
   @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
   searchResults = signal<Contact[]>([]);
-  ownUserID: string = '';
-  isEditing: boolean = false;
+  protected ownUserID: string = '';
+  protected isEditing: boolean = false;
+  protected changingPassword: boolean = false;
+  protected pressed: boolean = false;
+  passwordForm: FormGroup = this.formBuilder.group({
+    old_password: ['', [Validators.required]],
+    new_password: ['', [Validators.required]],
+    confirm_new_password: ['', [Validators.required]]
+  });
 
-  constructor(protected contactService: ContactService, private loginService: LoginService) {
+  constructor(protected contactService: ContactService, private loginService: LoginService, private formBuilder: FormBuilder) {
     this.ownUserID = this.contactService.getOwnUserID();
   }
 
@@ -50,8 +59,7 @@ export class InfoWindowComponent {
       if (this.isGroup(currentChat)) {
         this.contactService.changeGroup('name', contact_id, newName);
       } else if (this.isContact(currentChat)) {
-        // Implement contact name update logic here
-        // this.contactService.updateContactName(currentChat.contact_id, newName);
+        this.contactService.changeProfile('name', newName);
       }
     }
   }
@@ -87,6 +95,7 @@ export class InfoWindowComponent {
 
   deleteGroup(group_id: string) {
     this.contactService.deleteGroup(group_id);
+    this.pressed = true;
   }
 
   addMember($event: Contact | Group) {
@@ -121,5 +130,23 @@ export class InfoWindowComponent {
     } else {
       this.searchResults.set([]);
     }
+  }
+
+  editProfilePicture(contact_id: string): void {
+    const newPictureUrl = window.prompt('Bitte geben Sie eine neue Bild-URL ein:');
+    const currentChat = this.contactService.showInfoOf();
+    if (currentChat && newPictureUrl && newPictureUrl.trim() !== '') {
+      if (this.isGroup(currentChat)) {
+        this.contactService.changeGroup('picture', contact_id, newPictureUrl);
+      } else if (this.isContact(currentChat)) {
+        this.contactService.changeProfile('picture', newPictureUrl);
+      }
+    }
+  }
+
+  onSubmitNewPassword() {
+    if (this.passwordForm.invalid) return;
+    this.contactService.changeProfile('password', this.passwordForm.controls['new_password'].value, this.passwordForm.controls['old_password'].value);
+    this.changingPassword = false;
   }
 }

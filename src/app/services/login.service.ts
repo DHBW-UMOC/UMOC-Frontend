@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { EnvironmentService } from './environment.service';
 
@@ -67,11 +67,6 @@ export class LoginService {
 
   public logout(): void {
     this.loginInProgress.set(true);
-    this.http.post(
-      this.environmentService.getLogoutUrl(),
-      {},
-      {headers: new HttpHeaders({'Authorization': `Bearer ${this.getAuthToken()}`})}
-    );
     this.cookie.deleteAll();
     this.userLoggedIn.set(false);
     this.loginInProgress.set(false);

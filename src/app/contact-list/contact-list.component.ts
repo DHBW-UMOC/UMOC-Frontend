@@ -84,6 +84,8 @@ export class ContactListComponent {
   }
 
   createNewGroup() {
-    this.contactService.createGroup();
+    this.contactService.createGroup().subscribe(
+      (response) => this.contactService.showInfoOf.set(this.contactService.contacts().find(contact => contact.contact_id == response)!)
+    );
   }
 }

@@ -1,20 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CURRENT_ENVIRONMENT } from '../environments/environments';
 
-// Coose environment out of the enum
 @Injectable({
   providedIn: 'root'
 })
 export class EnvironmentService {
-  private apiUrl = CURRENT_ENVIRONMENT;
+  private apiUrl = CURRENT_ENVIRONMENT; // Choose an environment from enum values
 
   // Authentication Endpoints
   getLoginUrl(): string {
     return `${this.apiUrl}/login`;
-  }
-
-  getLogoutUrl(): string {
-    return `${this.apiUrl}/logout`;
   }
 
   getRegisterUrl(): string {
@@ -34,9 +29,12 @@ export class EnvironmentService {
     return `${this.apiUrl}/getOwnProfile`;
   }
 
-
   getGetAllUsersUrl() {
     return `${this.apiUrl}/getAllUsers`;
+  }
+
+  getChangeProfileUrl() {
+    return `${this.apiUrl}/changeProfile`;
   }
 
   // Messaging Endpoints
