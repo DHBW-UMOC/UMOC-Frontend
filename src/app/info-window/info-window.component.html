@@ -19,7 +19,7 @@
         <mat-card-header>
           <div class="name-container">
             @if (isEditing) {
-              <input #nameInput [value]="chat.name" (keyup.enter)="finishEditing(chat.contact_id, nameInput.value)">
+              <input #nameInput [value]="chat.name" (keyup.enter)="finishEditing(chat.contact_id, nameInput.value)" (blur)="cancelEditing()">
             } @else {
               <p class="editable-text">{{ chat.name }}</p>
               @if (canEdit()) {

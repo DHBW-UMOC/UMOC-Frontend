@@ -29,6 +29,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class InfoWindowComponent {
   @ViewChild('searchBox') searchBox!: ElementRef<HTMLInputElement>;
+  @ViewChild('nameInput') nameInput!: ElementRef<HTMLInputElement>;
   searchResults = signal<Contact[]>([]);
   protected ownUserID: string = '';
   protected isEditing: boolean = false;
@@ -50,6 +51,14 @@ export class InfoWindowComponent {
 
   startEditing(): void {
     this.isEditing = true;
+    setTimeout(() => {
+      this.nameInput.nativeElement.focus();
+      this.nameInput.nativeElement.select();
+    });
+  }
+
+  cancelEditing(): void {
+    this.isEditing = false;
   }
 
   finishEditing(contact_id: string, newName: string): void {
