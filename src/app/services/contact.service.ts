@@ -27,6 +27,10 @@ export class ContactService {
     source: this.contacts,
     computation: (source, previous) => {
       if (previous?.value) {
+        const self = this.self();
+        if (self && self.contact_id == previous.value!.contact_id){
+          return self!;
+        }
         return (source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
       }
       return null;
