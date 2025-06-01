@@ -1,18 +1,18 @@
-import { Component, ElementRef, Input, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ChatInputEmojisComponent } from '../chat-input-emojis/chat-input-emojis.component';
 import { ChatInputExtrasComponent } from '../chat-input-extras/chat-input-extras.component';
 import { ContactService } from '../services/contact.service';
 import { ChatService } from '../services/chat.service';
 import { FormsModule } from '@angular/forms';
-import { catchError, of, take } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { WsService } from '../services/ws.service';
 
 @Component({
   selector: 'app-chat-input',
   imports: [
-    ChatInputEmojisComponent, 
-    ChatInputExtrasComponent, 
+    ChatInputEmojisComponent,
+    ChatInputExtrasComponent,
     FormsModule,
     MatIconModule,
     MatButtonModule
@@ -26,7 +26,8 @@ export class ChatInputComponent implements AfterViewInit {
 
   constructor(
     private contactService: ContactService,
-    private chatService: ChatService
+    private chatService: ChatService,
+    private websocket: WsService
   ) {
   }
 
@@ -49,6 +50,12 @@ export class ChatInputComponent implements AfterViewInit {
     }
   }
 
+  onKeyUp(event: KeyboardEvent) {
+    if (event.key !== "Enter") {
+      this.websocket.sendMessageTooEarly(this.messageInput.nativeElement.value);
+    }
+  }
+
   adjustTextareaHeight() {
     const textarea = this.messageInput.nativeElement;
     textarea.style.height = '0';
@@ -59,7 +66,7 @@ export class ChatInputComponent implements AfterViewInit {
   saveMessage(messageContent: string) {
     this.chatService.saveMessage(
       this.recipientID,
-      messageContent.trim()  // Changed from trimStart().trimEnd() to trim()
-    ).subscribe();
+      messageContent.trim()
+    ).subscribe(() => this.chatService.updateChatHistory(this.recipientID));
   }
 }

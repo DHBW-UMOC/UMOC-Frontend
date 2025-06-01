@@ -70,4 +70,9 @@ export class EnvironmentService {
   getLeaveGroupUrl() {
     return `${this.apiUrl}/leaveGroup`;
   }
+
+  // Websocket Endpoint
+  getWSUrl() {
+    return`${this.apiUrl}`;
+  }
 }

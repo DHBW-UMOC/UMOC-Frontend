@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import { MatTab, MatTabGroup } from '@angular/material/tabs';
@@ -7,7 +7,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'login-field',
-  imports: [CommonModule, ReactiveFormsModule, MatTabGroup, MatTab, MatProgressSpinner],
+  imports: [CommonModule, ReactiveFormsModule, MatTabGroup, MatTab, MatProgressSpinner, NgOptimizedImage],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })

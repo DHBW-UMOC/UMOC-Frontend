@@ -8,18 +8,24 @@
          class="chat-messages"
          [class.loading]="this.chatService.isLoading()"
          [class.alt-bg]="this.umocService.showDuckBackground()">
-      @if (messages().length > 0 && !this.chatService.isLoading()) {
-        <ng-container>
-          @for (message of messages(); track message.message_id) {
-            <app-message
-              [message]="message"
-              [currentUser]="this.currentUser"
-              [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
+      @if (this.chatService.currentChatHistory().length > 0 && !this.chatService.isLoading()) {
+        @for (message of this.chatService.currentChatHistory(); track message.message_id) {
+          <app-message
+            [message]="message"
+            [currentUser]="this.currentUser"
+            [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
+        }
+        @if (this.websocket.earlyMessages().length > 0) {
+          @for (earlyMessage of this.websocket.earlyMessages(); track earlyMessage.sender_id){
+            <div>
+              {{earlyMessage.sender_username}}<br>
+              {{earlyMessage.content}}
+            </div>
           }
-        </ng-container>
+        }
       } @else if (this.chatService.isLoading()) {
         <div>
-          <img ngSrc="assets/UMOCUS.gif" width="383" height="480" alt="Loading..."/>
+          <img ngSrc="assets/UMOCUS.gif" priority width="383" height="480" alt="Loading..."/>
         </div>
       } @else {
         <div class="no-messages">

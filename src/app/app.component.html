@@ -1,5 +1,5 @@
 <div class="app-background">
-    <div class="app-container">
+  <div class="app-container">
     <app-ad-banner
       [hidden]="!this.umocService.showAdBanners()"
       [imageSrc]="'assets/UMOCUS-ad.gif'"
@@ -10,9 +10,9 @@
     @if (this.loginService.userLoggedIn()) {
       <app-contact-list/>
       <div class="chat-area">
-        @if (this.umocService.showShop()){
+        @if (this.umocService.showShop()) {
           <app-umoc-shop/>
-        }@else if (this.contactService.selectedContact()) {
+        } @else if (this.contactService.selectedContact()) {
           <app-chat-window/>
         } @else {
           <app-chat-placeholder/>

@@ -24,20 +24,15 @@ export class MemberContainerComponent {
   @Output() adminChange = new EventEmitter<string>();
   @Output() removeMember = new EventEmitter();
 
-  protected flipped: boolean = false;
-  protected pressed: boolean = false;
-
   isAdmin(): boolean {
     return this.member?.role === 'admin';
   }
 
   onToggleAdmin(): void {
-    this.adminChange.emit(this.isAdmin() ? 'de_admin' : 'admin');
-    this.flipped = true;
+    this.adminChange.emit(this.isAdmin() ? 'deadmin' : 'admin');
   }
 
   onRemoveMember(): void {
     this.removeMember.emit();
-    this.pressed = true;
   }
 }

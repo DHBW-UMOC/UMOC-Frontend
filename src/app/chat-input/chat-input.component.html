@@ -9,6 +9,7 @@
       required
       placeholder="Nachricht schreiben"
       (keydown)="onKeydown($event)"
+      (keyup)="onKeyUp($event)"
       (input)="adjustTextareaHeight()"
       rows="1"></textarea>
   </div>

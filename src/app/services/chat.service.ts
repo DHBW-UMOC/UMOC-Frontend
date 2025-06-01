@@ -10,7 +10,8 @@ import { EnvironmentService } from './environment.service';
 })
 export class ChatService {
 
-  isLoading = signal(false);
+  isLoading = signal<boolean>(false);
+  currentChatHistory = signal<Message[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -19,9 +20,17 @@ export class ChatService {
   ) {
   }
 
-  public fetchChatHistory(contact_id: string): Observable<Message[]> {
+  public getChatHistory(contact_id: string) {
     this.isLoading.set(true);
-    return this.http.get<any>(
+    this.fetchChatHistory(contact_id);
+  }
+
+  public updateChatHistory(contact_id: string) {
+    this.fetchChatHistory(contact_id);
+  }
+
+  private fetchChatHistory(contact_id: string) {
+    this.http.get<any>(
       this.environmentService.getContactMessagesUrl(),
       {
         headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`}),
@@ -43,6 +52,8 @@ export class ChatService {
         });
       }),
       finalize(() => this.isLoading.set(false))
+    ).subscribe(
+      newMessages => this.currentChatHistory.set(newMessages)
     );
   }
 

@@ -76,7 +76,6 @@ export class ContactListComponent {
           this.searchResults.set(uniqueContacts);
         },
         () => {
-          console.error('error searching contacts');
           this.searchResults.set([]);
         }
       );

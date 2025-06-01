@@ -42,6 +42,7 @@ export class ContactService {
     private loginService: LoginService,
     private environmentService: EnvironmentService
   ) {
+    this.isLoading.set(true);
     effect(() => {
       if (this.loginService.userLoggedIn()) {
         this.fetchOwnUserInfo().subscribe(userData => {
@@ -71,7 +72,6 @@ export class ContactService {
   }
 
   public fetchContacts(): Observable<Contact[]> {
-    this.isLoading.set(true);
     return this.http.get<any>(
       this.environmentService.getContactsUrl(),
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}

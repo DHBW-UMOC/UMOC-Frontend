@@ -1,6 +1,4 @@
-import { Chat } from './chat.model';
-
-export class Contact implements Chat{
+export class Contact {
   is_group: boolean;
   contact_id: string;
   name: string;
