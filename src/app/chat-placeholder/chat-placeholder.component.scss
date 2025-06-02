@@ -11,6 +11,10 @@
     position: relative;
     overflow: hidden;
 
+    @media (max-width: 1500px) {
+        width: 40vw;
+    }
+
     .subtitle {
         width: 100%;
         text-align: center;

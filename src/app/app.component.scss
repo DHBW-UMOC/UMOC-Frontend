@@ -20,6 +20,13 @@
   display: flex;
 }
 
+  
+@media (max-width: 1500px) {
+  .chat-area {
+    width: 40vw;
+  }
+}
+
 app-info-window {
   position: absolute;
   top: 0;

@@ -11,6 +11,10 @@
   position: relative;
   overflow: hidden;
 
+  @media (max-width: 1500px) {
+    width: 40vw;
+  }
+
   .chat-window {
     display: flex;
     flex-direction: column;

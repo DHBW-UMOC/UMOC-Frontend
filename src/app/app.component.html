@@ -1,6 +1,6 @@
 <div class="app-background">
   <div class="app-container">
-    <app-ad-banner
+    <app-ad-banner class="left-banner"
       [hidden]="!this.umocService.showAdBanners()"
       [imageSrc]="'assets/UMOCUS-ad.gif'"
       [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
@@ -25,7 +25,7 @@
         <login-field/>
       }
     }
-    <app-ad-banner
+    <app-ad-banner class="right-banner"
       [hidden]="!this.umocService.showAdBanners()"
       [imageSrc]="'https://gifdb.com/images/high/gummibar-gummy-bear-break-dance-fortnite-dance-7lonn1izgkap3jj1.gif'"
       [videoSrc]="'https://cdn.revid.ai/backgrounds/fortnite/video_lowres_4.mp4'"

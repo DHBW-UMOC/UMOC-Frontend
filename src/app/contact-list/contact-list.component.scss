@@ -15,6 +15,10 @@
   border-bottom: 1px solid var(--mat-sys-outline);
   border-left: 1px solid var(--mat-sys-outline);
 
+  @media (max-width: 1500px) {
+    width: 20vw;
+  }
+
   .contact-list {
     flex: 1; // This allows the list to take remaining space
     list-style: none;
