@@ -11,6 +11,7 @@
   .app-container {
     display: flex;
     height: 100vh;
+    flex-wrap: wrap;  // Allow items to wrap
   }
 }
 
@@ -20,6 +21,8 @@
   display: flex;
   width: 100%;
   background-color: white;
+  max-height: 100vh;
+  min-height: 700px; 
   
   // Add these properties
   min-width: 350px; // Prevents flex items from overflowing
@@ -29,6 +32,14 @@
   }
 }
 
+.left-banner {
+  order: 0;  // Default order
+}
+
+.right-banner {
+  order: 3;  // Default order
+}
+
 app-info-window {
   position: absolute;
   top: 0;
@@ -36,4 +47,27 @@ app-info-window {
   width: 50%;
   height: 100%;
   z-index: 10;
+}
+
+@media (max-width: 1000px) {
+  .app-container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .left-banner {
+    order: 3;  // Move to end
+    width: 100%;  // Take full width
+    height: auto;
+    min-height: 150px;
+  }
+
+  .chat-area {
+    order: 1;  // Move to top
+    height: 50vw;
+  }
+
+  // .right-banner {
+  //   display: none;  // Hide right banner on mobile
+  // }
 }

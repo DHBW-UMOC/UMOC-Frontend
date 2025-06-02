@@ -47,4 +47,14 @@
             }
         }
     }
+
+    @media (max-width: 1000px) {
+        width: 45vw;  // Take most of the width on mobile
+        height: 200px;
+
+        .ad-banner-content {
+            width: 100px !important;
+            flex-direction: row !important;
+        }
+    }
 }
