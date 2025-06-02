@@ -76,4 +76,21 @@ app-info-window {
     height: 50vw;
     max-height: 700px;
   }
+  @media (max-width: 750px) {
+    .app-container {
+      display: none !important;
+    }
+    .size-warning {
+      display: inline !important;
+    }
+  }
+
+  @media (max-height: 950px) {
+    .app-container {
+      display: none !important;
+    }
+    .size-warning {
+      display: inline !important;
+    }
+  }
 }
