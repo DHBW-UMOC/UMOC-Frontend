@@ -6,23 +6,24 @@
       [videoSrc]="'https://cdn.revid.ai/minecraft/bg-1.mp4'"
       [altText]="'AD'"
     />
-
-    @if (this.loginService.userLoggedIn()) {
-      <app-contact-list/>
-      <div class="chat-area">
-        @if (this.umocService.showShop()) {
-          <app-umoc-shop/>
-        } @else if (this.contactService.selectedContact()) {
-          <app-chat-window/>
-        } @else {
-          <app-chat-placeholder/>
-        }
-        @if (this.contactService.showInfoOf()) {
-          <app-info-window/>
-        }
-      </div>
-    } @else {
-      <login-field/>
+    @defer {
+      @if (this.loginService.userLoggedIn()) {
+        <app-contact-list/>
+        <div class="chat-area">
+          @if (this.umocService.showShop()) {
+            <app-umoc-shop/>
+          } @else if (this.contactService.selectedContact()) {
+            <app-chat-window/>
+          } @else {
+            <app-chat-placeholder/>
+          }
+          @if (this.contactService.showInfoOf()) {
+            <app-info-window/>
+          }
+        </div>
+      } @else {
+        <login-field/>
+      }
     }
     <app-ad-banner
       [hidden]="!this.umocService.showAdBanners()"

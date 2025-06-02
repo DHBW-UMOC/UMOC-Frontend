@@ -16,7 +16,9 @@ export class LoginService {
     private environmentService: EnvironmentService
   ) {
     if (this.cookie.check('auth_token') && this.cookie.check('expires_in')) {
-      if (new Date(parseInt(this.cookie.get('expires_in'))) < new Date()) {
+      const expiresIn = new Date(parseInt(this.cookie.get('expires_in')));
+      
+      if (expiresIn < new Date()) {
         this.userLoggedIn.set(false);
         this.cookie.deleteAll();
         window.location.reload();
