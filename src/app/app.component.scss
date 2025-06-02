@@ -22,7 +22,7 @@
   background-color: white;
   
   // Add these properties
-  min-width: 250px; // Prevents flex items from overflowing
+  min-width: 350px; // Prevents flex items from overflowing
   > * {
     flex: 1; // Makes direct children take full width
     width: 100%;
