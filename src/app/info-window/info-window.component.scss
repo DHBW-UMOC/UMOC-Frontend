@@ -1,6 +1,7 @@
 @use "../../styles.scss" as global;
 
 .info-window-container {
+  width: 50%;
   flex: 1;
   display: flex;
   flex-direction: column;

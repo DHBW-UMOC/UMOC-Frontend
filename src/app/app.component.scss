@@ -11,6 +11,7 @@
   .app-container {
     display: flex;
     height: 100vh;
+    flex-wrap: wrap;  // Allow items to wrap
   }
 }
 
@@ -18,6 +19,25 @@
   position: relative;
   flex: 1;
   display: flex;
+  width: 100%;
+  background-color: white;
+  max-height: 100vh;
+  min-height: 700px; 
+  
+  // Add these properties
+  min-width: 350px; // Prevents flex items from overflowing
+  > * {
+    flex: 1; // Makes direct children take full width
+    width: 100%;
+  }
+}
+
+.left-banner {
+  order: 0;  // Default order
+}
+
+.right-banner {
+  order: 3;  // Default order
 }
 
 app-info-window {
@@ -27,4 +47,33 @@ app-info-window {
   width: 50%;
   height: 100%;
   z-index: 10;
+}
+
+@media (max-width: 1000px) {
+  .app-container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .left-banner {
+    order: 3;  // Move to end
+    // width: 100%;  // Take full width
+    // height: auto;
+    // min-height: 150px;
+    position: fixed;
+    bottom: 25px;
+    left: 125px;
+  }
+
+  .right-banner {
+    position: fixed;
+    bottom: 25px;
+    right: -100px;
+  }
+
+  .chat-area {
+    order: 1;
+    height: 50vw;
+    max-height: 700px;
+  }
 }
