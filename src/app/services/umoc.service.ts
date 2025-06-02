@@ -5,7 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class UmocService {
   showShop = signal<boolean>(false);
-  showAdBanners = signal<boolean>(true);
+  showAdBanners = signal<boolean>(false);
   showDuckBackground = signal<boolean>(false);
 
   constructor(
