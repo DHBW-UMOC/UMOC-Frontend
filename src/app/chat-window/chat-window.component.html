@@ -9,7 +9,7 @@
          [class.loading]="this.chatService.isLoading()"
          [class.alt-bg]="this.umocService.showDuckBackground()">
       @if (this.chatService.currentChatHistory().length > 0 && !this.chatService.isLoading()) {
-        @for (message of this.chatService.currentChatHistory(); track message.message_id) {
+        @for (message of this.chatService.currentChatHistory().slice().reverse(); track message.message_id) {
           <app-message
             [message]="message"
             [currentUser]="this.currentUser"
