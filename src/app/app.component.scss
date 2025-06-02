@@ -23,6 +23,7 @@
   background-color: white;
   max-height: 100vh;
   min-height: 700px; 
+  overflow: hidden;
   
   // Add these properties
   min-width: 350px; // Prevents flex items from overflowing
