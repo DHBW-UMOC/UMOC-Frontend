@@ -57,17 +57,23 @@ app-info-window {
 
   .left-banner {
     order: 3;  // Move to end
-    width: 100%;  // Take full width
-    height: auto;
-    min-height: 150px;
+    // width: 100%;  // Take full width
+    // height: auto;
+    // min-height: 150px;
+    position: fixed;
+    bottom: 25px;
+    left: 125px;
+  }
+
+  .right-banner {
+    position: fixed;
+    bottom: 25px;
+    right: -100px;
   }
 
   .chat-area {
-    order: 1;  // Move to top
+    order: 1;
     height: 50vw;
+    max-height: 700px;
   }
-
-  // .right-banner {
-  //   display: none;  // Hide right banner on mobile
-  // }
 }
