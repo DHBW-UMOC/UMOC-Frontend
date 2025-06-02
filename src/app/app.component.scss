@@ -18,12 +18,14 @@
   position: relative;
   flex: 1;
   display: flex;
-}
-
+  width: 100%;
+  background-color: white;
   
-@media (max-width: 1500px) {
-  .chat-area {
-    width: 40vw;
+  // Add these properties
+  min-width: 250px; // Prevents flex items from overflowing
+  > * {
+    flex: 1; // Makes direct children take full width
+    width: 100%;
   }
 }
 
