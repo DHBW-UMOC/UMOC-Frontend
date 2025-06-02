@@ -15,15 +15,26 @@ export class LoginService {
     private cookie: CookieService,
     private environmentService: EnvironmentService
   ) {
+    console.log('Constructor start - userLoggedIn:', this.userLoggedIn());
+    console.log('Has auth_token:', this.cookie.check('auth_token'));
+    console.log('Has expires_in:', this.cookie.check('expires_in'));
+
     if (this.cookie.check('auth_token') && this.cookie.check('expires_in')) {
-      if (new Date(parseInt(this.cookie.get('expires_in'))) < new Date()) {
+      const expiresIn = new Date(parseInt(this.cookie.get('expires_in')));
+      console.log('Token expires:', expiresIn);
+      console.log('Current time:', new Date());
+      
+      if (expiresIn < new Date()) {
+        console.log('Token expired - logging out');
         this.userLoggedIn.set(false);
         this.cookie.deleteAll();
         window.location.reload();
       } else {
+        console.log('Token valid - setting logged in');
         this.userLoggedIn.set(true);
       }
     }
+    console.log('Constructor end - userLoggedIn:', this.userLoggedIn());
   }
 
   public register(username: String, password: String): void {
@@ -57,6 +68,7 @@ export class LoginService {
 
         this.loginInProgress.set(false);
         this.userLoggedIn.set(true);
+        console.log(this.userLoggedIn() + "USER LOGGED IN");
       },
       error: (err) => {
         this.loginInProgress.set(false);
