@@ -2,7 +2,7 @@ import { effect, Injectable, linkedSignal, signal } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
-import { finalize, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
 import { Member } from '../model/member.model';
@@ -28,7 +28,7 @@ export class ContactService {
     computation: (source, previous) => {
       if (previous?.value) {
         const self = this.self();
-        if (self && self.contact_id == previous.value!.contact_id){
+        if (self && self.contact_id == previous.value!.contact_id) {
           return self!;
         }
         return (source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
@@ -48,9 +48,7 @@ export class ContactService {
         this.fetchOwnUserInfo().subscribe(userData => {
           this.self.set(userData);
         });
-        this.fetchContacts().subscribe(contactsData => {
-          this.contacts.set(contactsData);
-        });
+        this.fetchContacts();
       } else {
         this.contacts.set([]);
         this.self.set(null);
@@ -71,8 +69,8 @@ export class ContactService {
     this.showInfoOf.set(null);
   }
 
-  public fetchContacts(): Observable<Contact[]> {
-    return this.http.get<any>(
+  public fetchContacts() {
+    this.http.get<any>(
       this.environmentService.getContactsUrl(),
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).pipe(
@@ -93,6 +91,7 @@ export class ContactService {
               contact.contact_id,
               contact.name,
               contact.picture_url,
+              new Date(contact.last_message_timestamp),
               new Date(contact.created_at),
               members,
               contact.am_admin
@@ -103,14 +102,20 @@ export class ContactService {
               contact.contact_id,
               contact.name,
               contact.picture_url,
+              new Date(contact.last_message_timestamp),
               contact.status,
               contact.streak
             );
           }
         });
-      }),
-      finalize(() => this.isLoading.set(false))
-    );
+      })
+    ).subscribe((contactsData: (Contact | Group)[]) => {
+      const sortedContacts = [...contactsData].sort((a, b) =>
+        b.last_message_timestamp.getTime() - a.last_message_timestamp.getTime()
+      );
+      this.contacts.set(sortedContacts);
+      this.isLoading.set(false);
+    });
   }
 
   private fetchOwnUserInfo() {
@@ -124,6 +129,7 @@ export class ContactService {
           response.user_id,
           response.username,
           response.profile_picture,
+          new Date(response.last_message_timestamp),
           'Friend',
           0
         );
@@ -218,6 +224,7 @@ export class ContactService {
             contact.user_id,
             contact.username,
             contact.profile_picture,
+            new Date(contact.last_message_timestamp),
             '',
             0
           );
