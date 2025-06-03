@@ -28,6 +28,19 @@
     overflow-y: auto;
 
     border-top: 1px solid var(--mat-sys-outline);
+
+    .no-chats-text {
+      padding: 16px;
+      text-align: center;
+      font: var(--mat-sys-body-medium);
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    .new-chats-header {
+      padding: 16px;
+      font: var(--mat-sys-title-medium);
+      color: var(--mat-sys-on-surface);
+    }
   }
 
   .contact-list-header {
