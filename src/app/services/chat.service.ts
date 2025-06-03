@@ -17,21 +17,11 @@ export class ChatService {
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
-    private environmentService: EnvironmentService,
-    private contactService: ContactService
+    private environmentService: EnvironmentService
   ) {
   }
 
-  public getChatHistory(contact_id: string) {
-    this.isLoading.set(true);
-    this.fetchChatHistory(contact_id);
-  }
-
-  public updateChatHistory(contact_id: string) {
-    this.fetchChatHistory(contact_id);
-  }
-
-  private fetchChatHistory(contact_id: string) {
+  fetchChatHistory(contact_id: string) {
     this.http.get<any>(
       this.environmentService.getContactMessagesUrl(),
       {
@@ -75,8 +65,7 @@ export class ChatService {
         })
       }
     ).subscribe(() => {
-      this.updateChatHistory(recipientID);
-      this.contactService.fetchContacts();
+      this.fetchChatHistory(recipientID);
     });
   }
 }
