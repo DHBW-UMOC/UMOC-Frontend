@@ -48,9 +48,7 @@ export class WsService {
     });
 
     this.socket.on('chat_change', () => {
-      this.contactService.fetchContacts().subscribe(contactsData => {
-        this.contactService.contacts.set(contactsData);
-      });
+      this.contactService.fetchContacts();
     });
 
     this.socket.on('new_message', (message) => {

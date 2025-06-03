@@ -67,6 +67,6 @@ export class ChatInputComponent implements AfterViewInit {
     this.chatService.saveMessage(
       this.recipientID,
       messageContent.trim()
-    ).subscribe(() => this.chatService.updateChatHistory(this.recipientID));
+    );
   }
 }

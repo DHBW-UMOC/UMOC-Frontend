@@ -1,9 +1,10 @@
 import { Injectable, signal } from '@angular/core';
 import { Message } from '../model/message.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { finalize, map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
+import { ContactService } from './contact.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class ChatService {
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
+    private contactService: ContactService
   ) {
   }
 
@@ -50,15 +52,17 @@ export class ChatService {
             message.type
           );
         });
-      }),
-      finalize(() => this.isLoading.set(false))
+      })
     ).subscribe(
-      newMessages => this.currentChatHistory.set(newMessages)
+      newMessages => {
+        this.currentChatHistory.set(newMessages);
+        this.isLoading.set(false);
+      }
     );
   }
 
-  public saveMessage(recipientID: string, message: string): Observable<any> {
-    return this.http.post(
+  public saveMessage(recipientID: string, message: string) {
+    this.http.post(
       this.environmentService.getSaveMessageUrl(),
       {
         recipient_id: recipientID,
@@ -70,6 +74,9 @@ export class ChatService {
           'Authorization': `Bearer ${this.loginService.getAuthToken()}`
         })
       }
-    );
+    ).subscribe(() => {
+      this.updateChatHistory(recipientID);
+      this.contactService.fetchContacts();
+    });
   }
 }
