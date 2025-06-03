@@ -29,6 +29,11 @@ export class WsService {
         this.disconnect();
       }
     });
+    effect(() => {
+        this.contactService.selectedContact();
+        this.earlyMessages.set([]);
+      }
+    );
   }
 
   private connect(): void {
@@ -65,8 +70,13 @@ export class WsService {
         const existingIndex = this.earlyMessages().findIndex(msg => msg.sender_id === earlyMessageData.sender_id);
         if (existingIndex !== -1) {
           const oldMessages = [...this.earlyMessages()];
-          oldMessages[existingIndex] = earlyMessage;
-          this.earlyMessages.set(oldMessages);
+          if (earlyMessage.content == '') {
+            oldMessages.splice(existingIndex, 1);
+            this.earlyMessages.set(oldMessages);
+          } else {
+            oldMessages[existingIndex] = earlyMessage;
+            this.earlyMessages.set(oldMessages);
+          }
         } else {
           const oldMessages = [...this.earlyMessages(), earlyMessage];
           this.earlyMessages.set(oldMessages);

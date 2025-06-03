@@ -68,5 +68,6 @@ export class ChatInputComponent implements AfterViewInit {
       this.recipientID,
       messageContent.trim()
     );
+    this.websocket.sendMessageTooEarly('');
   }
 }
