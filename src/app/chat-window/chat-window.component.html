@@ -11,7 +11,7 @@
       @if (this.chatService.currentChatHistory().length > 0 && !this.chatService.isLoading()) {
         @if (this.websocket.earlyMessages().length > 0) {
           @for (earlyMessage of this.websocket.earlyMessages(); track earlyMessage.sender_id){
-            <app-message
+            <app-message class="early-message"
               [message]="earlyMessage.toMessage()"
               [currentUser]="this.currentUser"
               [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
