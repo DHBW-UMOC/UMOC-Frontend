@@ -1,10 +1,15 @@
 @use "../../styles.scss" as global;
 
 .chat-window-container {
+  height: 100%;
+  width: 100%;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  flex: 1;
+  border: 1px solid var(--mat-sys-outline);
+  background-color: var(--mat-sys-surface-bright);
+  position: relative;
+  overflow: hidden;
 
   .chat-window {
     display: flex;
@@ -12,6 +17,7 @@
     flex: 1;
     height: 100%;
   }
+
   .chat-messages {
     display: flex;
     flex: 1;
@@ -19,13 +25,11 @@
     padding: 20px;
     background-size: cover;
     background-attachment: fixed;
-    flex-direction: column;
+    flex-direction: column-reverse;
     border-top: 2px solid var(--mat-sys-outline);
     border-bottom: 2px solid var(--mat-sys-outline);
     gap: 20px;
 
-    // Remove the default background from here
-    
     &.alt-bg {
       background-image: url('/assets/UMOCUS.gif');
     }
@@ -33,7 +37,7 @@
     &:not(.alt-bg):not(.loading) {
       background-image: url('/assets/MessageBackTODO2.png');
     }
-  
+
     &.loading {
       background: var(--mat-sys-surface);
     }
@@ -44,5 +48,26 @@
     top: 70px;
     left: 10px;
     z-index: 100;
+  }
+}
+
+.no-messages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--mat-sys-primary);
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  margin: auto auto 10px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 200px;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
   }
 }

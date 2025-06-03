@@ -1,30 +1,35 @@
 <ng-container>
   <div class="chat-window-container">
-    <button class="bg-toggle-btn" (click)="toggleBackground()">
-      {{ useAltBackground ? 'Default BG' : 'Alt BG' }}
-    </button>
-    <app-chat-header [selectedUser]="this.contactService.selectedContact()" (infoSelect)="this.contactService.selectContactToEdit($event)"/>
-
-    <div #messagesContainer 
-         class="chat-messages" 
+    <app-chat-header
+      [selectedUser]="this.contactService.selectedContact()"
+      (infoSelect)="this.contactService.selectContactToEdit($event)"
+    />
+    <div #messagesContainer
+         class="chat-messages"
          [class.loading]="this.chatService.isLoading()"
-         [class.alt-bg]="useAltBackground">
-      @if (messages().length > 0 && !this.chatService.isLoading()) {
-        <ng-container>
-          @for (message of messages(); track message.message_id) {
-            <app-message
-              [message]="message"
-              [currentUser]="this.currentUser"
-              [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
+         [class.alt-bg]="this.umocService.showDuckBackground()">
+      @if (this.chatService.currentChatHistory().length > 0) {
+        @for (message of this.chatService.currentChatHistory().slice().reverse(); track message.message_id) {
+          <app-message
+            [message]="message"
+            [currentUser]="this.currentUser"
+            [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
+        }
+        @if (this.websocket.earlyMessages().length > 0) {
+          @for (earlyMessage of this.websocket.earlyMessages(); track earlyMessage.sender_id){
+            <div>
+              {{earlyMessage.sender_username}}<br>
+              {{earlyMessage.content}}
+            </div>
           }
-        </ng-container>
+        }
       } @else if (this.chatService.isLoading()) {
         <div>
-          <img ngSrc="assets/UMOCUS.gif" width="383" height="480" alt="Loading..."/>
+          <img ngSrc="assets/UMOCUS.gif" priority width="383" height="480" alt="Loading..."/>
         </div>
       } @else {
         <div class="no-messages">
-          <h2>No messages yet</h2>
+          <p>Start Chatting</p>
         </div>
       }
     </div>

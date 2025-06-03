@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { EnvironmentService } from './environment.service';
 
@@ -16,7 +16,9 @@ export class LoginService {
     private environmentService: EnvironmentService
   ) {
     if (this.cookie.check('auth_token') && this.cookie.check('expires_in')) {
-      if (new Date(parseInt(this.cookie.get('expires_in'))) < new Date()) {
+      const expiresIn = new Date(parseInt(this.cookie.get('expires_in')));
+      
+      if (expiresIn < new Date()) {
         this.userLoggedIn.set(false);
         this.cookie.deleteAll();
         window.location.reload();
@@ -58,17 +60,15 @@ export class LoginService {
         this.loginInProgress.set(false);
         this.userLoggedIn.set(true);
       },
-      error: (err) => console.error('Login error: ', err)
+      error: (err) => {
+        this.loginInProgress.set(false);
+        console.error('Login error: ', err);
+      }
     });
   }
 
   public logout(): void {
     this.loginInProgress.set(true);
-    this.http.post(
-      this.environmentService.getLogoutUrl(),
-      {},
-      {headers: new HttpHeaders({'Authorization': `Bearer ${this.getAuthToken()}`})}
-    );
     this.cookie.deleteAll();
     this.userLoggedIn.set(false);
     this.loginInProgress.set(false);

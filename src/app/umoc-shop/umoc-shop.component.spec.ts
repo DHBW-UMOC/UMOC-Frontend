@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainWindowComponent } from './main-window.component';
+import { UmocShopComponent } from './umoc-shop.component';
 
-describe('MainWindowComponent', () => {
-  let component: MainWindowComponent;
-  let fixture: ComponentFixture<MainWindowComponent>;
+describe('UmocShopComponent', () => {
+  let component: UmocShopComponent;
+  let fixture: ComponentFixture<UmocShopComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MainWindowComponent]
+      imports: [UmocShopComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MainWindowComponent);
+    fixture = TestBed.createComponent(UmocShopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

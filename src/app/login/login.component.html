@@ -1,6 +1,6 @@
 <div class="login-background">
   <div class="logo-container">
-    <img src="assets/UMOCUS.gif" alt="UMOCUS" />
+    <img ngSrc="assets/UMOCUS.gif" priority width="383" height="480" alt="UMOCUS"/>
   </div>
   <div class="login-container">
     <mat-tab-group animationDuration="0ms">
@@ -30,7 +30,7 @@
             }
           </div>
           <button type="submit" [disabled]="loginForm.invalid  || this.loginService.loginInProgress()">
-            @if (this.loginService.loginInProgress()){
+            @if (this.loginService.loginInProgress()) {
               <mat-spinner diameter="24"/>
             } @else {
               Anmelden
@@ -75,8 +75,8 @@
               <div class="error-message">Passwörter müssen übereinstimmen</div>
             }
           </div>
-          <button type="submit" [disabled]="registerForm.invalid || this.loginService.loginInProgress()">
-            @if (this.loginService.loginInProgress()){
+          <button type="submit" [disabled]="registerForm.invalid || this.loginService.loginInProgress() || registerForm.get('password')?.value != registerForm.get('confirmPassword')?.value">
+            @if (this.loginService.loginInProgress()) {
               <mat-spinner diameter="24"/>
             } @else {
               Registrieren

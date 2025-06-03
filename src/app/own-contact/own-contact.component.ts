@@ -1,21 +1,36 @@
 import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { ContactService } from '../services/contact.service';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { Group } from '../model/group.model';
+import { Contact } from '../model/contact.model';
+import { UmocService } from '../services/umoc.service';
 
 @Component({
   selector: 'app-own-contact',
   imports: [
-    NgOptimizedImage
+    NgOptimizedImage,
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './own-contact.component.html',
   styleUrl: './own-contact.component.scss'
 })
 export class OwnContactComponent {
 
-  constructor(protected contactservice: ContactService) {
+  constructor(protected contactservice: ContactService, private umocService: UmocService) {
   }
 
-  selectSelf() {
-    this.contactservice.selectContactToEdit(this.contactservice.self()!)
+  selectSelf(ownContact: Contact | Group) {
+    if (this.contactservice.showInfoOf()?.contact_id == this.contactservice.self()?.contact_id) {
+      this.contactservice.showInfoOf.set(null);
+    } else {
+      this.contactservice.selectContactToEdit(ownContact);
+    }
+  }
+
+  toggleShop() {
+    this.umocService.toggleShop()
   }
 }

@@ -1,7 +1,7 @@
 .ad-banner {
     height: 100%;
-    // width: 100%;
     width: 15vw;
+    min-width: 150px;
     padding-left: 5%;
     padding-right: 5%;
 
@@ -45,6 +45,16 @@
             100% {
                 background-position: 100% 50%;
             }
+        }
+    }
+
+    @media (max-width: 1000px) {
+        width: 45vw;  // Take most of the width on mobile
+        height: 200px;
+
+        .ad-banner-content {
+            width: 150px !important;
+            flex-direction: row !important;
         }
     }
 }

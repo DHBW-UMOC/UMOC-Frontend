@@ -1,0 +1,13 @@
+<div class="umoc-shop-container">
+  <h1>Hier kommen die Features hin wegen denen diese Anwendung unsicher genannt wird</h1>
+  <br>
+  <br>
+  <button mat-fab (click)="this.umocService.toggleAdBanner()">
+    {{ this.umocService.showAdBanners() ? 'Hide Ad Banner' : 'Show Ad Banner'}}
+  </button>
+  <br>
+  <br>
+  <button mat-fab (click)="this.umocService.toggleDuckBackground()">
+    {{ this.umocService.showDuckBackground() ? 'Hide Alt Background' : 'Show Alt Background'}}
+  </button>
+</div>

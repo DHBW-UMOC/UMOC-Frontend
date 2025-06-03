@@ -1,11 +1,12 @@
-import { Component, effect, signal, ViewChild, ElementRef } from '@angular/core';
+import { Component, effect, ElementRef, ViewChild } from '@angular/core';
 import { MessageComponent } from '../message/message.component';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Message } from '../model/message.model';
 import { ChatService } from '../services/chat.service';
 import { ContactService } from '../services/contact.service';
 import { ChatHeaderComponent } from '../chat-header/chat-header.component';
+import { UmocService } from '../services/umoc.service';
+import { WsService } from '../services/ws.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -16,24 +17,19 @@ import { ChatHeaderComponent } from '../chat-header/chat-header.component';
 export class ChatWindowComponent {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   protected currentUser: string = this.contactService.getOwnUserID();
-  protected messages = signal<Message[]>([]);
-  protected useAltBackground = false;
 
-  toggleBackground() {
-    this.useAltBackground = !this.useAltBackground;
-  }
-
-  constructor(protected chatService: ChatService,
-              protected contactService: ContactService
+  constructor(
+    protected chatService: ChatService,
+    protected contactService: ContactService,
+    protected umocService: UmocService,
+    protected websocket: WsService
   ) {
     effect(() => {
         if (!this.contactService.selectedContact()) return;
-        this.messages.set([]);
-        this.chatService.fetchChatHistory(this.contactService.selectedContact()!.contact_id)
-          .subscribe(newMessages => {
-            this.messages.set(newMessages);
-            setTimeout(() => this.scrollToBottom(), 0);
-          });
+        this.chatService.isLoading.set(true);
+        this.chatService.currentChatHistory.set([]);
+        this.chatService.fetchChatHistory(this.contactService.selectedContact()!.contact_id);
+        setTimeout(() => this.scrollToBottom(), 0);
       }
     );
   }
@@ -41,6 +37,7 @@ export class ChatWindowComponent {
   private scrollToBottom(): void {
     try {
       this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+    } catch (err) {
+    }
   }
 }

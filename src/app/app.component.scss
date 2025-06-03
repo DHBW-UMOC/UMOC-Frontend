@@ -1,19 +1,97 @@
 @use "../styles.scss" as global;
 
-// Irgendwas aus Stackoverflow um Margin in Angular zu removen.
-::ng-deep * { 
-    margin: 0;
-    padding: 0;
+::ng-deep * {
+  margin: 0;
+  padding: 0;
 }
 
 .app-background {
-    background-color: var(--mat-sys-surface);
-    // background:
-    //     linear-gradient(217deg, rgba(153, 0, 153, 0.8), rgba(153, 0, 153, 0) 70.71%),
-    //     linear-gradient(127deg, rgba(76, 0, 153, 0.8), rgba(76, 0, 153, 0) 70.71%),
-    //     linear-gradient(336deg, rgba(0, 61, 153, 1), rgba(0, 61, 153, 0) 70.71%);
+  background-color: var(--mat-sys-surface);
+
+  .app-container {
+    display: flex;
+    height: 100vh;
+    flex-wrap: wrap;  // Allow items to wrap
+  }
+}
+
+.chat-area {
+  position: relative;
+  flex: 1;
+  display: flex;
+  width: 100%;
+  background-color: white;
+  max-height: 100vh;
+  min-height: 700px; 
+  overflow: hidden;
+  
+  // Add these properties
+  min-width: 350px; // Prevents flex items from overflowing
+  > * {
+    flex: 1; // Makes direct children take full width
+    width: 100%;
+  }
+}
+
+.left-banner {
+  order: 0;  // Default order
+}
+
+.right-banner {
+  order: 3;  // Default order
+}
+
+app-info-window {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  z-index: 10;
+}
+
+@media (max-width: 1000px) {
+  .app-container {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .left-banner {
+    order: 3;  // Move to end
+    // width: 100%;  // Take full width
+    // height: auto;
+    // min-height: 150px;
+    position: fixed;
+    bottom: 25px;
+    left: 125px;
+  }
+
+  .right-banner {
+    position: fixed;
+    bottom: 25px;
+    right: -100px;
+  }
+
+  .chat-area {
+    order: 1;
+    height: 50vw;
+    max-height: 700px;
+  }
+  @media (max-width: 750px) {
     .app-container {
-        display: flex;
-        height: 100vh;
+      display: none !important;
     }
+    .size-warning {
+      display: inline !important;
+    }
+  }
+
+  @media (max-height: 950px) {
+    .app-container {
+      display: none !important;
+    }
+    .size-warning {
+      display: inline !important;
+    }
+  }
 }

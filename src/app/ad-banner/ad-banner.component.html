@@ -9,15 +9,11 @@
         <div class="ad-banner-text">
             <p *ngIf="!hidden">Hier könnte Ihre Werbung stehen!</p>
         </div>
-        <video
-          *ngIf="videoSrc && !hidden"
-          autoplay
-          loop
-          muted
-          playsinline
-          style="width: 100%; max-width: 100%;"
-        >
-            <source [src]="videoSrc" type="video/mp4">
-        </video>
+        <img
+          class="ad-banner-gif"
+          *ngIf="imageSrc && !hidden"
+          [src]="imageSrc"
+          [alt]="altText"
+        />
     </div>
 </div>

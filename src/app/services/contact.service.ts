@@ -1,8 +1,8 @@
-import { effect, Injectable, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { effect, Injectable, linkedSignal, signal } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
-import { finalize, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
 import { Member } from '../model/member.model';
@@ -12,24 +12,43 @@ import { Member } from '../model/member.model';
 })
 export class ContactService {
   isLoading = signal(false);
-  selectedContact = signal<Contact | Group | null>(null);
   self = signal<Contact | null>(null);
   contacts = signal<(Contact | Group)[]>([]);
-  showInfoOf = signal<Contact | Group | null>(null);
+  selectedContact = linkedSignal<(Contact | Group)[], (Contact | Group | null)>({
+    source: this.contacts,
+    computation: (source, previous) => {
+      if (previous?.value) {
+        return (source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
+      }
+      return null;
+    }
+  });
+  showInfoOf = linkedSignal<(Contact | Group)[], (Contact | Group | null)>({
+    source: this.contacts,
+    computation: (source, previous) => {
+      if (previous?.value) {
+        const self = this.self();
+        if (self && self.contact_id == previous.value!.contact_id) {
+          return self!;
+        }
+        return (source.find((opt) => opt.contact_id === previous.value!.contact_id) ?? null);
+      }
+      return null;
+    }
+  });
 
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
     private environmentService: EnvironmentService
   ) {
+    this.isLoading.set(true);
     effect(() => {
       if (this.loginService.userLoggedIn()) {
         this.fetchOwnUserInfo().subscribe(userData => {
           this.self.set(userData);
         });
-        this.fetchContacts().subscribe(contactsData => {
-          this.contacts.set(contactsData);
-        });
+        this.fetchContacts();
       } else {
         this.contacts.set([]);
         this.self.set(null);
@@ -50,9 +69,8 @@ export class ContactService {
     this.showInfoOf.set(null);
   }
 
-  public fetchContacts(): Observable<Contact[]> {
-    this.isLoading.set(true);
-    return this.http.get<any>(
+  public fetchContacts() {
+    this.http.get<any>(
       this.environmentService.getContactsUrl(),
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).pipe(
@@ -73,8 +91,10 @@ export class ContactService {
               contact.contact_id,
               contact.name,
               contact.picture_url,
+              new Date(contact.last_message_timestamp),
               new Date(contact.created_at),
-              members
+              members,
+              contact.am_admin
             );
           } else {
             return new Contact(
@@ -82,14 +102,20 @@ export class ContactService {
               contact.contact_id,
               contact.name,
               contact.picture_url,
+              new Date(contact.last_message_timestamp),
               contact.status,
               contact.streak
             );
           }
         });
-      }),
-      finalize(() => this.isLoading.set(false))
-    );
+      })
+    ).subscribe((contactsData: (Contact | Group)[]) => {
+      const sortedContacts = [...contactsData].sort((a, b) =>
+        b.last_message_timestamp.getTime() - a.last_message_timestamp.getTime()
+      );
+      this.contacts.set(sortedContacts);
+      this.isLoading.set(false);
+    });
   }
 
   private fetchOwnUserInfo() {
@@ -103,6 +129,7 @@ export class ContactService {
           response.user_id,
           response.username,
           response.profile_picture,
+          new Date(response.last_message_timestamp),
           'Friend',
           0
         );
@@ -143,11 +170,13 @@ export class ContactService {
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe();
+    this.showInfoOf.set(null);
+    this.selectedContact.set(null);
   }
 
   changeGroup(action: string, group_id: string, new_value: string) {
     this.http.post(
-      this.environmentService.getDeleteGroupUrl(),
+      this.environmentService.getChangeGroupUrl(),
       {
         'action': `${action}`,
         'group_id': `${group_id}`,
@@ -173,7 +202,61 @@ export class ContactService {
       this.environmentService.getRemoveMemberUrl(),
       {
         'group_id': `${group_id}`,
-        'new_member_id': `${new_member_id}`
+        'member_id': `${new_member_id}`
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe();
+  }
+
+  fetchNewContacts(newContactName: string): Observable<Contact[]> {
+    return this.http.get<any>(
+      this.environmentService.getGetAllUsersUrl(),
+      {
+        headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`}),
+        params: new HttpParams().append('searchBy', newContactName)
+      }
+    ).pipe(
+      map((response: any) => {
+        const contactsData = Array.isArray(response) ? response : (response.users ? response.users : []);
+        return contactsData.map((contact: any) => {
+          return new Contact(
+            false,
+            contact.user_id,
+            contact.username,
+            contact.profile_picture,
+            new Date(contact.last_message_timestamp),
+            '',
+            0
+          );
+        });
+      })
+    );
+  }
+
+  createGroup(): Observable<string> {
+    return this.http.post<string>(
+      this.environmentService.getCreateGroupUrl(),
+      {},
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    );
+  }
+
+  changeProfile(action: string, new_value: string, old_password?: string) {
+    if (this.self() && action == 'name') {
+      const new_self = {...this.self()!, name: new_value};
+      this.self.set(new_self);
+      this.showInfoOf.set(new_self);
+    } else if (this.self() && action == 'picture') {
+      const new_self = {...this.self()!, picture_url: new_value};
+      this.self.set(new_self);
+      this.showInfoOf.set(new_self);
+    }
+    this.http.post(
+      this.environmentService.getChangeProfileUrl(),
+      {
+        action: action,
+        new_value: new_value,
+        old_password: old_password
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe();

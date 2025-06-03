@@ -4,7 +4,9 @@
   display: flex;
   flex-direction: column;
   width: 20vw;
+  min-width: 350px;
   height: 100%;
+  min-height: 700px;
   background-color: var(--mat-sys-surface-container);
   color: var(--mat-sys-on-surface);
 
@@ -13,6 +15,10 @@
   // border-right is defined in chat-window-component, chat-input; / placeholder, because I don't want the outline to conflict with the chat window header primary color
   border-bottom: 1px solid var(--mat-sys-outline);
   border-left: 1px solid var(--mat-sys-outline);
+
+  @media (max-width: 1000px) {
+    max-height: 700px;
+  }
 
   .contact-list {
     flex: 1; // This allows the list to take remaining space

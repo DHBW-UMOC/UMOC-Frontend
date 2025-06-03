@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Member } from '../model/member.model';
 import { NgOptimizedImage } from '@angular/common';
 import { MatButtonToggle } from '@angular/material/button-toggle';
@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
     NgOptimizedImage,
     MatButtonToggle,
     MatFabButton,
-    MatIcon, 
+    MatIcon,
     MatCardModule
   ],
   templateUrl: './member-container.component.html',
@@ -20,4 +20,19 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class MemberContainerComponent {
   @Input() member: Member | null = null;
+  @Input() editable!: boolean;
+  @Output() adminChange = new EventEmitter<string>();
+  @Output() removeMember = new EventEmitter();
+
+  isAdmin(): boolean {
+    return this.member?.role === 'admin';
+  }
+
+  onToggleAdmin(): void {
+    this.adminChange.emit(this.isAdmin() ? 'deadmin' : 'admin');
+  }
+
+  onRemoveMember(): void {
+    this.removeMember.emit();
+  }
 }

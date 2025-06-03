@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatMenu, MatMenuItem, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
 import { Contact } from '../model/contact.model';
 import { Group } from '../model/group.model';
@@ -9,7 +9,7 @@ import { Group } from '../model/group.model';
 @Component({
   selector: 'contact-container',
   templateUrl: './contact-container.component.html',
-  imports: [NgOptimizedImage, MatIconButton, MatMenuTrigger, MatIcon, MatMenuItem, MatMenu],
+  imports: [NgOptimizedImage, MatIconButton, MatMenuTrigger, MatIcon, MatMenuItem, MatMenu, MatMenuModule],
   styleUrl: './contact-container.component.scss'
 })
 export class ContactContainerComponent {
@@ -17,6 +17,7 @@ export class ContactContainerComponent {
   @Output() contactClick = new EventEmitter<Contact | Group>();
   @Output() optionSelect = new EventEmitter<string>();
   @Output() optionSelectGroup = new EventEmitter<string>();
+  @Input() known!: boolean;
 
   onContactClick() {
     this.contactClick.emit(this.chat);

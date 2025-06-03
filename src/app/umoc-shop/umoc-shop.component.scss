@@ -1,0 +1,9 @@
+.umoc-shop-container {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  border: 1px solid var(--mat-sys-outline);
+  background-color: var(--mat-sys-surface-bright);
+  position: relative;
+  overflow: hidden;
+}
