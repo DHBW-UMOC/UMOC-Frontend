@@ -11,10 +11,10 @@
       @if (this.chatService.currentChatHistory().length > 0 && !this.chatService.isLoading()) {
         @if (this.websocket.earlyMessages().length > 0) {
           @for (earlyMessage of this.websocket.earlyMessages(); track earlyMessage.sender_id){
-            <div>
-              {{earlyMessage.sender_username}}<br>
-              {{earlyMessage.content}}
-            </div>
+            <app-message
+              [message]="earlyMessage.toMessage()"
+              [currentUser]="this.currentUser"
+              [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
           }
         }
         @for (message of this.chatService.currentChatHistory().slice().reverse(); track message.message_id) {
