@@ -29,6 +29,11 @@ export class WsService {
         this.disconnect();
       }
     });
+    effect(() => {
+        this.contactService.selectedContact();
+        this.earlyMessages.set([]);
+      }
+    );
   }
 
   private connect(): void {
@@ -48,58 +53,36 @@ export class WsService {
     });
 
     this.socket.on('chat_change', () => {
-      this.contactService.fetchContacts().subscribe(contactsData => {
-        this.contactService.contacts.set(contactsData);
-      });
+      this.contactService.fetchContacts();
     });
 
     this.socket.on('new_message', (message) => {
-      if (this.contactService.selectedContact()) {
-        if (message.is_group) {
-          if (this.contactService.selectedContact()!.contact_id == message.recipient_id) {
-            this.chatService.updateChatHistory(message.recipient_id);
-          }
-        } else {
-          if (this.contactService.selectedContact()!.contact_id == message.sender_id) {
-            this.chatService.updateChatHistory(message.sender_id);
-          }
-        }
+      const currentContact = this.contactService.selectedContact();
+      if (currentContact && currentContact!.contact_id == (message.is_group ? message.recipient_id : message.sender_id)) {
+        this.chatService.fetchChatHistory(message.is_group ? message.recipient_id : message.sender_id);
       }
     });
 
-    this.socket.on('receive_char', (earlyMessage) => {
-      if (this.contactService.selectedContact()) {
-        if (earlyMessage.is_group) {
-          if (this.contactService.selectedContact()!.contact_id == earlyMessage.recipient_id) {
-            this.indentPrevent(earlyMessage);
+    this.socket.on('receive_char', (earlyMessageData) => {
+      const currentContact = this.contactService.selectedContact();
+      if (currentContact && currentContact!.contact_id == (earlyMessageData.is_group ? earlyMessageData.recipient_id : earlyMessageData.sender_id)) {
+        const earlyMessage = new EarlyMessage(earlyMessageData.char, earlyMessageData.sender_id, 'Username gebraucht');
+        const existingIndex = this.earlyMessages().findIndex(msg => msg.sender_id === earlyMessageData.sender_id);
+        if (existingIndex !== -1) {
+          const oldMessages = [...this.earlyMessages()];
+          if (earlyMessage.content == '') {
+            oldMessages.splice(existingIndex, 1);
+            this.earlyMessages.set(oldMessages);
+          } else {
+            oldMessages[existingIndex] = earlyMessage;
+            this.earlyMessages.set(oldMessages);
           }
         } else {
-          if (this.contactService.selectedContact()!.contact_id == earlyMessage.sender_id) {
-            this.indentPrevent(earlyMessage);
-          }
+          const oldMessages = [...this.earlyMessages(), earlyMessage];
+          this.earlyMessages.set(oldMessages);
         }
       }
     });
-  }
-
-  private indentPrevent(earlyMessage: any){
-    const existingIndex = this.earlyMessages().findIndex(msg => msg.sender_id === earlyMessage.sender_id);
-    if (existingIndex !== -1) {
-      const oldMessages = [...this.earlyMessages()];
-      oldMessages[existingIndex] = new EarlyMessage(
-        earlyMessage.char,
-        earlyMessage.sender_id,
-        'Username gebraucht'
-      );
-      this.earlyMessages.set(oldMessages);
-    } else {
-      const oldMessages = [...this.earlyMessages(), new EarlyMessage(
-        earlyMessage.char,
-        earlyMessage.sender_id,
-        'Username gebraucht'
-      )];
-      this.earlyMessages.set(oldMessages);
-    }
   }
 
   private disconnect() {

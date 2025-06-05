@@ -26,8 +26,9 @@ export class ChatWindowComponent {
   ) {
     effect(() => {
         if (!this.contactService.selectedContact()) return;
+        this.chatService.isLoading.set(true);
         this.chatService.currentChatHistory.set([]);
-        this.chatService.getChatHistory(this.contactService.selectedContact()!.contact_id);
+        this.chatService.fetchChatHistory(this.contactService.selectedContact()!.contact_id);
         setTimeout(() => this.scrollToBottom(), 0);
       }
     );

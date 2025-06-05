@@ -61,3 +61,24 @@
   50% { opacity: 1; }
   100% { opacity: 0.75; }
 }
+
+.no-messages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--mat-sys-primary);
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  margin: auto auto 10px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 200px;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+}
