@@ -5,7 +5,14 @@
       <img [ngSrc]="chat.picture_url" width="50" height="50" alt=""/>
     </div>
     <div class="contact-container-informations">
-      <div class="contact-container-name">{{ chat.name }}</div>
+      <div class="contact-container-name" 
+      [ngClass]="{
+        'status-friend': isContact(chat) && chat.status === 'friend',
+        'status-blocked': isContact(chat) && chat.status === 'blocked',
+        'status-new': isContact(chat) && chat.status === 'new',
+        'status-timeout': isContact(chat) && chat.status === 'timeout',
+        'status-lastwords': isContact(chat) && chat.status === 'lastwords'
+      }">{{ chat.name }}</div>
       @if (!chat.is_group) {
         <div class="contact-container-status">
           {{ isContact(chat) ? chat.status : 'Unbekannt' }}
