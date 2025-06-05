@@ -49,6 +49,17 @@
     left: 10px;
     z-index: 100;
   }
+
+  .early-message {
+    opacity: 0.5;
+    animation: pulse-opacity 2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-opacity {
+  0% { opacity: 0.75; }
+  50% { opacity: 1; }
+  100% { opacity: 0.75; }
 }
 
 .no-messages {
