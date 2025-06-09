@@ -36,9 +36,9 @@
           />
         }
       } @else {
-        <ng-container>
-          <p>Keine vorhandenen Chats</p>
-        </ng-container>
+        <div class="no-chats-text">
+          Keine vorhandenen Chats
+        </div>
       }
     } @else {
       <ng-container>
@@ -47,7 +47,9 @@
     }
 
     @if (this.searchResults().length > 0) {
-      <p>Neue Chats:</p>
+      <div class="new-chats-header">
+        Neue Chats
+      </div>
       @for (newContact of this.searchResults(); track newContact.contact_id) {
         <contact-container
           [chat]="newContact"

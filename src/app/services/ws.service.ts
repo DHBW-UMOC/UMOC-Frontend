@@ -66,7 +66,7 @@ export class WsService {
     this.socket.on('receive_char', (earlyMessageData) => {
       const currentContact = this.contactService.selectedContact();
       if (currentContact && currentContact!.contact_id == (earlyMessageData.is_group ? earlyMessageData.recipient_id : earlyMessageData.sender_id)) {
-        const earlyMessage = new EarlyMessage(earlyMessageData.char, earlyMessageData.sender_id, 'Username gebraucht');
+        const earlyMessage = new EarlyMessage(earlyMessageData.char, earlyMessageData.sender_id, earlyMessageData.sender_username);
         const existingIndex = this.earlyMessages().findIndex(msg => msg.sender_id === earlyMessageData.sender_id);
         if (existingIndex !== -1) {
           const oldMessages = [...this.earlyMessages()];

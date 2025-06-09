@@ -7,8 +7,8 @@
     <div class="contact-container-informations">
       <div class="contact-container-name">{{ chat.name }}</div>
       @if (!chat.is_group) {
-        <div class="contact-container-status">
-          {{ isContact(chat) ? chat.status : 'Unbekannt' }}
+        <div class="contact-container-status" [ngClass]="isContact(chat) ? 'status-' + chat.status : 'status-default'">
+          {{ isContact(chat) ? (ContactStatusDisplay[chat.status] !== undefined ? ContactStatusDisplay[chat.status] : 'Unbekannter Status: ' + chat.status) : 'Kein Status übermittelt' }}
         </div>
       }
     </div>
@@ -28,23 +28,30 @@
       <span>Gruppe verlassen</span>
     </button>
   } @else if (isContact(chat)) {
-    @if (chat.status == 'friend') {
+    @if (chat.status == 'friend' || chat.status == 'pending_friend') {
       <button mat-menu-item (click)='onOptionSelect("unfriend")'>
         <span>Entfreunden</span>
       </button>
-    } @else {
+      <button mat-menu-item (click)='onOptionSelect("block")'>
+        <span>Blockieren</span>
+      </button>
+    } @else if (chat.status == 'block'){
+      <button mat-menu-item (click)='onOptionSelect("unblock")'>
+        <span>Entblockieren</span>
+      </button>
+    } @else if (chat.status == 'fpending_friend' || chat.status == 'new' || chat.status == 'ntcon'){
       <button mat-menu-item (click)='onOptionSelect("friend")'>
         <span>Befreunden</span>
       </button>
-    }
-    @if (chat.status == 'blocked') {
       <button mat-menu-item (click)='onOptionSelect("block")'>
-        <span>Entblocken</span>
+        <span>Blockieren</span>
       </button>
-    } @else {
-      <button mat-menu-item (click)='onOptionSelect("unblock")'>
-        <span>Blocken</span>
+    } @else if (chat.status == 'last_words'){
+      <button mat-menu-item (click)='onOptionSelect("block")'>
+        <span>Blockieren</span>
       </button>
+    } @else if (chat.status == 'timeout'){
+
     }
   }
 </mat-menu>
