@@ -233,11 +233,35 @@ export class ContactService {
     );
   }
 
-  createGroup(): Observable<string> {
-    return this.http.post<string>(
+  createGroup() {
+    this.http.post<string>(
       this.environmentService.getCreateGroupUrl(),
       {},
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe(
+      (groupData: any) => {
+        const group = groupData.group;
+        const members = group.members.map((member: any) => {
+          return new Member(
+            member.contact_id,
+            member.name,
+            member.picture_url,
+            member.role
+          );
+        });
+        const newGroup = new Group(
+          group.is_group,
+          group.contact_id,
+          group.name,
+          group.picture_url,
+          new Date(group.last_message_timestamp),
+          new Date(group.created_at),
+          members,
+          group.am_admin
+        );
+        this.selectedContact.set(newGroup);
+        this.showInfoOf.set(newGroup);
+      }
     );
   }
 
