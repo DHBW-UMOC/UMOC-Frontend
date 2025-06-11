@@ -43,28 +43,6 @@
       height: 100%;
     }
 
-    .contact-container-name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-
-      &.status-friend {
-        color: #3ED978;
-      } 
-      &.status-blocked {
-        color: #d73b14;
-      }
-      &.status-new {
-        color: #C8D8F9;
-      }
-      &.status-timeout { 
-        color: #c18719;
-      }
-      &.status-lastwords {
-        color: #f228e1;
-      }
-    }
-
     .contact-container-status {
       display: block;
       font: var(--mat-sys-body-small);
@@ -74,11 +52,11 @@
       white-space: nowrap;
 
       &.status-friend {
-        color: #4CAF50;
+        color: #3ED978;
       }
 
       &.status-pending_friend {
-        color: #FF9800;
+        color: #c18719;
       }
 
       &.status-fpending_friend {
@@ -90,7 +68,7 @@
       }
 
       &.status-block {
-        color: #F44336;
+        color: #d73b14;
       }
 
       &.status-fblocked {
@@ -98,7 +76,7 @@
       }
 
       &.status-new {
-        color: #00BCD4;
+        color: #C8D8F9;
       }
 
       &.status-timeout {
