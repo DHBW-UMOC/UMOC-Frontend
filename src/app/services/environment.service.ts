@@ -75,4 +75,25 @@ export class EnvironmentService {
   getWSUrl() {
     return`${this.apiUrl}`;
   }
+
+  // Umoc Endpoints
+  getGetItemListUrl() {
+    return`${this.apiUrl}/getItemList`;
+  }
+
+  getGetInventoryUrl() {
+    return`${this.apiUrl}/getInventory`;
+  }
+
+  getGetActiveItemsUrl() {
+    return`${this.apiUrl}/getActiveItems`;
+  }
+
+  getBuyItemUrl() {
+    return`${this.apiUrl}/buyItem`;
+  }
+
+  getGetUseItemUrl() {
+    return`${this.apiUrl}/useItem`;
+  }
 }
