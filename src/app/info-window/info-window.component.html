@@ -67,23 +67,31 @@
             }
           </mat-card-content>
           @if (canEdit()) {
-            <mat-card-actions>
-              <input type="text" placeholder="Neue Member suchen" #searchBox
-                     (keyup)="searchNewMembers(searchBox.value)"/>
-            </mat-card-actions>
+            <mat-card-actions class="member-search">
+              <input
+                type="text"
+                placeholder="Neue Member suchen"
+                #searchBox
+                (keyup)="searchNewMembers(searchBox.value)"
+              />
+            </mat-card-actions>                      
           }
           <mat-card-content>
             @if (this.searchResults().length > 0) {
-              <p>Neue Member:</p>
-              @for (newMember of this.searchResults(); track newMember.contact_id) {
-                <contact-container
-                  [chat]="newMember"
-                  [known]="false"
-                  (contactClick)="addMember($event)"
-                />
-              }
+              <div class="member-search-results-container">
+                <div class="results-title">Neue Member:</div>
+                <div class="member-search-results">
+                  @for (newMember of this.searchResults(); track newMember.contact_id) {
+                    <contact-container
+                      [chat]="newMember"
+                      [known]="false"
+                      (contactClick)="addMember($event)"
+                    />
+                  }
+                </div>
+              </div>
             }
-          </mat-card-content>
+          </mat-card-content>          
         </mat-card>
       }
 
