@@ -9,11 +9,6 @@
   align-items: center;
   justify-content: center;
 
-  &:hover {
-    background-color: var(--mat-sys-surface-container-high);
-    cursor: pointer;
-  }
-
   .own-contact-container-image {
     aspect-ratio: 1 / 1;
     height: 58px;
