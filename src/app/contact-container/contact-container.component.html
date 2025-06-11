@@ -5,7 +5,20 @@
       <img [ngSrc]="chat.picture_url" width="50" height="50" alt=""/>
     </div>
     <div class="contact-container-informations">
-      <div class="contact-container-name">{{ chat.name }}</div>
+      <div class="contact-container-name" 
+      [ngClass]="{
+        'status-friend': isContact(chat) && chat.status === 'friend',
+        'status-unfriend': isContact(chat) && chat.status === 'unfriend',
+        'status-pending_friend': isContact(chat) && chat.status === 'pending_friend',
+        'status-last_words': isContact(chat) && chat.status === 'last_words',
+        'status-blocked': isContact(chat) && chat.status === 'blocked',
+        'status-fblocked': isContact(chat) && chat.status === 'fblocked',
+        'status-deblocked': isContact(chat) && chat.status === 'deblocked',
+        'status-new': isContact(chat) && chat.status === 'new',
+        'status-timeout': isContact(chat) && chat.status === 'timeout',
+        'status-ntcon': isContact(chat) && chat.status === 'ntcon'
+
+      }">{{ chat.name }}</div>
       @if (!chat.is_group) {
         <div class="contact-container-status" [ngClass]="isContact(chat) ? 'status-' + chat.status : 'status-default'">
           {{ isContact(chat) ? (ContactStatusDisplay[chat.status] !== undefined ? ContactStatusDisplay[chat.status] : 'Unbekannter Status: ' + chat.status) : 'Kein Status übermittelt' }}

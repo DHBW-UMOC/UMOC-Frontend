@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { NgClass, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgClass, NgOptimizedImage } from '@angular/common';
 import { MatIconButton } from '@angular/material/button';
 import { MatMenu, MatMenuItem, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
@@ -10,7 +10,7 @@ import { ContactStatusDisplay } from '../model/ContactStatusDisplay';
 @Component({
   selector: 'contact-container',
   templateUrl: './contact-container.component.html',
-  imports: [NgOptimizedImage, MatIconButton, MatMenuTrigger, MatIcon, MatMenuItem, MatMenu, MatMenuModule, NgClass],
+  imports: [CommonModule, NgOptimizedImage, MatIconButton, MatMenuTrigger, MatIcon, MatMenuItem, MatMenu, MatMenuModule, NgClass],
   styleUrl: './contact-container.component.scss'
 })
 export class ContactContainerComponent {

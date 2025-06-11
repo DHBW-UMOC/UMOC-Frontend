@@ -23,8 +23,11 @@
     flex: 1;
     overflow-y: auto;
     padding: 20px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: repeat;
+    background-position: center center;
     background-attachment: fixed;
+    background-color: var(--mat-sys-surface);
     flex-direction: column-reverse;
     border-top: 2px solid var(--mat-sys-outline);
     border-bottom: 2px solid var(--mat-sys-outline);
@@ -35,7 +38,7 @@
     }
 
     &:not(.alt-bg):not(.loading) {
-      background-image: url('/assets/MessageBackTODO2.png');
+      background-image: url('/assets/ChatBackgroundImage.png');
     }
 
     &.loading {
