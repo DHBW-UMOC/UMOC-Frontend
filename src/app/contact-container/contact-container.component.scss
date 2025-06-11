@@ -12,6 +12,7 @@
   &:hover {
     background-color: var(--mat-sys-surface-container-high);
     cursor: pointer;
+
     button[mat-icon-button] {
       visibility: visible;
       opacity: 1;
@@ -34,7 +35,7 @@
         border-radius: 50%;
       }
     }
-    
+
     .contact-container-informations {
       display: flex;
       flex-direction: column;
@@ -67,11 +68,46 @@
     .contact-container-status {
       display: block;
       font: var(--mat-sys-body-small);
-      color: #888;
       margin-top: 2px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      &.status-friend {
+        color: #4CAF50;
+      }
+
+      &.status-pending_friend {
+        color: #FF9800;
+      }
+
+      &.status-fpending_friend {
+        color: #2196F3;
+      }
+
+      &.status-last_words {
+        color: #795548;
+      }
+
+      &.status-block {
+        color: #F44336;
+      }
+
+      &.status-fblocked {
+        color: #9C27B0;
+      }
+
+      &.status-new {
+        color: #00BCD4;
+      }
+
+      &.status-timeout {
+        color: #9E9E9E;
+      }
+
+      &.status-default {
+        color: #757575;
+      }
     }
   }
 
