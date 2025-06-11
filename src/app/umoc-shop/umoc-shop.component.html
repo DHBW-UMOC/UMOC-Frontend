@@ -1,13 +1,33 @@
 <div class="umoc-shop-container">
-  <h1>Hier kommen die Features hin wegen denen diese Anwendung unsicher genannt wird</h1>
-  <br>
-  <br>
-  <button mat-fab (click)="this.umocService.toggleAdBanner()">
-    {{ this.umocService.showAdBanners() ? 'Hide Ad Banner' : 'Show Ad Banner'}}
-  </button>
-  <br>
-  <br>
-  <button mat-fab (click)="this.umocService.toggleDuckBackground()">
-    {{ this.umocService.showDuckBackground() ? 'Hide Alt Background' : 'Show Alt Background'}}
-  </button>
+  <h1>UMOC-Shop</h1>
+
+  <div class="card-container">
+    @for (item of this.umocService.itemTypes(); track item.item_name) {
+      <mat-card class="item-card" (click)="this.umocService.buyItem(item.item_name)">
+        <mat-card-content>
+          <div class="item-icon">{{ item.icon }}</div>
+          <div class="item-details">
+            <div class="item-name">{{ item.item_name }}</div>
+            <div class="item-price">{{ item.price }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  <h1>Inventar</h1>
+
+  <div class="card-container">
+    @for (item of this.umocService.inventory(); track item.item_name) {
+      <mat-card class="item-card">
+        <mat-card-content>
+          <div class="item-icon">{{ item.icon }}</div>
+          <div class="item-details">
+            <div class="item-name">{{ item.item_name }}</div>
+            <div class="item-price">{{ item.amount }}</div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
 </div>

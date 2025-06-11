@@ -6,6 +6,7 @@ import { UmocService } from './umoc.service';
 import { EnvironmentService } from './environment.service';
 import { io, Socket } from 'socket.io-client';
 import { EarlyMessage } from '../model/early-message.model';
+import { ActiveItem } from '../model/active-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -83,6 +84,10 @@ export class WsService {
         }
       }
     });
+
+    this.socket.on('item_used', (itemData: any) => {
+      this.umocService.activateItem(new ActiveItem(itemData.name, new Date(itemData.active_until)));
+    })
   }
 
   private disconnect() {

@@ -1,6 +1,9 @@
 <div class="own-contact-container">
   @if (this.contactservice.self(); as me) {
     <div class="own-contact-container-image">
+      @if (this.umocService.showTimeOutReminder()) {
+        <div class="timeout-emoji">🤐</div>
+      }
       <img [ngSrc]="me.picture_url!" width="58" height="58" alt="UMOCUS"/>
     </div>
     <div class="own-contact-container-name">{{ me.name! }}</div>
