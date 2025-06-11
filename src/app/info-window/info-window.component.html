@@ -99,7 +99,7 @@
         <mat-card>
           @if (changingPassword) {
             <mat-card-content>
-              <form [formGroup]="passwordForm" (ngSubmit)="onSubmitNewPassword()">
+              <form [formGroup]="passwordForm" (ngSubmit)="onSubmitNewPassword()" class="password-form">
                 <input
                   type="password"
                   id="old_password"
@@ -130,12 +130,18 @@
                   [class.invalid]="passwordForm.controls['confirm_new_password'].invalid && !passwordForm.controls['confirm_new_password'].untouched"
                 />
                 @if (passwordForm.get('new_password')?.value != passwordForm.get('confirm_new_password')?.value && !passwordForm.controls['confirm_new_password'].untouched) {
-                  <div class="error-message"> Neue Passwörter müssen übereinstimmen</div>
+                  <div class="error-message">Neue Passwörter müssen übereinstimmen</div>
                 }
 
-                <button mat-fab type="submit" [disabled]="passwordForm.invalid || passwordForm.get('new_password')?.value != passwordForm.get('confirm_new_password')?.value">
-                  Passwort ändern
-                </button>
+                <div class="button-container">
+                  <button mat-raised-button type="button" (click)="changingPassword = false">
+                    Abbrechen
+                  </button>
+                  <button mat-raised-button color="primary" type="submit" 
+                          [disabled]="passwordForm.invalid || passwordForm.get('new_password')?.value != passwordForm.get('confirm_new_password')?.value">
+                    Speichern
+                  </button>
+                </div>
               </form>
             </mat-card-content>
           } @else {
