@@ -8,15 +8,15 @@
          class="chat-messages"
          [class.loading]="this.chatService.isLoading()"
          [class.alt-bg]="this.umocService.showDuckBackground()">
-      @if (this.chatService.currentChatHistory().length > 0 && !this.chatService.isLoading()) {
-        @if (this.websocket.earlyMessages().length > 0) {
-          @for (earlyMessage of this.websocket.earlyMessages(); track earlyMessage.sender_id){
-            <app-message class="early-message"
-              [message]="earlyMessage.toMessage()"
-              [currentUser]="this.currentUser"
-              [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
-          }
+      @if (this.websocket.earlyMessages().length > 0) {
+        @for (earlyMessage of this.websocket.earlyMessages(); track earlyMessage.sender_id){
+          <app-message class="early-message"
+                       [message]="earlyMessage.toMessage()"
+                       [currentUser]="this.currentUser"
+                       [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
         }
+      }
+      @if (this.chatService.currentChatHistory().length > 0 && !this.chatService.isLoading()) {
         @for (message of this.chatService.currentChatHistory().slice().reverse(); track message.message_id) {
           <app-message
             [message]="message"
