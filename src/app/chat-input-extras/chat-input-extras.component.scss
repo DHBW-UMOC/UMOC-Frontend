@@ -125,5 +125,19 @@
 
   button[mat-fab] {
     width: 100%;
+    color: var(--mat-sys-primary)
   }
+}
+
+.empty-inventory-message {
+  padding: 16px;
+  text-align: center;
+  color: var(--mat-sys-on-surface-variant);
+  background-color: var(--mat-sys-surface-container-lowest);
+  border-radius: 4px;
+  width: 160px; // Gleiche Breite wie die Karten
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
