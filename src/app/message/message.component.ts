@@ -45,4 +45,12 @@ export class MessageComponent {
       b.toString(16).padStart(2, '0')
     );
   }
+
+  formatMessageContent(content: string | undefined): string {
+    if (!content) return '';
+
+    const emojiRegex = /(\p{Emoji})/gu;
+
+    return content.replace(emojiRegex, '<span class="emoji">$1</span>');
+  }
 }

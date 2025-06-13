@@ -1,3 +1,9 @@
-<button mat-icon-button type="button">
-  <mat-icon>sentiment_satisfied_alt</mat-icon>
-</button>
+<div class="chat-input-emojis">
+  <button mat-icon-button type="button" (click)="toggleEmojiPicker($event)">
+    <mat-icon>sentiment_satisfied_alt</mat-icon>
+  </button>
+
+  <div *ngIf="showEmojiPicker" class="emoji-picker-container" (click)="$event.stopPropagation()">
+    <emoji-mart [darkMode]="true" (emojiSelect)="addEmoji($event)" [title]="'Wähle ein Emoji'"></emoji-mart>
+  </div>
+</div>

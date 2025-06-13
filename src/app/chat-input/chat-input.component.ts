@@ -70,4 +70,21 @@ export class ChatInputComponent implements AfterViewInit {
     );
     this.websocket.sendMessageTooEarly('');
   }
+
+  insertEmoji(emoji: string) {
+    const textarea = this.messageInput.nativeElement;
+    const startPos = textarea.selectionStart;
+    const endPos = textarea.selectionEnd;
+
+    textarea.value =
+      textarea.value.substring(0, startPos) +
+      emoji +
+      textarea.value.substring(endPos);
+
+    textarea.selectionStart = startPos + emoji.length;
+    textarea.selectionEnd = startPos + emoji.length;
+
+    textarea.focus();
+    this.adjustTextareaHeight();
+  }
 }

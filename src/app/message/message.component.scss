@@ -1,5 +1,17 @@
 @use "../../styles.scss" as global;
 
+:root {
+  --message-text-color-light: #000;
+  --message-text-color-dark: #fff;
+  --message-text-color: var(--message-text-color-dark);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --message-text-color: var(--message-text-color-light);
+  }
+}
+
 .message-container {
 
   --r: 1em;
@@ -7,25 +19,27 @@
   --message-custom-color: #fe6d00;
 
 
-
   max-width: 80%;
   padding: 1em;
   border-inline: var(--t) solid #0000;
   border-radius: calc(var(--r) + var(--t)) / var(--r);
-  mask: 
-    radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
-      var(--_p) 100%/var(--t) var(--t) no-repeat,
-    linear-gradient(#000 0 0) padding-box;
+  mask: radial-gradient(100% 100% at var(--_p) 0, #0000 99%, #000 102%) var(--_p) 100%/var(--t) var(--t) no-repeat,
+  linear-gradient(#000, #000) padding-box;
 
   &.message-received {
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
-    background: linear-gradient(135deg,var(--mat-sys-secondary-container),var(--mat-sys-secondary-container)) border-box;
+    background: linear-gradient(135deg, var(--mat-sys-secondary-container), var(--mat-sys-secondary-container)) border-box;
+
     .message-text {
-      background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-secondary-container));
-      color: transparent;
-      background-clip: text;
+      color: var(--message-text-color);
+
+      .emoji {
+        color: initial;
+        background-clip: initial;
+        background-image: none;
+      }
     }
   }
 
@@ -34,16 +48,22 @@
     border-bottom-right-radius: 0 0;
     place-self: end;
     background: linear-gradient(135deg, var(--mat-sys-tertiary-container), var(--mat-sys-primary-container)) border-box;
+
     .message-text {
-      background-image: linear-gradient(135deg, var(--mat-sys-on-tertiary-container), var(--mat-sys-on-primary-container));
-      color: transparent;
-      background-clip: text;
+      color: var(--message-text-color);
+
+      .emoji {
+        color: initial;
+        background-clip: initial;
+        background-image: none;
+      }
     }
   }
 
   .message-text {
     white-space: pre-wrap;
     word-wrap: break-word;
+    color-scheme: light;
   }
 
   .message-sender {

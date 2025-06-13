@@ -85,3 +85,14 @@
     text-align: center;
   }
 }
+
+.message-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+
+  .emoji {
+    color: initial;
+    background-clip: initial;
+    background-image: none;
+  }
+}
