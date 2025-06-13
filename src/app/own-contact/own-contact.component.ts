@@ -19,7 +19,10 @@ import { UmocService } from '../services/umoc.service';
 })
 export class OwnContactComponent {
 
-  constructor(protected contactservice: ContactService, private umocService: UmocService) {
+  constructor(
+    protected contactservice: ContactService,
+    protected umocService: UmocService
+  ) {
   }
 
   selectSelf(ownContact: Contact | Group) {

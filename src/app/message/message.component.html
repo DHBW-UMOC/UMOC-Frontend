@@ -1,8 +1,8 @@
 <div class="message-container"
      [ngClass]="(message?.sender_user_id == currentUser) ? 'message-sent' : 'message-received'">
   @if (isGroupChat && message?.sender_user_id != currentUser) {
-    <div class="message-sender"
-         [style.color]="stringToColour(message?.sender_username || '')">{{ message?.sender_username }}
+    <div class="message-sender" [style.color]="stringToColour(message?.sender_username || '')">
+      {{ message?.sender_username }}
     </div>
   }
   @if (message?.type === 'deleted_text') {
@@ -12,7 +12,7 @@
     </span>
   }
   @else {
-    <span class="message-text">{{ message?.content }}</span>
+    <span class="message-text" [innerHTML]="formatMessageContent(message?.content)">{{ message?.content }}</span>
   }
   <div class="message-timestamp">{{ message?.timestamp ? (message?.timestamp | date: 'HH:mm') : 'ERR' }}</div>
   @if (message?.type === 'text' && message?.sender_user_id == currentUser) {

@@ -1,6 +1,7 @@
 .chat-input-emojis {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  position: relative;
 
   button {
     display: flex;
@@ -10,8 +11,6 @@
     padding: 8px;
     color: var(--mat-sys-on-surface);
     background-color: transparent;
-    align-self: flex-end;
-    margin-bottom: 8px;
 
     mat-icon {
       font-size: 24px;
@@ -23,5 +22,12 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .emoji-picker-container {
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    z-index: 1000;
   }
 }

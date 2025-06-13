@@ -48,7 +48,15 @@ export class MessageComponent {
     );
   }
 
-  protected deleteMessage() {
+  formatMessageContent(content: string | undefined): string {
+    if (!content) return '';
+
+    const emojiRegex = /(\p{Emoji})/gu;
+
+    return content.replace(emojiRegex, '<span class="emoji">$1</span>');
+  }
+
+  deleteMessage() {
     this.onDelete.emit(this.message?.message_id);
   }
 }
