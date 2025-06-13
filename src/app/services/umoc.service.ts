@@ -1,5 +1,5 @@
 import { effect, Injectable, OnDestroy, signal } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
 import { map } from 'rxjs';
@@ -128,9 +128,18 @@ export class UmocService implements OnDestroy {
         'to_user_id': to_user_id
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
-    ).subscribe(() => {
-      this.fetchInventory();
-      this.fetchActiveItems();
+    ).subscribe({
+      next: () => {
+        this.fetchInventory();
+        this.fetchActiveItems();
+      },
+      error: (error: HttpErrorResponse) => {
+        if (error.error.error == 'Item already active for this user') {
+          window.alert('Das Item ist bei diesem Nutzer bereits aktiv');
+          return;
+        }
+        window.alert('Unbekannter Fehler');
+      }
     });
   }
 
