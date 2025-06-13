@@ -46,6 +46,10 @@ export class EnvironmentService {
     return `${this.apiUrl}/saveMessage`;
   }
 
+  getDeleteMessageUrl() {
+    return `${this.apiUrl}/deleteMessage`;
+  }
+
   // Group Management Endpoints
   getCreateGroupUrl(): string {
     return `${this.apiUrl}/createGroup`;

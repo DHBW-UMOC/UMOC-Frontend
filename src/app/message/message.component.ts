@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
 import { Message } from '../model/message.model';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-message',
-  imports: [CommonModule, NgClass],
+  imports: [CommonModule, NgClass, MatIcon],
   templateUrl: './message.component.html',
   styleUrl: './message.component.scss'
 })
@@ -12,6 +13,7 @@ export class MessageComponent {
   @Input() message: Message | undefined;
   @Input() currentUser: string | undefined = '';
   @Input() isGroupChat: boolean = false;
+  @Output() onDelete = new EventEmitter<string>();
 
   stringToColour(str: string, minBrightness = 130): string {
     let hash = 0;
@@ -44,5 +46,9 @@ export class MessageComponent {
       g.toString(16).padStart(2, '0') +
       b.toString(16).padStart(2, '0')
     );
+  }
+
+  protected deleteMessage() {
+    this.onDelete.emit(this.message?.message_id);
   }
 }

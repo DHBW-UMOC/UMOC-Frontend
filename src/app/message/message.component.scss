@@ -1,27 +1,74 @@
 @use "../../styles.scss" as global;
 
 .message-container {
-
   --r: 1em;
   --t: 1.5em;
   --message-custom-color: #fe6d00;
-
-
 
   max-width: 80%;
   padding: 1em;
   border-inline: var(--t) solid #0000;
   border-radius: calc(var(--r) + var(--t)) / var(--r);
-  mask: 
-    radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
-      var(--_p) 100%/var(--t) var(--t) no-repeat,
-    linear-gradient(#000 0 0) padding-box;
+  mask:
+          radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%)
+          var(--_p) 100%/var(--t) var(--t) no-repeat,
+          linear-gradient(#000 0 0) padding-box;
+  position: relative;
+
+  // Löschfunktion nur für eigene Nachrichten
+  &.message-sent {
+    &:hover {
+      .message-overlay {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  &:hover {
+    .delete-icon {
+      display: flex;
+    }
+  }
+
+  .message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: white;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .delete-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    background-color: white;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    mat-icon {
+      color: black;
+    }
+  }
 
   &.message-received {
     --_p: 0;
     border-bottom-left-radius: 0 0;
     place-self: start;
-    background: linear-gradient(135deg,var(--mat-sys-secondary-container),var(--mat-sys-secondary-container)) border-box;
+    background: linear-gradient(135deg, var(--mat-sys-secondary-container), var(--mat-sys-secondary-container)) border-box;
     .message-text {
       background-image: linear-gradient(135deg, var(--mat-sys-on-secondary-container), var(--mat-sys-on-secondary-container));
       color: transparent;
@@ -44,6 +91,8 @@
   .message-text {
     white-space: pre-wrap;
     word-wrap: break-word;
+    position: relative;
+    z-index: 0;
   }
 
   .message-sender {
@@ -51,6 +100,8 @@
     font-weight: bold;
     font: var(--mat-sys-title-medium);
     margin-top: -10px;
+    position: relative;
+    z-index: 0;
   }
 
   .message-timestamp {
@@ -59,6 +110,8 @@
     text-align: right;
     margin-top: 5px;
     margin-bottom: -10px;
+    position: relative;
+    z-index: 0;
   }
 }
 
@@ -67,4 +120,11 @@
   padding: 20px;
   color: #888;
   font: var(--mat-sys-body-large);
+}
+.deleted-message {
+  color: red;
+
+  .deleted-message-content {
+    color: initial; // Oder eine spezifische Farbe für den Inhalt
+  }
 }

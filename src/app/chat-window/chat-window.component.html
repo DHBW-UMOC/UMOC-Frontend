@@ -21,7 +21,9 @@
           <app-message
             [message]="message"
             [currentUser]="this.currentUser"
-            [isGroupChat]="this.contactService.selectedContact()?.is_group || false"/>
+            [isGroupChat]="this.contactService.selectedContact()?.is_group || false"
+            (onDelete)="this.deleteMessage($event)"
+          />
         }
       } @else if (this.chatService.isLoading()) {
         <div>

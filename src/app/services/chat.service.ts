@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
-import { ContactService } from './contact.service';
 
 @Injectable({
   providedIn: 'root'
@@ -58,6 +57,22 @@ export class ChatService {
         recipient_id: recipientID,
         content: message,
         is_group: false
+      },
+      {
+        headers: new HttpHeaders({
+          'Authorization': `Bearer ${this.loginService.getAuthToken()}`
+        })
+      }
+    ).subscribe(() => {
+      this.fetchChatHistory(recipientID);
+    });
+  }
+
+  public deleteMessage(recipientID: string, message_id: string) {
+    this.http.post(
+      this.environmentService.getDeleteMessageUrl(),
+      {
+        message_id: message_id
       },
       {
         headers: new HttpHeaders({

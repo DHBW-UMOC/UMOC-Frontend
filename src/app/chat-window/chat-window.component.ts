@@ -40,4 +40,8 @@ export class ChatWindowComponent {
     } catch (err) {
     }
   }
+
+  deleteMessage($message_id: string) {
+    this.chatService.deleteMessage(this.contactService.selectedContact()!.contact_id, $message_id);
+  }
 }
