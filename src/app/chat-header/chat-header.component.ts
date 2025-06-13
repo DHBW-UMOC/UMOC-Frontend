@@ -12,7 +12,8 @@ export class ChatHeaderComponent {
   @Input() selectedUser: Contact | Group | null = null;
   @Output() infoSelect = new EventEmitter<Contact | Group>();
 
-  onInfoSelect() {
+  onInfoSelect($event: MouseEvent) {
+    $event.stopPropagation();
     this.infoSelect.emit(this.selectedUser!);
   }
 }
