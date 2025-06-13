@@ -86,5 +86,6 @@ export class ChatInputComponent implements AfterViewInit {
 
     textarea.focus();
     this.adjustTextareaHeight();
+    this.websocket.sendMessageTooEarly(this.messageInput.nativeElement.value);
   }
 }
