@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { LoginComponent } from './login/login.component';
 import { LoginService } from './services/login.service';
@@ -9,7 +9,6 @@ import { ChatWindowComponent } from './chat-window/chat-window.component';
 import { InfoWindowComponent } from './info-window/info-window.component';
 import { UmocService } from './services/umoc.service';
 import { UmocShopComponent } from './umoc-shop/umoc-shop.component';
-import { WsService } from './services/ws.service';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +23,17 @@ export class AppComponent {
     protected loginService: LoginService,
     protected contactService: ContactService,
     protected umocService: UmocService,
-    protected wsService: WsService // unbedingt nötig, sonst wird er nie instanziiert
+    private elementRef: ElementRef
   ) {
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (this.contactService.showInfoOf()) {
+      const infoWindowElement = this.elementRef.nativeElement.querySelector('app-info-window');
+      if (infoWindowElement && !infoWindowElement.contains(event.target as Node)) {
+        this.contactService.showInfoOf.set(null);
+      }
+    }
   }
 }

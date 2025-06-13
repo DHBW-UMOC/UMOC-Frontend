@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, ElementRef, HostListener } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { UmocService } from '../services/umoc.service';
@@ -36,7 +36,8 @@ export class ChatInputExtrasComponent {
 
   constructor(
     protected contactService: ContactService,
-    protected umocService: UmocService
+    protected umocService: UmocService,
+    private elementRef: ElementRef
   ) {
     effect(() => {
       this.inventoryList = this.umocService.inventory();
@@ -49,7 +50,14 @@ export class ChatInputExtrasComponent {
     });
   }
 
-  togglePopup() {
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    if (this.isPopupVisible && !this.elementRef.nativeElement.contains(event.target)) {
+      this.isPopupVisible = false;
+    }
+  }
+
+  togglePopup(): void {
     this.isPopupVisible = !this.isPopupVisible;
   }
 

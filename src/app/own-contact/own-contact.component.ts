@@ -25,7 +25,8 @@ export class OwnContactComponent {
   ) {
   }
 
-  selectSelf(ownContact: Contact | Group) {
+  selectSelf(ownContact: Contact | Group, $event: MouseEvent) {
+    $event.stopPropagation()
     if (this.contactservice.showInfoOf()?.contact_id == this.contactservice.self()?.contact_id) {
       this.contactservice.showInfoOf.set(null);
     } else {

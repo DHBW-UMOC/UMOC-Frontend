@@ -3,7 +3,7 @@
     <mat-icon>add_box</mat-icon>
   </button>
   @if (isPopupVisible) {
-    <div class="popup-overlay">
+    <div class="popup-overlay" (click)="$event.stopPropagation()">
       <div class="popup-content">
         <div class="list-container">
           <mat-list>
@@ -21,24 +21,32 @@
           </mat-list>
         </div>
         <div class="list-container">
-          <mat-list>
-            @for (item of inventoryList; track item.item_name) {
-              <mat-list-item (click)="selectListItem(2, item.item_name)"
-                             [class.selected]="selectedItem === item.item_name">
-                <mat-card>
-                  <div class="card-content-wrapper">
-                    <span class="item-icon">{{ item.icon }}</span>
-                    <mat-card-content>{{ ItemNames[item.item_name] }}</mat-card-content>
-                  </div>
-                </mat-card>
-              </mat-list-item>
-            }
-          </mat-list>
+          @if (inventoryList.length > 0) {
+            <mat-list>
+              @for (item of inventoryList; track item.item_name) {
+                <mat-list-item (click)="selectListItem(2, item.item_name)"
+                               [class.selected]="selectedItem === item.item_name">
+                  <mat-card>
+                    <div class="card-content-wrapper">
+                      <span class="item-icon">{{ item.icon }}</span>
+                      <mat-card-content>{{ ItemNames[item.item_name] }}</mat-card-content>
+                    </div>
+                  </mat-card>
+                </mat-list-item>
+              }
+            </mat-list>
+          } @else {
+            <div class="empty-inventory-message">
+              Keine Items im Inventar vorhanden
+            </div>
+          }
         </div>
       </div>
-      <div class="button-container">
-        <button mat-fab [disabled]="!selectedUser || !selectedItem" (click)="useItem()">Item verwenden</button>
-      </div>
+      @if (selectedUser && selectedItem) {
+        <div class="button-container">
+          <button mat-fab color="primary" (click)="useItem()">Item verwenden</button>
+        </div>
+      }
     </div>
   }
 </div>

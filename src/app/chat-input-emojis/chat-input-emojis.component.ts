@@ -16,7 +16,8 @@ export class ChatInputEmojisComponent {
 
   showEmojiPicker = false;
 
-  constructor(private elementRef: ElementRef) {}
+  constructor(private elementRef: ElementRef) {
+  }
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
@@ -25,8 +26,7 @@ export class ChatInputEmojisComponent {
     }
   }
 
-  toggleEmojiPicker(event: MouseEvent): void {
-    event.stopPropagation();
+  toggleEmojiPicker(): void {
     this.showEmojiPicker = !this.showEmojiPicker;
   }
 

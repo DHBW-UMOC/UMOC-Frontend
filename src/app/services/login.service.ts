@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { EnvironmentService } from './environment.service';
 
@@ -17,7 +17,7 @@ export class LoginService {
   ) {
     if (this.cookie.check('auth_token') && this.cookie.check('expires_in')) {
       const expiresIn = new Date(parseInt(this.cookie.get('expires_in')));
-      
+
       if (expiresIn < new Date()) {
         this.userLoggedIn.set(false);
         this.cookie.deleteAll();
@@ -37,9 +37,13 @@ export class LoginService {
       next: () => {
         this.login(username, password);
       },
-      error: (err) => {
-        console.error('Register error: ', err.error);
+      error: (error: HttpErrorResponse) => {
         this.loginInProgress.set(false);
+        if (error.error.error == 'Username already exists') {
+          window.alert('Benutzername nicht verfügbar');
+          return;
+        }
+        window.alert('Unbekannter Fehler');
       }
     });
   }
@@ -51,7 +55,8 @@ export class LoginService {
       .set('password', password.toString());
     this.http.get(
       this.environmentService.getLoginUrl(),
-      {params}).subscribe({
+      {params}
+    ).subscribe({
       next: (response: any) => {
         this.cookie.set('auth_token', response.access_token);
         this.cookie.set('expires_in', (Date.now() + (response.expires_in * 1000)).toString());
@@ -60,9 +65,13 @@ export class LoginService {
         this.loginInProgress.set(false);
         this.userLoggedIn.set(true);
       },
-      error: (err) => {
+      error: (error: HttpErrorResponse) => {
         this.loginInProgress.set(false);
-        console.error('Login error: ', err);
+        if (error.error.error == 'Invalid credentials') {
+          window.alert('Falsches Passwort oder Benutzername');
+          return;
+        }
+        window.alert('Unbekannter Fehler');
       }
     });
   }
