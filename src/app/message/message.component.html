@@ -1,8 +1,24 @@
 <div class="message-container"
      [ngClass]="(message?.sender_user_id == currentUser) ? 'message-sent' : 'message-received'">
   @if (isGroupChat && message?.sender_user_id != currentUser) {
-    <div class="message-sender" [style.color]="stringToColour(message?.sender_username || '')">{{message?.sender_username}}</div>
+    <div class="message-sender" [style.color]="stringToColour(message?.sender_username || '')">
+      {{ message?.sender_username }}
+    </div>
   }
-  <span class="message-text" [innerHTML]="formatMessageContent(message?.content)"></span>
+  @if (message?.type === 'deleted_text') {
+    <span class="deleted-message">
+        <span class="deleted-message-sender">{{ message?.sender_username }}</span> hat versucht folgende Nachricht zu löschen:
+        <span class="deleted-message-content">{{ message?.content }}</span>
+    </span>
+  }
+  @else {
+    <span class="message-text" [innerHTML]="formatMessageContent(message?.content)">{{ message?.content }}</span>
+  }
   <div class="message-timestamp">{{ message?.timestamp ? (message?.timestamp | date: 'HH:mm') : 'ERR' }}</div>
+  @if (message?.type === 'text' && message?.sender_user_id == currentUser) {
+    <div class="message-overlay"></div>
+    <div class="delete-icon" (click)="deleteMessage()">
+      <mat-icon>delete</mat-icon>
+    </div>
+  }
 </div>
