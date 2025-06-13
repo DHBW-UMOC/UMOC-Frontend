@@ -122,7 +122,7 @@ export class InfoWindowComponent {
           const currentGroup = this.contactService.showInfoOf();
           if (this.isGroup(currentGroup)) {
             const existingMemberIds = new Set(
-              currentGroup.members.map(member => member.user_id)
+              currentGroup.members.map(member => member.contact_id)
             );
             const uniqueMembers = members.filter(
               contact => !existingMemberIds.has(contact.contact_id)

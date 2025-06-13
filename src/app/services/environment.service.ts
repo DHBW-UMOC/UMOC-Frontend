@@ -73,27 +73,27 @@ export class EnvironmentService {
 
   // Websocket Endpoint
   getWSUrl() {
-    return`${this.apiUrl}`;
+    return `${this.apiUrl}`;
   }
 
   // Umoc Endpoints
   getGetItemListUrl() {
-    return`${this.apiUrl}/getItemList`;
+    return `${this.apiUrl}/getItemList`;
   }
 
   getGetInventoryUrl() {
-    return`${this.apiUrl}/getInventory`;
+    return `${this.apiUrl}/getInventory`;
   }
 
   getGetActiveItemsUrl() {
-    return`${this.apiUrl}/getActiveItems`;
+    return `${this.apiUrl}/getActiveItems`;
   }
 
   getBuyItemUrl() {
-    return`${this.apiUrl}/buyItem`;
+    return `${this.apiUrl}/buyItem`;
   }
 
-  getGetUseItemUrl() {
-    return`${this.apiUrl}/useItem`;
+  getUseItemUrl() {
+    return `${this.apiUrl}/useItem`;
   }
 }

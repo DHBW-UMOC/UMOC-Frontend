@@ -52,7 +52,7 @@ export class UmocService implements OnDestroy {
       map((responseData: any) => {
         const itemData = Array.isArray(responseData) ? responseData : (responseData.items ? responseData.items : []);
         return itemData.map((item: any) => {
-          return new Item(item.name, item.price);
+          return new Item(item.item_name, item.price);
         });
       })
     ).subscribe((items) => this.itemTypes.set(items));
@@ -66,11 +66,11 @@ export class UmocService implements OnDestroy {
       map((responseData: any) => {
         const itemData = Array.isArray(responseData) ? responseData : (responseData.inventory ? responseData.inventory : []);
         return itemData.map((item: any) => {
-          return new Item(item.name, 0, item.quantity);
+          return new Item(item.item_name, 0, item.quantity);
         });
       })
     ).subscribe((items) => {
-      this.inventory.set(items)
+      this.inventory.set(items);
     });
   }
 
@@ -80,12 +80,24 @@ export class UmocService implements OnDestroy {
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).pipe(
       map((responseData: any) => {
-        const activeItemData = Array.isArray(responseData) ? responseData : (responseData.items ? responseData.items : []);
+        const activeItemData = Array.isArray(responseData) ? responseData : (responseData.active_items ? responseData.active_items : []);
         return activeItemData.map((activeItem: any) => {
           return new ActiveItem(activeItem.item_name, new Date(activeItem.active_until));
         });
       })
-    ).subscribe((activeItems) => this.activeItems.set(activeItems));
+    ).subscribe((activeItemsFromServer: ActiveItem[]) => {
+      this.activeItems.set(activeItemsFromServer);
+      activeItemsFromServer.forEach(item => {
+        const itemActionMap: Record<string, () => void> = {
+          'alt_background': () => this.showDuckBackground.set(true),
+          'show_ads': () => this.showAdBanners.set(true),
+          'timeout': () => this.showTimeOutReminder.set(true)
+        };
+        if (itemActionMap[item.item_name]) {
+          itemActionMap[item.item_name]();
+        }
+      });
+    });
   }
 
   buyItem(item_name: string) {
@@ -98,6 +110,20 @@ export class UmocService implements OnDestroy {
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
     ).subscribe(() => {
       this.fetchInventory();
+    });
+  }
+
+  useItem(item_name: string, to_user_id: string) {
+    this.http.post(
+      this.environmentService.getUseItemUrl(),
+      {
+        'item_name': item_name,
+        'to_user_id': to_user_id
+      },
+      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+    ).subscribe(() => {
+      this.fetchInventory();
+      this.fetchActiveItems();
     });
   }
 

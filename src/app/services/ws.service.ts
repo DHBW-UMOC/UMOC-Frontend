@@ -86,8 +86,8 @@ export class WsService {
     });
 
     this.socket.on('item_used', (itemData: any) => {
-      this.umocService.activateItem(new ActiveItem(itemData.name, new Date(itemData.active_until)));
-    })
+      this.umocService.activateItem(new ActiveItem(itemData.item_name, new Date(itemData.active_until)));
+    });
   }
 
   private disconnect() {
