@@ -1,5 +1,44 @@
 <div class="chat-input-extras">
-  <button mat-icon-button type="button">
-    <mat-icon>attach_file</mat-icon>
+  <button mat-icon-button type="button" (click)="togglePopup()">
+    <mat-icon>add_box</mat-icon>
   </button>
+  @if (isPopupVisible) {
+    <div class="popup-overlay">
+      <div class="popup-content">
+        <div class="list-container">
+          <mat-list>
+            @for (user of userList; track user.contact_id) {
+              <mat-list-item (click)="selectListItem(1, user.contact_id)"
+                             [class.selected]="selectedUser === user.contact_id">
+                <mat-card>
+                  <div class="card-content-wrapper">
+                    <img mat-card-avatar [ngSrc]="user.picture_url" width="40" height="40" alt="img">
+                    <mat-card-content>{{ user.name }}</mat-card-content>
+                  </div>
+                </mat-card>
+              </mat-list-item>
+            }
+          </mat-list>
+        </div>
+        <div class="list-container">
+          <mat-list>
+            @for (item of inventoryList; track item.item_name) {
+              <mat-list-item (click)="selectListItem(2, item.item_name)"
+                             [class.selected]="selectedItem === item.item_name">
+                <mat-card>
+                  <div class="card-content-wrapper">
+                    <span class="item-icon">{{ item.icon }}</span>
+                    <mat-card-content>{{ ItemNames[item.item_name] }}</mat-card-content>
+                  </div>
+                </mat-card>
+              </mat-list-item>
+            }
+          </mat-list>
+        </div>
+      </div>
+      <div class="button-container">
+        <button mat-fab [disabled]="!selectedUser || !selectedItem" (click)="useItem()">Item verwenden</button>
+      </div>
+    </div>
+  }
 </div>

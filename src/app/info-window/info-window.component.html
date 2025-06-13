@@ -57,12 +57,12 @@
             <p>Members</p>
           </mat-card-header>
           <mat-card-content>
-            @for (member of chat.members; track member.user_id) {
+            @for (member of chat.members; track member.contact_id) {
               <app-member-container
                 [member]="member"
                 [editable]="canEdit()"
-                (adminChange)="onAdminChange($event, chat.contact_id, member.user_id)"
-                (removeMember)="onRemoveMember(chat.contact_id, member.user_id)"
+                (adminChange)="onAdminChange($event, chat.contact_id, member.contact_id)"
+                (removeMember)="onRemoveMember(chat.contact_id, member.contact_id)"
               />
             }
           </mat-card-content>

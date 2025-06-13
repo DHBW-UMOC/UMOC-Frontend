@@ -149,7 +149,7 @@ export class ContactService {
         'status': `${$option}`
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
-    ).subscribe();
+    ).subscribe(() => this.fetchContacts());
   }
 
   leaveGroup(group_id: string) {
@@ -159,7 +159,7 @@ export class ContactService {
         'group_id': `${group_id}`
       },
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
-    ).subscribe();
+    ).subscribe(() => this.fetchContacts());
   }
 
   deleteGroup(group_id: string) {

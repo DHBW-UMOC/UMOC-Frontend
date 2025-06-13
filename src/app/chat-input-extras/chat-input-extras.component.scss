@@ -1,4 +1,5 @@
 .chat-input-extras {
+  position: relative; // Für die absolute Positionierung des Popups
   display: flex;
   align-items: center;
 
@@ -24,5 +25,105 @@
     &:hover {
       cursor: pointer;
     }
+  }
+}
+
+.popup-overlay {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  margin-bottom: 8px;
+  background-color: var(--mat-sys-surface-container-high);
+  border: 1px solid var(--mat-sys-outline);
+  border-radius: 8px;
+  padding: 16px;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-content {
+  display: flex;
+  gap: 16px;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+
+  mat-list {
+    padding-top: 0;
+    background-color: transparent;
+  }
+
+  mat-list-item {
+    cursor: pointer;
+    margin-bottom: 8px;
+    padding: 0 !important;
+    height: auto !important;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    mat-card {
+      width: 160px;
+      padding: 8px 12px;
+      background-color: var(--mat-sys-surface-container-lowest);
+      color: var(--mat-sys-on-surface-variant);
+      border: 2px solid transparent;
+      border-radius: 4px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+
+      .card-content-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        img[mat-card-avatar] {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+        }
+
+        .item-icon {
+          font-size: 20px;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        mat-card-content {
+          padding: 0 !important;
+          margin: 0 !important;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          flex-grow: 1;
+        }
+      }
+    }
+
+    &.selected mat-card {
+      border-color: var(--mat-sys-primary);
+      background-color: var(--mat-sys-primary-container);
+      color: var(--mat-sys-on-primary-container);
+    }
+
+    &:hover:not(.selected) mat-card {
+      background-color: var(--mat-sys-surface-container);
+    }
+  }
+}
+
+.button-container {
+  margin-top: 16px;
+  width: 100%;
+
+  button[mat-fab] {
+    width: 100%;
   }
 }
