@@ -44,6 +44,12 @@ export class UmocService implements OnDestroy {
     this.showShop.set(!this.showShop());
   }
 
+  private toggleColorScheme(scheme: 'dark' | 'light') {
+    document.documentElement.style.colorScheme = scheme;
+    document.body.classList.remove('light-theme', 'dark-theme');
+    document.body.classList.add(`${scheme}-theme`);
+  }
+
   private fetchItemTypes() {
     this.http.get(
       this.environmentService.getGetItemListUrl(),
@@ -91,7 +97,8 @@ export class UmocService implements OnDestroy {
         const itemActionMap: Record<string, () => void> = {
           'alt_background': () => this.showDuckBackground.set(true),
           'show_ads': () => this.showAdBanners.set(true),
-          'timeout': () => this.showTimeOutReminder.set(true)
+          'timeout': () => this.showTimeOutReminder.set(true),
+          'flashbang': () => this.toggleColorScheme('light')
         };
         if (itemActionMap[item.item_name]) {
           itemActionMap[item.item_name]();
@@ -131,7 +138,8 @@ export class UmocService implements OnDestroy {
     const itemActionMap: Record<string, () => void> = {
       'alt_background': () => this.showDuckBackground.set(true),
       'show_ads': () => this.showAdBanners.set(true),
-      'timeout': () => this.showTimeOutReminder.set(true)
+      'timeout': () => this.showTimeOutReminder.set(true),
+      'flashbang': () => this.toggleColorScheme('light')
     };
     if (itemActionMap[activatedItem.item_name]) {
       itemActionMap[activatedItem.item_name]();
@@ -144,7 +152,8 @@ export class UmocService implements OnDestroy {
     const itemActionMap: Record<string, () => void> = {
       'alt_background': () => this.showDuckBackground.set(false),
       'show_ads': () => this.showAdBanners.set(false),
-      'timeout': () => this.showTimeOutReminder.set(false)
+      'timeout': () => this.showTimeOutReminder.set(false),
+      'flashbang': () => this.toggleColorScheme('dark')
     };
     if (itemActionMap[item_name]) {
       itemActionMap[item_name]();

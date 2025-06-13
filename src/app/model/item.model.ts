@@ -16,6 +16,7 @@ export class Item {
       'alt_background': '🪿',
       'show_ads': '📺',
       'timeout': '🤐',
+      'flashbang': '🔦',
       'default': '📦'
     };
     if (emojiMap[item_name]) {
