@@ -3,7 +3,7 @@
     <mat-icon>add_box</mat-icon>
   </button>
   @if (isPopupVisible) {
-    <div class="popup-overlay">
+    <div class="popup-overlay" (click)="$event.stopPropagation()">
       <div class="popup-content">
         <div class="list-container">
           <mat-list>
