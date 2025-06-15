@@ -8,7 +8,7 @@
         <div class="profile-image-container">
           <img [ngSrc]="chat.picture_url" width="116" height="116" alt="{{isGroup(chat) ? 'Group' : 'Contact'}} image"
                class="profile-image">
-          <button mat-icon-button class="edit-button" (click)="editProfilePicture(chat.contact_id)">
+          <button mat-icon-button class="edit-button" (click)="$event.stopPropagation(); editProfilePicture(chat.contact_id)">
             <mat-icon>edit</mat-icon>
           </button>
         </div>
@@ -23,7 +23,7 @@
             } @else {
               <p class="editable-text">{{ chat.name }}</p>
               @if (canEdit()) {
-                <button mat-icon-button class="edit-button" (click)="startEditing()">
+                <button mat-icon-button class="edit-button" (click)="$event.stopPropagation(); startEditing()">
                   <mat-icon>edit</mat-icon>
                 </button>
               }
@@ -104,7 +104,7 @@
                   type="password"
                   id="old_password"
                   formControlName="old_password"
-                  placeholder="Altes Passwort eingeben"
+                  placeholder="Altes Passwort"
                   [class.invalid]="passwordForm.controls['old_password'].invalid && !passwordForm.controls['old_password'].untouched"
                 />
                 @if (passwordForm.controls['old_password'].invalid && !passwordForm.controls['old_password'].untouched) {
@@ -115,7 +115,7 @@
                   type="password"
                   id="new_password"
                   formControlName="new_password"
-                  placeholder="Neues Passwort eingeben"
+                  placeholder="Neues Passwort"
                   [class.invalid]="passwordForm.controls['new_password'].invalid && !passwordForm.controls['new_password'].untouched"
                 />
                 @if (passwordForm.controls['new_password'].invalid && !passwordForm.controls['new_password'].untouched) {
@@ -134,7 +134,7 @@
                 }
 
                 <div class="button-container">
-                  <button mat-raised-button type="button" (click)="changingPassword = false">
+                  <button mat-raised-button type="button" (click)="$event.stopPropagation(); changingPassword = false">
                     Abbrechen
                   </button>
                   <button mat-raised-button color="primary" type="submit" 
@@ -147,7 +147,7 @@
           } @else {
             <mat-card-content>
               <div class="password-change-button">
-                <button mat-raised-button color="primary" (click)="changingPassword = true">
+                <button mat-raised-button color="primary" (click)="$event.stopPropagation(); changingPassword = true">
                   Passwort ändern
                 </button>
               </div>
