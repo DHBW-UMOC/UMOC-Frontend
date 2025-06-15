@@ -12,7 +12,7 @@
         </div>
       }
     </div>
-    <div class="contact-container-button">
+    <div class="contact-container-button" (click)="$event.stopPropagation()">
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
