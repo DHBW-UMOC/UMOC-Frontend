@@ -6,6 +6,20 @@
   background-color: var(--mat-sys-surface-bright);
   position: relative;
   overflow: hidden;
+  padding: 0 24px;
+
+  .shop-title {
+    color: var(--mat-sys-primary);
+    font: var(--mat-sys-headline-large);
+    margin: 24px 0;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    background-color: var(--mat-sys-outline);
+    margin: 32px 0;
+  }
 }
 
 .card-container {
@@ -18,6 +32,12 @@
 .item-card {
   width: 120px;
   margin-bottom: 16px;
+  background-color: var(--mat-sys-surface-container-high);
+
+  &:hover {
+    background-color: var(--mat-sys-surface-container-highest);
+    cursor: pointer;
+  }
 }
 
 .item-icon {
