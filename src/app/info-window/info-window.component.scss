@@ -218,9 +218,11 @@
     gap: 16px;
     width: 100%;
     padding: 16px;
+    align-items: center;
 
     input {
-      width: 100%;
+      width: 60%;
+      max-width: 300px;
       
       &.invalid {
         border-color: var(--mat-sys-error);
@@ -228,6 +230,8 @@
     }
 
     .error-message {
+      width: 60%;
+      max-width: 300px;
       color: var(--mat-sys-error);
       font: var(--mat-sys-body-small);
       margin-top: 4px;
@@ -235,13 +239,41 @@
 
     .button-container {
       display: flex;
+      flex-direction: column;
       gap: 16px;
-      justify-content: center;
+      align-items: center;
       margin-top: 16px;
 
       button {
-        min-width: 120px;
+        min-width: 200px;
       }
+    }
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .password-change-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+    
+    button {
+      width: 60%;
+      max-width: 200px;
+      height: 48px;
+    }
+  }
+
+  .password-change-card {
+    width: 60%;
+    max-width: 300px;
+    margin: 0 auto;
+    
+    mat-card-content {
+      padding: 8px 0;
     }
   }
 }

@@ -146,9 +146,11 @@
             </mat-card-content>
           } @else {
             <mat-card-content>
-              <button mat-fab (click)="changingPassword = true">
-                Passwort ändern
-              </button>
+              <div class="password-change-button">
+                <button mat-raised-button color="primary" (click)="changingPassword = true">
+                  Passwort ändern
+                </button>
+              </div>
             </mat-card-content>
           }
         </mat-card>
