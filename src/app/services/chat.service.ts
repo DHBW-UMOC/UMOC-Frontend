@@ -63,8 +63,15 @@ export class ChatService {
           'Authorization': `Bearer ${this.loginService.getAuthToken()}`
         })
       }
-    ).subscribe(() => {
-      this.fetchChatHistory(recipientID);
+    ).subscribe({
+      next: () => {
+        this.fetchChatHistory(recipientID);
+      },
+      error: error => {
+        if (error.error.error == "You are currently in timeout and cannot send messages") {
+          window.alert("Du machst gerade eine Auszeit");
+        }
+      }
     });
   }
 
