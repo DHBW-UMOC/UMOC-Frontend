@@ -14,6 +14,21 @@
     margin: 24px 0;
   }
 
+  .points-display {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    background-color: rgba(50, 50, 50, 0.85);
+    color: white;
+    font: var(--mat-sys-headline-large);
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 16px;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+  }
+
   hr {
     border: none;
     height: 1px;
@@ -37,6 +52,15 @@
   &:hover {
     background-color: var(--mat-sys-surface-container-highest);
     cursor: pointer;
+  }
+}
+
+.disabled-item {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+
+  &:hover {
+    background-color: var(--mat-sys-surface-container-high) !important;
   }
 }
 

@@ -4,7 +4,7 @@ import { Group } from '../model/group.model';
 import { NgOptimizedImage } from '@angular/common';
 import { Contact } from '../model/contact.model';
 import { MemberContainerComponent } from '../member-container/member-container.component';
-import { MatFabButton, MatIconButton } from '@angular/material/button';
+import { MatButtonModule, MatFabButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { ContactContainerComponent } from '../contact-container/contact-container.component';
@@ -21,7 +21,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
     MatCardModule,
     MatIconButton,
     ContactContainerComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule
   ],
   templateUrl: './info-window.component.html',
   styleUrl: './info-window.component.scss',
