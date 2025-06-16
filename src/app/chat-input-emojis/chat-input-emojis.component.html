@@ -1,5 +1,5 @@
 <div class="chat-input-emojis">
-  <button mat-icon-button type="button" (click)="toggleEmojiPicker()">
+  <button mat-icon-button type="button" (click)="toggleEmojiPicker()" [disabled]="disabled">
     <mat-icon>sentiment_satisfied_alt</mat-icon>
   </button>
   @if (showEmojiPicker) {

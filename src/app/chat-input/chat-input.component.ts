@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { WsService } from '../services/ws.service';
+import { UmocService } from '../services/umoc.service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-chat-input',
@@ -15,7 +17,8 @@ import { WsService } from '../services/ws.service';
     ChatInputExtrasComponent,
     FormsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    NgClass
   ],
   templateUrl: './chat-input.component.html',
   styleUrl: './chat-input.component.scss'
@@ -27,7 +30,8 @@ export class ChatInputComponent implements AfterViewInit {
   constructor(
     private contactService: ContactService,
     private chatService: ChatService,
-    private websocket: WsService
+    private websocket: WsService,
+    protected umocService: UmocService
   ) {
   }
 
