@@ -1,5 +1,5 @@
 <div class="umoc-shop-container">
-  <h1>UMOC-Shop</h1>
+  <h1 class="shop-title">UMOC-Shop</h1>
 
   <div class="card-container">
     @for (item of this.umocService.itemTypes(); track item.item_name) {
@@ -14,8 +14,8 @@
       </mat-card>
     }
   </div>
-
-  <h1>Inventar</h1>
+  <hr>
+  <h1 class="shop-title">Inventar</h1>
 
   <div class="card-container">
     @for (item of this.umocService.inventory(); track item.item_name) {

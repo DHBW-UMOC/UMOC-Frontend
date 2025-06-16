@@ -8,7 +8,7 @@
         <div class="profile-image-container">
           <img [ngSrc]="chat.picture_url" width="116" height="116" alt="{{isGroup(chat) ? 'Group' : 'Contact'}} image"
                class="profile-image">
-          <button mat-icon-button class="edit-button" (click)="editProfilePicture(chat.contact_id)">
+          <button mat-icon-button class="edit-button" (click)="$event.stopPropagation(); editProfilePicture(chat.contact_id)">
             <mat-icon>edit</mat-icon>
           </button>
         </div>
@@ -23,7 +23,7 @@
             } @else {
               <p class="editable-text">{{ chat.name }}</p>
               @if (canEdit()) {
-                <button mat-icon-button class="edit-button" (click)="startEditing()">
+                <button mat-icon-button class="edit-button" (click)="$event.stopPropagation(); startEditing()">
                   <mat-icon>edit</mat-icon>
                 </button>
               }
@@ -67,23 +67,31 @@
             }
           </mat-card-content>
           @if (canEdit()) {
-            <mat-card-actions>
-              <input type="text" placeholder="Neue Member suchen" #searchBox
-                     (keyup)="searchNewMembers(searchBox.value)"/>
-            </mat-card-actions>
+            <mat-card-actions class="member-search">
+              <input
+                type="text"
+                placeholder="Neue Member suchen"
+                #searchBox
+                (keyup)="searchNewMembers(searchBox.value)"
+              />
+            </mat-card-actions>                      
           }
           <mat-card-content>
             @if (this.searchResults().length > 0) {
-              <p>Neue Member:</p>
-              @for (newMember of this.searchResults(); track newMember.contact_id) {
-                <contact-container
-                  [chat]="newMember"
-                  [known]="false"
-                  (contactClick)="addMember($event)"
-                />
-              }
+              <div class="member-search-results-container">
+                <div class="results-title">Neue Member:</div>
+                <div class="member-search-results">
+                  @for (newMember of this.searchResults(); track newMember.contact_id) {
+                    <contact-container
+                      [chat]="newMember"
+                      [known]="false"
+                      (contactClick)="addMember($event)"
+                    />
+                  }
+                </div>
+              </div>
             }
-          </mat-card-content>
+          </mat-card-content>          
         </mat-card>
       }
 
@@ -91,12 +99,12 @@
         <mat-card>
           @if (changingPassword) {
             <mat-card-content>
-              <form [formGroup]="passwordForm" (ngSubmit)="onSubmitNewPassword()">
+              <form [formGroup]="passwordForm" (ngSubmit)="onSubmitNewPassword()" class="password-form">
                 <input
                   type="password"
                   id="old_password"
                   formControlName="old_password"
-                  placeholder="Altes Passwort eingeben"
+                  placeholder="Altes Passwort"
                   [class.invalid]="passwordForm.controls['old_password'].invalid && !passwordForm.controls['old_password'].untouched"
                 />
                 @if (passwordForm.controls['old_password'].invalid && !passwordForm.controls['old_password'].untouched) {
@@ -107,7 +115,7 @@
                   type="password"
                   id="new_password"
                   formControlName="new_password"
-                  placeholder="Neues Passwort eingeben"
+                  placeholder="Neues Passwort"
                   [class.invalid]="passwordForm.controls['new_password'].invalid && !passwordForm.controls['new_password'].untouched"
                 />
                 @if (passwordForm.controls['new_password'].invalid && !passwordForm.controls['new_password'].untouched) {
@@ -122,19 +130,27 @@
                   [class.invalid]="passwordForm.controls['confirm_new_password'].invalid && !passwordForm.controls['confirm_new_password'].untouched"
                 />
                 @if (passwordForm.get('new_password')?.value != passwordForm.get('confirm_new_password')?.value && !passwordForm.controls['confirm_new_password'].untouched) {
-                  <div class="error-message"> Neue Passwörter müssen übereinstimmen</div>
+                  <div class="error-message">Neue Passwörter müssen übereinstimmen</div>
                 }
 
-                <button mat-fab type="submit" [disabled]="passwordForm.invalid || passwordForm.get('new_password')?.value != passwordForm.get('confirm_new_password')?.value">
-                  Passwort ändern
-                </button>
+                <div class="button-container">
+                  <button mat-raised-button type="button" (click)="$event.stopPropagation(); changingPassword = false">
+                    Abbrechen
+                  </button>
+                  <button mat-raised-button color="primary" type="submit" 
+                          [disabled]="passwordForm.invalid || passwordForm.get('new_password')?.value != passwordForm.get('confirm_new_password')?.value">
+                    Speichern
+                  </button>
+                </div>
               </form>
             </mat-card-content>
           } @else {
             <mat-card-content>
-              <button mat-fab (click)="changingPassword = true">
-                Passwort ändern
-              </button>
+              <div class="password-change-button">
+                <button mat-raised-button color="primary" (click)="$event.stopPropagation(); changingPassword = true">
+                  Passwort ändern
+                </button>
+              </div>
             </mat-card-content>
           }
         </mat-card>
