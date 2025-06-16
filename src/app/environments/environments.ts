@@ -1,5 +1,5 @@
 enum Environment {
-  PRODUCTION = 'https://api.umoc.chat',
+  PRODUCTION = 'http://localhost:5000',
   ACCEPT = 'as if',
   TEST = 'we poor af',
   DEVELOPMENT = 'legends test on prod',
