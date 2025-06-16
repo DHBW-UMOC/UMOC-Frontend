@@ -1,5 +1,5 @@
 <div class="chat-input-extras">
-  <button mat-icon-button type="button" (click)="togglePopup()">
+  <button mat-icon-button type="button" (click)="togglePopup()" [disabled]="disabled">
     <mat-icon>add_box</mat-icon>
   </button>
   @if (isPopupVisible) {
@@ -44,7 +44,7 @@
       </div>
       @if (selectedUser && selectedItem) {
         <div class="button-container">
-          <button mat-fab color="primary" (click)="useItem()">Item verwenden</button>
+          <button mat-fab color="primary" (click)="useItem()" [disabled]="disabled">Item verwenden</button>
         </div>
       }
     </div>

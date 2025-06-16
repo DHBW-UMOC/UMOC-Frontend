@@ -1,12 +1,12 @@
 export class Item {
   item_name: string;
-  price: string;
+  price: number;
   amount: number = 0;
   icon: string;
 
   constructor(item_name: string, price: number, amount?: number) {
     this.item_name = item_name;
-    this.price = `${price} Pkt.`;
+    this.price = price;
     this.amount = (amount) ? amount : 0;
     this.icon = this.correspondingEmoji(item_name);
   }

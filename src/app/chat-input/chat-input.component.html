@@ -1,19 +1,26 @@
-<form class="chat-input-container" (ngSubmit)="saveMessage(messageInput.value); messageInput.value=''; adjustTextareaHeight()">
-  <app-chat-input-extras/>
+<form class="chat-input-container"
+      [ngClass]="{'timeout-mode': umocService.showTimeOutReminder()}"
+      (ngSubmit)="!umocService.showTimeOutReminder() && saveMessage(messageInput.value); messageInput.value=''; adjustTextareaHeight()">
+  <app-chat-input-extras [disabled]="umocService.showTimeOutReminder()"/>
   <div class="input-wrapper">
-    <app-chat-input-emojis (emojiSelected)="insertEmoji($event)"/>
+    <app-chat-input-emojis
+      [disabled]="umocService.showTimeOutReminder()"
+      (emojiSelected)="!umocService.showTimeOutReminder() && insertEmoji($event)"/>
     <textarea
         #messageInput
         name="message"
         ngModel
         required
         placeholder="Nachricht schreiben"
-        (keydown)="onKeydown($event)"
-        (keyup)="onKeyUp($event)"
+        (keydown)="!umocService.showTimeOutReminder() && onKeydown($event)"
+        (keyup)="!umocService.showTimeOutReminder() && onKeyUp($event)"
         (input)="adjustTextareaHeight()"
+        [disabled]="umocService.showTimeOutReminder()"
+        [value]="umocService.showTimeOutReminder() ? '' : messageInput?.value"
         rows="1"></textarea>
   </div>
-  <button mat-icon-button type="submit" [disabled]="!messageInput.value.trimStart()">
+  <button mat-icon-button type="submit"
+          [disabled]="!messageInput.value.trimStart() || umocService.showTimeOutReminder()">
     <mat-icon>send</mat-icon>
   </button>
 </form>

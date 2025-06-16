@@ -35,7 +35,7 @@
             <p>{{ chat.contact_id }}</p>
             @if (isGroup(chat)) {
               <p>Erstellt am: {{ chat.created_at.toString() }}</p>
-            } @else {
+            } @else if(!canEdit()) {
               <p>Streak: {{ chat.streak }}</p>
             }
           </div>
