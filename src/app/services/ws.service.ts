@@ -79,6 +79,7 @@ export class WsService {
             this.earlyMessages.set(oldMessages);
           }
         } else {
+          if (earlyMessage.content == '') return;
           const oldMessages = [...this.earlyMessages(), earlyMessage];
           this.earlyMessages.set(oldMessages);
         }
