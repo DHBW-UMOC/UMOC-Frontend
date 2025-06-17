@@ -48,7 +48,9 @@
   width: 120px;
   margin-bottom: 16px;
   background-color: var(--mat-sys-surface-container-high);
+}
 
+.umoc-shop-container > .shop-title:first-of-type + .card-container .item-card:not(.disabled-item) {
   &:hover {
     background-color: var(--mat-sys-surface-container-highest);
     cursor: pointer;

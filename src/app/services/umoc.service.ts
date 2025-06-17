@@ -117,7 +117,7 @@ export class UmocService implements OnDestroy {
   }
 
   buyItem(item_to_buy: Item) {
-    if (this.pointCount() > item_to_buy.price) {
+    if (this.pointCount() >= item_to_buy.price) {
       this.pointCount.set(this.pointCount() - item_to_buy.price);
       this.http.post(
         this.environmentService.getBuyItemUrl(),
