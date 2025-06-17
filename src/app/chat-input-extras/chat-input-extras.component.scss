@@ -129,6 +129,15 @@
   }
 }
 
+.scrollable-list {
+  max-height: 300px; // Diese Höhe kannst du anpassen
+  overflow-y: auto;
+
+  mat-list {
+    overflow-y: auto;
+  }
+}
+
 .empty-inventory-message {
   padding: 16px;
   text-align: center;

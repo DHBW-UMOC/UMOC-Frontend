@@ -5,7 +5,7 @@
   @if (isPopupVisible) {
     <div class="popup-overlay" (click)="$event.stopPropagation()">
       <div class="popup-content">
-        <div class="list-container">
+        <div class="list-container scrollable-list">
           <mat-list>
             @for (user of userList; track user.contact_id) {
               <mat-list-item (click)="selectListItem(1, user.contact_id)"
