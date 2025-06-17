@@ -1,4 +1,4 @@
-import { Component, effect, ElementRef, HostListener } from '@angular/core';
+import { Component, effect, ElementRef, HostListener, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { UmocService } from '../services/umoc.service';
@@ -26,7 +26,8 @@ import { ItemNameDisplay } from '../model/ItemNameDisplay';
   templateUrl: './chat-input-extras.component.html',
   styleUrl: './chat-input-extras.component.scss'
 })
-export class ChatInputExtrasComponent {
+export class ChatInputExtrasComponent implements OnChanges {
+  @Input() disabled = false;
   isPopupVisible = false;
   inventoryList: Item[] = [];
   userList: (Contact | Group | Member)[] = [];
@@ -50,6 +51,12 @@ export class ChatInputExtrasComponent {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['disabled'] && changes['disabled'].currentValue === true && this.isPopupVisible) {
+      this.isPopupVisible = false;
+    }
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     if (this.isPopupVisible && !this.elementRef.nativeElement.contains(event.target)) {
@@ -58,10 +65,12 @@ export class ChatInputExtrasComponent {
   }
 
   togglePopup(): void {
+    if (this.disabled) return;
     this.isPopupVisible = !this.isPopupVisible;
   }
 
   selectListItem(listNumber: number, selection: string) {
+    if (this.disabled) return;
     if (listNumber == 1) {
       this.selectedUser = this.selectedUser == selection ? null : selection;
     } else if (listNumber == 2) {
@@ -74,6 +83,7 @@ export class ChatInputExtrasComponent {
   }
 
   useItem() {
+    if (this.disabled) return;
     this.umocService.useItem(this.selectedItem!, this.selectedUser!);
     this.selectedItem = null;
     this.selectedUser = null;

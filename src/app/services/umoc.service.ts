@@ -5,6 +5,7 @@ import { EnvironmentService } from './environment.service';
 import { map } from 'rxjs';
 import { Item } from '../model/item.model';
 import { ActiveItem } from '../model/active-item.model';
+import { ContactService } from './contact.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,13 @@ export class UmocService implements OnDestroy {
   itemTypes = signal<Item[]>([]);
   inventory = signal<Item[]>([]);
   activeItems = signal<ActiveItem[]>([]);
+  pointCount = signal<number>(10);
   private activeItemsCheckInterval: any;
 
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
+    private contactService: ContactService,
     private environmentService: EnvironmentService
   ) {
     effect(() => {
@@ -32,6 +35,12 @@ export class UmocService implements OnDestroy {
         this.startActiveItemsCheck();
       } else {
         this.stopActiveItemsCheck();
+      }
+    });
+    effect(() => {
+      const self = this.contactService.self();
+      if (self) {
+        this.pointCount.set(self.streak);
       }
     });
   }
@@ -107,17 +116,31 @@ export class UmocService implements OnDestroy {
     });
   }
 
-  buyItem(item_name: string) {
-    this.http.post(
-      this.environmentService.getBuyItemUrl(),
-      {
-        'item_name': item_name,
-        'amount': 1
-      },
-      {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
-    ).subscribe(() => {
-      this.fetchInventory();
-    });
+  buyItem(item_to_buy: Item) {
+    if (this.pointCount() > item_to_buy.price) {
+      this.pointCount.set(this.pointCount() - item_to_buy.price);
+      this.http.post(
+        this.environmentService.getBuyItemUrl(),
+        {
+          'item_name': item_to_buy.item_name,
+          'amount': 1
+        },
+        {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
+      ).subscribe({
+        next: () => {
+          this.fetchInventory();
+          this.contactService.fetchOwnUserInfo();
+        },
+        error: error => {
+          if (error.error.error == "Not enough points to buy this item"){
+            window.alert("Nein");
+          }
+        }
+      });
+    } else {
+      window.alert('Punktestand ist nicht ausreichend');
+      window.location.reload();
+    }
   }
 
   useItem(item_name: string, to_user_id: string) {
