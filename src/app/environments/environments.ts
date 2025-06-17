@@ -5,4 +5,4 @@ enum Environment {
   DEVELOPMENT = 'legends test on prod',
 }
 
-export const CURRENT_ENVIRONMENT = Environment.TEST;
+export const CURRENT_ENVIRONMENT = Environment.PRODUCTION;
