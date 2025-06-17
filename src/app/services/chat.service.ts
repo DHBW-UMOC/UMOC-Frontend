@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs';
 import { LoginService } from './login.service';
 import { EnvironmentService } from './environment.service';
+import { ContactService } from './contact.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class ChatService {
   constructor(
     private http: HttpClient,
     private loginService: LoginService,
-    private environmentService: EnvironmentService
+    private environmentService: EnvironmentService,
+    private contactService: ContactService
   ) {
   }
 
@@ -66,6 +68,7 @@ export class ChatService {
     ).subscribe({
       next: () => {
         this.fetchChatHistory(recipientID);
+        this.contactService.fetchContacts();
       },
       error: error => {
         if (error.error.error == "You are currently in timeout and cannot send messages") {
