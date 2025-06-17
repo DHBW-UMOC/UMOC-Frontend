@@ -1,5 +1,5 @@
 enum Environment {
-  PRODUCTION = 'http://localhost:5000',
+  PRODUCTION = 'http://172.16.22.236:5000',
   ACCEPT = 'as if',
   TEST = 'http://localhost:5000',
   DEVELOPMENT = 'legends test on prod',
