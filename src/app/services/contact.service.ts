@@ -118,7 +118,7 @@ export class ContactService {
     });
   }
 
-  private fetchOwnUserInfo() {
+  fetchOwnUserInfo() {
     return this.http.get<any>(
       this.environmentService.getGetOwnProfileUrl(),
       {headers: new HttpHeaders({'Authorization': `Bearer ${this.loginService.getAuthToken()}`})}
@@ -131,7 +131,7 @@ export class ContactService {
           response.profile_picture,
           new Date(response.last_message_timestamp),
           'Friend',
-          0
+          response.points
         );
       })
     );

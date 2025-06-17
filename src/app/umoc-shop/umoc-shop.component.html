@@ -3,17 +3,21 @@
 
   <div class="card-container">
     @for (item of this.umocService.itemTypes(); track item.item_name) {
-      <mat-card class="item-card" (click)="this.umocService.buyItem(item.item_name)">
+      <mat-card class="item-card"
+                [class.disabled-item]="this.umocService.pointCount() < item.price"
+                (click)="this.umocService.pointCount() >= item.price && this.umocService.buyItem(item)"
+      >
         <mat-card-content>
           <div class="item-icon">{{ item.icon }}</div>
           <div class="item-details">
             <div class="item-name">{{ ItemNameDisplay[item.item_name] }}</div>
-            <div class="item-price">{{ item.price }}</div>
+            <div class="item-price">{{ item.price }} Pkt.</div>
           </div>
         </mat-card-content>
       </mat-card>
     }
   </div>
+  <div class="points-display">{{ this.umocService.pointCount() }} Punkte</div>
   <hr>
   <h1 class="shop-title">Inventar</h1>
 
